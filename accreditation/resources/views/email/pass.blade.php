@@ -62,7 +62,6 @@
       <li>Enter your email and the temporary password provided above.</li>
       <li>Once logged in, go to your account settings.</li>
       <li>Choose the option to change your password.</li>
-      <li>Follow the on-screen instructions to set a new, secure password of your choice.</li>
     </ol>
 
     <a href="#" class="button">Login Now</a>

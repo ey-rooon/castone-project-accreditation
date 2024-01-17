@@ -21,10 +21,13 @@ class User extends Authenticatable
         'firstname',
         'lastname',
         'email',
+        'university_id',
         'campus_id',
         'program_id',
         'password',
         'user_type',
+        'isExternal',
+        'isInternal',
     ];
 
     /**

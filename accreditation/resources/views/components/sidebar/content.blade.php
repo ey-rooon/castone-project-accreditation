@@ -30,13 +30,13 @@
 
     <x-sidebar.dropdown
         title="User List"
-        :active="Str::startsWith(request()->route()->uri(), 'buttons')"
+        :active="request()->routeIs('user_list', 'external_users')"
     >
         <x-slot name="icon">
             <i class="far fa-users" aria-hidden="true"></i>
         </x-slot>
-        <x-sidebar.sublink title="Users" />
-        <x-sidebar.sublink title="External Users" />
+        <x-sidebar.sublink title="Users" href="/user_list" isActive="request()->routeIs('user_list')" />
+        <x-sidebar.sublink title="External Users" href="/external_users" :isActive="request()->routeIs('external_users')" />
     </x-sidebar.dropdown>
     <!-- <x-sidebar.link
         title="User List"

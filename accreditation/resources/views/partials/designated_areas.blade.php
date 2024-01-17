@@ -353,31 +353,7 @@
                                                 <input type="radio" name="members[]" class="form-check-input" value="{{$user->id}}" id="external{{$user->user_id}}{{$area->id}}">
                                                 <label class="form-check-label" for="external{{$user->user_id}}{{$area->id}}">
                                                     <b class="fs-5">{{$user->lastname}} {{$user->firstname}}</b> 
-                                                    <span class="fs-6">({{$user->campus_name}}) (External Accreditor)</span>
-                                                    <p class="fs-6">{{$user->program}} </p>
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endif
-                                @empty
-                                <center>
-                                    <a href="/add_users">
-                                        <i class="fa-solid fa-user-plus"></i> No Interal Accreditor users, Add Here
-                                    </a>
-                                </center>
-                                @endforelse
-                            </tbody>
-                            <tbody style="display: none;" class="list-group list-group-flush user_table allUserExternal">
-                                @forelse($unfilteredUser as $user)
-                                    @if (!$externalInArea->contains('user_id', $user->user_id))
-                                    <tr class="list-group-item list-group-item-action list-group-item-light">
-                                        <td>
-                                            <div class="form-check">
-                                                <input type="radio" name="members[]" class="form-check-input" value="{{$user->id}}" id="external{{$user->user_id}}{{$area->id}}">
-                                                <label class="form-check-label" for="external{{$user->user_id}}{{$area->id}}">
-                                                    <b class="fs-5">{{$user->lastname}} {{$user->firstname}}</b> 
-                                                    <span class="fs-6">({{$user->campus_name}}) {{$user->isExternal == 1 ? '(External Accreditor)' : ''}}</span>
+                                                    <span class="fs-6">({{$user->univ_name}})({{$user->campus_name}})</span>
                                                     <p class="fs-6">{{$user->program}} </p>
                                                 </label>
                                             </div>

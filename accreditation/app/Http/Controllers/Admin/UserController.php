@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\University;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Program;
@@ -22,6 +23,7 @@ class UserController extends Controller
         $users = User::join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')
             ->select('users.*', 'users.id as user_id', 'campuses.id as campus_id', 'campuses.name as campus_name', 'programs.program as program')
+            ->whereNot('isExternal', 1)
             ->where('user_type', 'user')
             ->OrderBy('lastname')
             ->get();
@@ -72,8 +74,9 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $university = University::where('university_id', 'psu')->first();
+        $campuses = Campus::select()->where('university_id', $university->id)->get();
         $programs = Program::select()->get();
-        $campuses = Campus::select()->get();
         $user = User::where('id', $id)->first();
         return view('admin.edit_user')->with('user', $user)->with('campuses', $campuses)->with('programs', $programs);
     }
@@ -108,7 +111,6 @@ class UserController extends Controller
             'campus_id' => $request->campus,
             'program_id' => $request->program,
             'isInternal' => $request->has('internal') ? 1 : 0,
-            'isExternal' => $request->has('external') ? 1 : 0,
         ]);
         if ($user) {
             // Add a flash message to indicate successful deletion

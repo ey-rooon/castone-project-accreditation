@@ -43,7 +43,6 @@
                         <th>Campus</th>
                         <th>Email</th>
                         <th>Is Internal</th>
-                        <th>Is External</th>
                         <th>User Type</th>
                         <th>Action</th>
                     </tr>
@@ -59,21 +58,31 @@
                         <td>
                             {{$user->isInternal == 1 ? 'Yes' : 'No'}}
                         </td>
-                        <td>
-                            {{$user->isExternal == 1 ? 'Yes' : 'No'}}
-                        </td>
                         <td>{{$user->user_type}}</td>
                         <td>
-                            <a href="/edit_user/{{$user->id}}">
-                                <button class="btn btn-outline-success">
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                </button>
-                            </a>
-                            <a href="/user_list/{{$user->id}}">
-                                <button class="btn btn-outline-danger" onclick="return confirm('You are about to delete this accont')">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </a>
+                            <div class="row">
+                                <div class="col-md-auto">
+                                    <a href="/edit_user/{{$user->id}}">
+                                        <button class="btn btn-outline-success">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="col-md-auto">
+                                    <a href="/user_list/{{$user->id}}">
+                                        <button class="btn btn-outline-danger" onclick="return confirm('You are about to delete this accont')">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="col-md-auto">
+                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Resend Password">
+                                        <button class="btn btn-outline-info">
+                                            <i class="far fa-sync-alt"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     @empty

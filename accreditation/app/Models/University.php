@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class University extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'university_id'];
+
+    public function campus()
+    {
+        return $this->belongsTo(Campus::class);
+    }
 }

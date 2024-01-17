@@ -39,9 +39,11 @@ class UniversityController extends Controller
     public function store(Request $request)
     {
         //
+        $name = $request->input('university');
+        $university_id = $request->input('university_id');
         $rules = [
             'university' => 'required|max:255',
-            'university_id' => 'required|max:255|unique',
+            'university_id' => 'required|max:255|unique:universities,university_id,' . $university_id,
         ];
 
         $customMessage = [
@@ -50,8 +52,6 @@ class UniversityController extends Controller
         ];
         $this->validate($request, $rules, $customMessage);
 
-        $name = $request->input('university');
-        $university_id = $request->input('university_id');
         $university = University::firstOrCreate([
             'name'=>$name,
             'university_id'=>$university_id,
@@ -95,32 +95,39 @@ class UniversityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $name = $request->input('university');
         $university_id = $request->input('university_id');
+
         $rules = [
             'university' => 'required|max:255',
-            'university_id' => 'required|max:255|unique:universities,university_id,' . $university_id,
+            'university_id' => 'required|max:255|unique:universities,university_id,' . $id,
         ];
 
         $customMessage = [
             'required' => ':attribute must be filled',
-
         ];
+
         $this->validate($request, $rules, $customMessage);
 
-        
-        $university = University::where('id', $id)->update([
-            'name'=>$name,
-            'university_id'=>$university_id,
-        ]);
-        if ($university) {
+        $university = University::find($id);
+
+        if (!$university) {
+            // Handle case where the university with the given ID is not found
+            return redirect()->back()->with('error', 'University not found.');
+        }
+
+        $university->name = $name;
+        $university->university_id = $university_id;
+
+        if ($university->save()) {
             session()->flash('success', 'University updated successfully.');
         } else {
             session()->flash('error', 'Something went wrong, please try again.');
         }
+
         return redirect()->back();
     }
+
 
     /**
      * Remove the specified resource from storage.

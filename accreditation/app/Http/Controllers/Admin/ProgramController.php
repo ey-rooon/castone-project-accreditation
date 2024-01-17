@@ -17,7 +17,7 @@ class ProgramController extends Controller
     public function index()
     {
         //
-        $programs = Program::select()->get();
+        $programs = Program::select()->orderBy('program')->get();
         return view('admin.program_list')->with('programs', $programs);
     }
 
@@ -53,10 +53,9 @@ class ProgramController extends Controller
         $this->validate($request, $rules, $customMessage);
 
         $pname = $request->input('program');
-        $program = new Program;
-        $program->id = null;
-        $program->program = $pname;
-        $program->save();
+        $program = Program::firstOrCreate([
+            'program'=>$pname,
+        ]);
         if ($program) {
             // Add a flash message to indicate successful deletion
             session()->flash('success', 'Program added successfully.');

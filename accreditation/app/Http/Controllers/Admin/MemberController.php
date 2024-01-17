@@ -126,12 +126,15 @@ class MemberController extends Controller
 
         $externalUsers = User::join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')
-            ->select('users.*', 'users.id as user_id', 'campuses.id as campus_id', 'campuses.name as campus_name', 'programs.program as program')
+            ->join('universities', 'users.university_id', '=', 'universities.id')
+            ->select('users.*', 'users.id as user_id', 'campuses.id as campus_id', 'campuses.name as campus_name', 'programs.program as program', 'universities.*', 'universities.name as univ_name')
+            ->where('isExternal', 1)
             ->where('user_type', '!=', 'admin')
-            ->where('program_id', '!=', $programLevel->program_id)
             ->where('isExternal', 1)
             ->orderBy('users.lastname')
             ->get();
+
+            
 
         $nonAdminUsers = User::join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')

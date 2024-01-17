@@ -17,6 +17,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Models\Program;
 use App\Models\Campus;
+use App\Models\University;
 use DB;
 
 class RegisteredUserController extends Controller
@@ -36,7 +37,8 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         $programs = Program::select()->get();
-        $campuses = Campus::select()->get();
+        $university = University::where('university_id', 'psu')->first();
+        $campuses = Campus::select()->where('university_id', $university->id)->get();
         return view('admin.add_user')->with('campuses', $campuses)->with('programs', $programs);
     }
 
@@ -52,7 +54,6 @@ class RegisteredUserController extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-
             'campus' => 'required',
             'program' => 'required',
         ]);
@@ -65,10 +66,8 @@ class RegisteredUserController extends Controller
             'campus_id' =>$request->campus,
             'program_id' =>$request->program,
             'user_type'=>'user',
-            // 'isAreachair' => $request->has('areachair') ? 1 : 0,
-            // 'isAreamember' => $request->has('areamember') ? 1 : 0,
-            // 'isExternal' => $request->has('external') ? 1 : 0,
-            // 'isInternal' => $request->has('internal') ? 1 : 0,
+
+            'isInternal' => $request->has('internal') ? 1 : 0,
             'password' => Hash::make($temp_pass),
         ]);
         if($user)
