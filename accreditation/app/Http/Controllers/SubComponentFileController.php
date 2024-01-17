@@ -35,6 +35,7 @@ class SubComponentFileController extends Controller
             ->where('parameter_id', $parameter_id)
             ->where('sub_component_id', $subcomponent_id)
             ->where('accreditation_id', $acc_id)
+            ->orderBy('sub_component_files.updated_at', 'DESC')
             ->get();
 
         $messages = SubComponentMessage::join('users', 'sub_component_messages.sender_id', '=', 'users.id')

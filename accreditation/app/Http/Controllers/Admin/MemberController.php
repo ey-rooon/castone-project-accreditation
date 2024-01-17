@@ -144,7 +144,7 @@ class MemberController extends Controller
             ->orderBy('users.lastname')
             ->get();
 
-        $member = Member::join('users', 'members.user_id', '=', 'users.id')
+        $coordinator = Member::join('users', 'members.user_id', '=', 'users.id')
             ->join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')
             ->select('members.*', 'campuses.name', 'programs.program')
@@ -152,7 +152,7 @@ class MemberController extends Controller
             ->where('members.user_id', $uid)
             ->first();
 
-        return view('partials.designated_areas', compact('accreditation', 'accreditation_areas', 'area_membersAll', 'area_members', 'area_chairs', 'internal_members', 'external_members', 'areas', 'acc_areas', 'id', 'member', 'unfilteredUser', 'internalUsers', 'externalUsers', 'nonAdminUsers'))->render();
+        return view('partials.designated_areas', compact('accreditation', 'accreditation_areas', 'area_membersAll', 'area_members', 'area_chairs', 'internal_members', 'external_members', 'areas', 'acc_areas', 'id', 'coordinator', 'unfilteredUser', 'internalUsers', 'externalUsers', 'nonAdminUsers'))->render();
     }
     public function store(Request $request)
     {
@@ -242,7 +242,7 @@ class MemberController extends Controller
             ->orderBy('lastname', 'ASC')
             ->get();
 
-        $member = Member::join('users', 'members.user_id', '=', 'users.id')
+        $coordinator = Member::join('users', 'members.user_id', '=', 'users.id')
             ->join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')
             ->select('members.*', 'campuses.name', 'programs.program')
@@ -250,7 +250,7 @@ class MemberController extends Controller
             ->where('members.user_id', $uid)
             ->first();
 
-        return view('admin.manage_member', compact('accreditation', 'users', 'id', 'members', 'member', 'areas', 'acc_areas', ));
+        return view('admin.manage_member', compact('accreditation', 'users', 'id', 'members', 'coordinator', 'areas', 'acc_areas', ));
     }
 
     public function addArea(Request $request)

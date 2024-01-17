@@ -224,7 +224,7 @@
     $(document).ready(function(){
         $('.move-up, .move-down').click(function () {
             var fileId = $(this).data('file-id');
-
+            console.log('1');
             $.ajax({
                 url: '/move_file_order_indicator',
                 type: 'POST',
@@ -233,6 +233,7 @@
                     _token: "{{ csrf_token() }}" // Add this line
                 },
                 success: function (response) {
+                    console.log('2');
                     // Handle success, you may want to update the table after a successful move
                     location.reload(); // For simplicity, just reload the page
                 },

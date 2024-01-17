@@ -1,7 +1,7 @@
 @php
     $headerColors = ['bg-primary', 'bg-secondary', 'bg-info', 'bg-success', 'bg-warning', 'bg-danger'];
 @endphp
-<div class="row mx-auto mb-5">
+<div class="row justify-content-center align-items-center mb-5">
     @forelse($acc_areas AS $index => $area)
         @php
             $colorClass = $headerColors[$index % count($headerColors)];
@@ -18,7 +18,7 @@
                             <b>{{ $area->area_name }}: {{ $area->area_title }}</b>
                         </div>
                         <!-- <div class="col-1 text-end">
-                            @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                            @if(Auth::user()->user_type == 'admin' || $coordinator)
                                 <i class="fa-solid fa-xmark fa-lg text-black remove-acc-area" data-bs-toggle="tooltip" data-bs-title="Remove Area" data-acc-area-id="{{$accreditation_area->id}}" style="cursor: pointer;"></i>
                             @endif
                         </div> -->
@@ -31,7 +31,7 @@
                             <h5 class="card-title">Area Chair/s:</h5>
                         </div>
                         <div class="col-12 col-md-5 text-end">
-                            @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                            @if(Auth::user()->user_type == 'admin' || $coordinator)
                             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addAreaMemberModal{{$area->id}}">
                                 Add Area Members
                             </button>
@@ -42,7 +42,7 @@
                         <thead class="table-success">
                             <tr>
                                 <th>Name</th>
-                                @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                @if(Auth::user()->user_type == 'admin' || $coordinator)
                                 <th class="text-end">Action</th>
                                 @endif
                             </tr>
@@ -53,7 +53,7 @@
                                     <td>
                                         <b>{{$member->lname}} {{$member->fname}}</b>
                                     </td>
-                                    @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                    @if(Auth::user()->user_type == 'admin' || $coordinator)
                                     <td class="text-end">
                                         <button class="btn btn-outline-danger remove-area-member" data-area-name="{{ $area->area_name }}" data-area-member-id="{{$member->amId}}">Remove</button>
                                     </td>
@@ -77,7 +77,7 @@
                         <thead class="table-warning">
                             <tr>
                                 <th>Name</th>
-                                @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                @if(Auth::user()->user_type == 'admin' || $coordinator)
                                 <th class="text-end">Action</th>
                                 @endif
                             </tr>
@@ -88,7 +88,7 @@
                                     <td>
                                         <b>{{$member->lname}} {{$member->fname}}</b>
                                     </td>
-                                    @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                    @if(Auth::user()->user_type == 'admin' || $coordinator)
                                         <td class="text-end">
                                             <button class="btn btn-outline-danger remove-area-member" data-area-name="{{ $area->area_name }}" data-area-member-id="{{$member->amId}}">Remove</button>
                                         </td>
@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-12 col-md-5 text-end">
                             @if($internal_members->where('area_id', $area->id)->where('member_type', 'internal')->count() == 0)
-                                @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                @if(Auth::user()->user_type == 'admin' || $coordinator)
                                     <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addInternalModal{{$area->id}}">
                                         Assign Internal Accreditor
                                     </button>
@@ -124,7 +124,7 @@
                         <thead class="table-info">
                             <tr>
                                 <th>Name</th>
-                                @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                @if(Auth::user()->user_type == 'admin' || $coordinator)
                                 <th class="text-end">Action</th>
                                 @endif
                             </tr>
@@ -135,7 +135,7 @@
                                     <td>
                                         <b>{{$member->lname}} {{$member->fname}}</b>
                                     </td>
-                                    @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                    @if(Auth::user()->user_type == 'admin' || $coordinator)
                                     <td class="text-end">
                                         <button class="btn btn-outline-danger remove-area-member" data-area-name="{{ $area->area_name }}" data-area-member-id="{{$member->amId}}">Remove</button>
                                     </td>
@@ -155,7 +155,7 @@
                         </div>
                         <div class="col-12 col-md-5 text-end">
                             @if($external_members->where('area_id', $area->id)->where('member_type', 'external')->count() == 0)
-                                @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                @if(Auth::user()->user_type == 'admin' || $coordinator)
                                 <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addExternalModal{{$area->id}}">
                                     Assign External Accreditor
                                 </button>
@@ -167,7 +167,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>Name</th>
-                                @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                @if(Auth::user()->user_type == 'admin' || $coordinator)
                                 <th class="text-end">Action</th>
                                 @endif
                             </tr>
@@ -178,7 +178,7 @@
                                     <td>
                                         <b>{{$member->lname}} {{$member->fname}}</b>
                                     </td>
-                                    @if(Auth::user()->user_type == 'admin' || $member == NULL)
+                                    @if(Auth::user()->user_type == 'admin' || $coordinator)
                                         <td class="text-end">
                                             <button class="btn btn-outline-danger remove-area-member" data-area-name="{{ $area->area_name }}" data-area-member-id="{{$member->amId}}">Remove</button>
                                         </td>
@@ -198,7 +198,7 @@
         <!-- Area Member/Chair Modal -->
         <div class="modal fade" id="addAreaMemberModal{{$area->id}}" tabindex="-1" aria-labelledby="addAreaMemberLabel{{$area->id}}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                <form action="{{route('add_area_members')}}" class="modal-content" method="POST">
+                <form action="{{ route('add_area_members')}}" method="POST" class="modal-content addAreaMembersForm" id="addAreaMemberForm{{$area->id}}">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="addAreaMemberLabel{{$area->id}}">Add Member to {{ $area->area_name }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -222,7 +222,7 @@
                                     <tr class="list-group-item list-group-item-action list-group-item-light">
                                         <td>
                                             <div class="form-check">
-                                                <input type="checkbox" name="members[]" class="form-check-input" value="{{$user->id}}" id="area{{$user->user_id}}{{$area->id}}">
+                                                <input type="checkbox" name="members[]" class="form-check-input" value="{{$user->user_id}}" id="area{{$user->user_id}}{{$area->id}}">
                                                 <label class="form-check-label" for="area{{$user->user_id}}{{$area->id}}"><b class="fs-5">{{$user->lastname}} {{$user->firstname}}</b> <span class="fs-6">({{$user->campus_name}})</span>
                                                     <p class="fs-6">{{$user->program}}</p>
                                                 </label>
@@ -242,7 +242,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-outline-success">Save changes</button>
+                        <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal" data-target="#addAreaMemberModal{{$area->id}}">Save changes</button>                    
                     </div>
                 </form>
             </div>
@@ -251,7 +251,7 @@
         <!-- Internal Modal -->
         <div class="modal fade" id="addInternalModal{{$area->id}}" tabindex="-1" aria-labelledby="addInternalLabel{{$area->id}}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-                <form action="{{route('add_area_members')}}" method="POST" class="modal-content">
+                <form action="{{ route('add_area_members')}}" method="POST" class="modal-content addInternalMembersForm" id="addInternalMemberForm{{$area->id}}">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="addInternalLabel{{$area->id}}">Assign Internal Accreditor to {{ $area->area_name }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -271,7 +271,7 @@
                                     <tr class="list-group-item list-group-item-action list-group-item-light">
                                         <td>
                                             <div class="form-check">
-                                                <input type="radio" name="members[]" class="form-check-input" value="{{$user->id}}" id="internal{{$user->user_id}}{{$area->id}}">
+                                                <input type="radio" name="members[]" class="form-check-input" value="{{$user->user_id}}" id="internal{{$user->user_id}}{{$area->id}}">
                                                 <label class="form-check-label" for="internal{{$user->user_id}}{{$area->id}}">
                                                     <b class="fs-5">{{$user->lastname}} {{$user->firstname}}</b> 
                                                     <span class="fs-6">({{$user->campus_name}}) (Internal Accreditor)</span>
@@ -295,7 +295,7 @@
                                     <tr class="list-group-item list-group-item-action list-group-item-light">
                                         <td>
                                             <div class="form-check">
-                                                <input type="radio" name="members[]" class="form-check-input" value="{{$user->id}}" id="internal{{$user->user_id}}{{$area->id}}">
+                                                <input type="radio" name="members[]" class="form-check-input" value="{{$user->user_id}}" id="internal{{$user->user_id}}{{$area->id}}">
                                                 <label class="form-check-label" for="internal{{$user->user_id}}{{$area->id}}">
                                                     <b class="fs-5">{{$user->lastname}} {{$user->firstname}}</b> 
                                                     <span class="fs-6">({{$user->campus_name}}) {{$user->isInternal == 1 ? '(Internal Accreditor)' : ''}}</span>
@@ -321,7 +321,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-outline-success">Save changes</button>
+                        <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal" data-target="#addInternalMemberForm{{$area->id}}">Save changes</button>                  
                     </div>
                 </form>
             </div>
@@ -330,7 +330,7 @@
         <!-- External Modal -->
         <div class="modal fade" id="addExternalModal{{$area->id}}" tabindex="-1" aria-labelledby="addExternalLabel{{$area->id}}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-                <form action="{{route('add_area_members')}}" method="POST" class="modal-content">
+                <form action="{{ route('add_area_members')}}" method="POST" class="modal-content addExternalMembersForm" id="addExternalMemberForm{{$area->id}}">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="addExternalLabel{{$area->id}}">Assign External Accreditor to {{ $area->area_name }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -350,7 +350,7 @@
                                     <tr class="list-group-item list-group-item-action list-group-item-light">
                                         <td>
                                             <div class="form-check">
-                                                <input type="radio" name="members[]" class="form-check-input" value="{{$user->id}}" id="external{{$user->user_id}}{{$area->id}}">
+                                                <input type="radio" name="members[]" class="form-check-input" value="{{$user->user_id}}" id="external{{$user->user_id}}{{$area->id}}">
                                                 <label class="form-check-label" for="external{{$user->user_id}}{{$area->id}}">
                                                     <b class="fs-5">{{$user->lastname}} {{$user->firstname}}</b> 
                                                     <span class="fs-6">({{$user->univ_name}})({{$user->campus_name}})</span>
@@ -362,8 +362,8 @@
                                     @endif
                                 @empty
                                 <center>
-                                    <a href="/add_users">
-                                        <i class="fa-solid fa-user-plus"></i> No Interal Accreditor users, Add Here
+                                    <a href="/external_users">
+                                        <i class="fa-solid fa-user-plus"></i> No Exteral Accreditor users, Add Here
                                     </a>
                                 </center>
                                 @endforelse
@@ -375,19 +375,20 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-outline-success">Save changes</button>
+                        <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal" data-target="#addExternalMemberModal{{$area->id}}">Save changes</button>                    
                     </div>
                 </form>
             </div>
         </div>
     @empty
-    <div class="col-4 py-5 mx-auto">
-    </div>
+    <div class="col-4 py-5 mx-auto"></div>
     @endforelse
 </div>
 <script>
     $(document).ready(function(){
-
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
         function getDesignatedAreas()
         {
             $.ajax({
@@ -402,6 +403,86 @@
                 }, 
             })
         }
+
+        $('.addAreaMembersForm').submit(function (event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+            var $form = $(this);
+            // Make Ajax request
+            $.ajax({
+                type: 'POST',
+                url: $form.attr('action'),
+                data: formData,
+                success: function (response) {
+                    $form.closest('.modal').modal('hide');
+                    getDesignatedAreas();
+                    swal("Success!", "User has been added.", "success");
+                    console.log(response);
+                    
+                },
+                error: function (error) {
+                    // Handle error response
+                    console.log(error);
+                    // You can add further error handling here
+                }
+            });
+        });
+
+        $('.addInternalMembersForm').submit(function (event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+            console.log(formData);
+            var $form = $(this);
+            // Make Ajax request
+            $.ajax({
+                type: 'POST',
+                url: $form.attr('action'),
+                data: formData,
+                success: function (response) {
+                    $form.closest('.modal').modal('hide');
+                    getDesignatedAreas();
+                    swal("Success!", "Internal User has been added.", "success");
+                    console.log(response);
+                    
+                },
+                error: function (error) {
+                    // Handle error response
+                    console.log(error);
+                    // You can add further error handling here
+                }
+            });
+        });
+
+        $('form.addExternalMembersForm').submit(function (event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+            console.log(formData);
+            var $form = $(this);
+            // Make Ajax request
+            $.ajax({
+                type: 'POST',
+                url: $form.attr('action'),
+                data: formData,
+                success: function (response) {
+                    $form.closest('.modal').modal('hide');
+                    getDesignatedAreas();
+                    swal("Success!", "External User has been added.", "success");
+                    console.log(response);
+                },
+                error: function (error) {
+                    // Handle error response
+                    console.log(error);
+                    // You can add further error handling here
+                }
+            });
+        });
+
 
         $('.remove-area-member').on('click', function(){
             var area_member_id = $(this).data('area-member-id');

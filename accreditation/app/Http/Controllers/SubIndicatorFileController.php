@@ -34,6 +34,7 @@ class SubIndicatorFileController extends Controller
             ->where('parameter_id', $parameter_id)
             ->where('sub_indicator_id', $subindicator_id)
             ->where('accreditation_id', $acc_id)
+            ->orderBy('sub_indicator_files.updated_at', 'DESC')
             ->get();
 
         $messages = SubIndicatorMessage::join('users', 'sub_indicator_messages.sender_id', '=', 'users.id')

@@ -25,7 +25,6 @@
             {{ __('Video Conference') }}
         </h2>
     </x-slot>
+    <div id="jaas-container" style="height: 100vh;">
+  </div>
 </x-app-layout>
-<div id="jaas-container">
-
-</div>

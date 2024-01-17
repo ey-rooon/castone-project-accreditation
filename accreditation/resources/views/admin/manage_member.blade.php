@@ -70,7 +70,7 @@
                     <div class="col">
                         <h3>Coordinators</h3>
                     </div>
-                    @if(Auth::user()->user_type == 'admin' || $member)
+                    @if(Auth::user()->user_type == 'admin' || $coordinator)
                     <div class="col text-end">
                         <button class="icon-btn add-btn" data-bs-toggle="modal" data-bs-target="#addMemberModal">
                             <div class="add-icon"></div>
@@ -176,7 +176,7 @@
             <div class="py-4">
             </div>
 
-            @if(Auth::user()->user_type == 'admin' || $member)
+            @if(Auth::user()->user_type == 'admin' || $coordinator)
                 @if($accreditation->accreditation_type == "New")
                     @if($acc_areas->count() != 4)
                         <div class="row">
@@ -206,7 +206,7 @@
             </div>
             <!-- AREAS Modal -->
             <div class="modal fade" id="areaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-dialog">
                     <form method="POST" class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel"><b>SELECT AREA</b></h1>

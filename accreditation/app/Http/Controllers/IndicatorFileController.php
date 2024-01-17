@@ -36,6 +36,7 @@ class IndicatorFileController extends Controller
             ->where('parameter_id', $parameter_id)
             ->where('indicator_id', $indicator_id)
             ->where('accreditation_id', $acc_id)
+            ->orderBy('indicator_files.updated_at', 'DESC')
             ->get();
 
         $messages = IndicatorMessage::join('users', 'indicator_messages.sender_id', '=', 'users.id')
