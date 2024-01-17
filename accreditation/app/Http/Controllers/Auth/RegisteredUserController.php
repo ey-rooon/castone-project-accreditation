@@ -30,6 +30,7 @@ class RegisteredUserController extends Controller
     public function index()
     {
         //
+        return view("admin.resend_password");
     }
     /**
      * Display the registration view.

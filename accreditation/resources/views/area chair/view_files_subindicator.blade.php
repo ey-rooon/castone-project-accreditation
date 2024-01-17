@@ -50,6 +50,7 @@
                             @csrf
                             <input type="hidden" name="subindicator_id" value="{{$subindicator_id}}">
                             <input type="hidden" name="parameter_id" value="{{$parameter_id}}">
+                            <input type="hidden" name="accreditation_id" value="{{$accreditation_id}}">
                             <div class="mb-3">
                                 <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" value="{{@old('file')}}" multiple accept="image/*,video/*,.pdf"  @if(!$area_member) disabled @endif >
                             </div>

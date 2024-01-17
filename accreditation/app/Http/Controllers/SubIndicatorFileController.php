@@ -33,7 +33,7 @@ class SubIndicatorFileController extends Controller
             ->select('users.id as uid', 'sub_indicator_files.*', 'users.firstname', 'users.lastname')
             ->where('parameter_id', $parameter_id)
             ->where('sub_indicator_id', $subindicator_id)
-            ->orderBy('updated_at', 'DESC')
+            ->where('accreditation_id', $acc_id)
             ->get();
 
         $messages = SubIndicatorMessage::join('users', 'sub_indicator_messages.sender_id', '=', 'users.id')
@@ -101,7 +101,8 @@ class SubIndicatorFileController extends Controller
             'file' => 'required',
             'parameter_id' => 'required',
             'subindicator_id' => 'required',
-            'screen_name' => 'required'
+            'screen_name' => 'required',
+            'accreditation_id' => 'required',
         ];
 
         $customMessages = [
@@ -118,6 +119,7 @@ class SubIndicatorFileController extends Controller
         $subindicator_id = $request->input('subindicator_id');
         $screen_name = $request->input("screen_name");
         $file = $request->file('file');
+        $accreditation_id = $request->input('accreditation_id');
 
 
         $subindicatorFile = new SubIndicatorFile(); // Create a new instance for each file
@@ -129,6 +131,7 @@ class SubIndicatorFileController extends Controller
             $subindicatorFile->user_id = $uid;
             $subindicatorFile->parameter_id = $parameter_id;
             $subindicatorFile->sub_indicator_id = $subindicator_id;
+            $subindicatorFile->accreditation_id = $accreditation_id;
             $subindicatorFile->screen_name = $screen_name;
             $subindicatorFile->file_name = $fileName;
             $subindicatorFile->file_type = $fileExtension;

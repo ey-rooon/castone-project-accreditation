@@ -17,14 +17,16 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('parameter_id');
             $table->unsignedBigInteger('indicator_id');
+            $table->unsignedBigInteger('accreditation_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('parameter_id')->references('id')->on('parameters')->onDelete('cascade');
             $table->foreign('indicator_id')->references('id')->on('indicators')->onDelete('cascade');
+            $table->foreign('accreditation_id')->references('id')->on('accreditations')->onDelete('cascade');
             $table->string('screen_name');
             $table->string('file_name');
             $table->string('file_type');
             $table->string('file_location');
-            $table->string('status')->default('checking');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

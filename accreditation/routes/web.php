@@ -72,7 +72,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('edit_user/{id}', [UserController::class, 'edit']);
     Route::post('edit_user/{id}', [UserController::class, 'update']);
 
-    Route::get("resent_password", [RegisteredUserController::class, 'view']);
+    Route::get("resend_password", [RegisteredUserController::class, 'index']);
 
     Route::get('external_users', [ExternalUserController::class, 'index'])->name('external_users');
     Route::get('getCampus/{id}', [ExternalUserController::class, 'getCampus']);

@@ -9,7 +9,7 @@
         @forelse(Auth::user()->Notifications as $notification)
             <a href="{{$notification->data['url']}}">
                 <div class="p-3 border-top border-bottom text-dark">
-                    <h5 class="font-weight-bold text-dark mb-1 mt-0">{{$notification->data['title']}}</h5>
+                    <h5 class="font-weight-bold text-dark mb-1 mt-0"><b>{{$notification->data['title']}}</b></h5>
                     <div class="row">
                         <div class="col text-start">
                             {{$notification->data['content']}}

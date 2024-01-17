@@ -73,7 +73,7 @@ class IndicatorController extends Controller
         $instrument = Instrument::select()->where('id', $area->instrument_id)->first();
         $categories = IndicatorCategory::select()->get();
         $category = $categories;
-        
+
         if ($instrument->instrument_type == 'Old') {
             $categories = $categories->where('forOld', 1);
         } else {
@@ -88,18 +88,19 @@ class IndicatorController extends Controller
         $indicatorfiles = indicatorFile::join('users', 'indicator_files.user_id', '=', 'users.id')
             ->select('users.id as uid', 'indicator_files.*', 'users.firstname', 'users.lastname')
             ->where('parameter_id', $id)
-            ->orderBy('file_order', 'DESC')
+            ->where('accreditation_id', $acc_id)
             ->get();
 
         $subindicatorfiles = SubIndicatorFile::join('users', 'sub_indicator_files.user_id', '=', 'users.id')
             ->select('users.id as uid', 'sub_indicator_files.*', 'users.firstname', 'users.lastname')
             ->where('parameter_id', $id)
+            ->where('accreditation_id', $acc_id)
             ->get();
 
         $componentfiles = SubComponentFile::join('users', 'sub_component_files.user_id', '=', 'users.id')
             ->select('users.id as uid', 'sub_component_files.*', 'users.firstname', 'users.lastname')
             ->where('parameter_id', $id)
-            ->orderBy('file_order', 'DESC')
+            ->where('accreditation_id', $acc_id)
             ->get();
 
         $areas = Area::select()->get();

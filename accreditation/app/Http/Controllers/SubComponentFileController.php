@@ -34,7 +34,7 @@ class SubComponentFileController extends Controller
             ->select('users.id as uid', 'sub_component_files.*', 'users.firstname', 'users.lastname')
             ->where('parameter_id', $parameter_id)
             ->where('sub_component_id', $subcomponent_id)
-            ->orderBy('file_order', 'DESC')
+            ->where('accreditation_id', $acc_id)
             ->get();
 
         $messages = SubComponentMessage::join('users', 'sub_component_messages.sender_id', '=', 'users.id')
@@ -101,7 +101,8 @@ class SubComponentFileController extends Controller
             'file' => 'required',
             'parameter_id' => 'required',
             'subcomponent_id' => 'required',
-            'screen_name' => 'required'
+            'screen_name' => 'required',
+            'accreditation_id' => 'required',
         ];
 
         $customMessages = [
@@ -118,6 +119,7 @@ class SubComponentFileController extends Controller
         $subcomponent_id = $request->input('subcomponent_id');
         $screen_name = $request->input("screen_name");
         $file = $request->file('file');
+        $accreditation_id = $request->input('accreditation_id');
 
 
         $subComponentFile = new SubComponentFile(); // Create a new instance for each file
@@ -129,6 +131,7 @@ class SubComponentFileController extends Controller
             $subComponentFile->user_id = $uid;
             $subComponentFile->parameter_id = $parameter_id;
             $subComponentFile->sub_component_id = $subcomponent_id;
+            $subComponentFile->accreditation_id = $accreditation_id;
             $subComponentFile->screen_name = $screen_name;
             $subComponentFile->file_name = $fileName;
             $subComponentFile->file_type = $fileExtension;

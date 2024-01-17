@@ -35,7 +35,7 @@ class IndicatorFileController extends Controller
             ->select('users.id as uid', 'indicator_files.*', 'users.firstname', 'users.lastname')
             ->where('parameter_id', $parameter_id)
             ->where('indicator_id', $indicator_id)
-            ->orderBy('updated_at', 'DESC')
+            ->where('accreditation_id', $acc_id)
             ->get();
 
         $messages = IndicatorMessage::join('users', 'indicator_messages.sender_id', '=', 'users.id')
@@ -99,7 +99,8 @@ class IndicatorFileController extends Controller
             'file' => 'required',
             'parameter_id' => 'required',
             'indicator_id' => 'required',
-            'screen_name' => 'required'
+            'screen_name' => 'required',
+            'accreditation_id' => 'required',
         ];
 
         $customMessages = [
@@ -115,6 +116,7 @@ class IndicatorFileController extends Controller
         $parameter_id = $request->input('parameter_id');
         $indicator_id = $request->input('indicator_id');
         $screen_name = $request->input("screen_name");
+        $accreditation_id = $request->input("accreditation_id");
         $file = $request->file('file');
 
 
@@ -127,6 +129,7 @@ class IndicatorFileController extends Controller
             $indicatorFile->user_id = $uid;
             $indicatorFile->parameter_id = $parameter_id;
             $indicatorFile->indicator_id = $indicator_id;
+            $indicatorFile->accreditation_id = $accreditation_id;
             $indicatorFile->screen_name = $screen_name;
             $indicatorFile->file_name = $fileName;
             $indicatorFile->file_type = $fileExtension;
