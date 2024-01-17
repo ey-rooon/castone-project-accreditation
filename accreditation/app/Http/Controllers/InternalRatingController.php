@@ -65,7 +65,7 @@ class InternalRatingController extends Controller
         $indicatorCategories = IndicatorCategory::select()->get();
         $category = $indicatorCategories;
 
-        if ($instrument->instrument_type == 'old') {
+        if ($instrument->instrument_type == 'Old') {
             $indicatorCategories = $indicatorCategories->where('forOld', 1);
         } else {
             $indicatorCategories = $indicatorCategories->where('forOld', 0);

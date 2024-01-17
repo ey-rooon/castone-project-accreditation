@@ -68,12 +68,13 @@ class IndicatorController extends Controller
         $subcomponents = SubIndicatorComponent::select()
             ->OrderByRaw('CAST(SUBSTRING_INDEX(component_name, " ", -1) AS UNSIGNED)')
             ->get();
-        $area = Area::select()
-            ->where('id', $param->area_id)->first();
+        $area = Area::select()->where('id', $param->area_id)->first();
+
         $instrument = Instrument::select()->where('id', $area->instrument_id)->first();
         $categories = IndicatorCategory::select()->get();
         $category = $categories;
-        if ($instrument->instrument_type == 'old') {
+        
+        if ($instrument->instrument_type == 'Old') {
             $categories = $categories->where('forOld', 1);
         } else {
             $categories = $categories->where('forOld', 0);
