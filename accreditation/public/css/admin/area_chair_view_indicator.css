@@ -1,0 +1,125 @@
+.accordion-header{
+    border: 1px solid #b5b5b5;
+    border-radius: 7px;
+}
+
+#indicator{
+    margin-top: 0.25rem; 
+    width: 100%; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#subindicator{
+    border-radius: 5px;
+}
+
+#subindicator-componentdesc{
+    margin-top: 0.25rem; 
+    width: 100%; border: 
+    1px solid #ccc;
+}
+
+#subcomponent{
+    margin-top: 0.25rem; 
+    width: 100%; border: 
+    1px solid #ccc;
+    border-radius: 5px;
+}
+#subcomponentdesc{
+    margin-top: 0.25rem; 
+    width: 100%; border: 
+    1px solid #ccc;
+}
+
+
+#subcomponent{
+    margin-top: 0.25rem; 
+    width: 100%; 
+    border: 1px solid #ccc;
+}
+#category{
+    margin-top: 0.25rem; 
+    width: 100%; 
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+/* add accreditation */
+.button-indicator {
+    --main-focus: #2d8cf0;
+    --font-color: #323232;
+    --bg-color-sub: #dedede;
+    --bg-color: #eee;
+    --main-color: #323232;
+    position: relative;
+    width: 170px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--main-color);
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .button-indicator, .button__icon, .button__text {
+    transition: all 0.3s;
+  }
+  
+  .button-indicator .button__text {
+    transform: translateX(19px);
+    color: var(--font-color);
+    font-weight: 600;
+  }
+  
+  .button-indicator .button__icon {
+    position: absolute;
+    transform: translateX(128px);
+    height: 100%;
+    width: 40px;
+    background-color: var(--bg-color-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button-indicator .svg {
+    width: 20px;
+    fill: var(--main-color);
+  }
+  
+  .button-indicator:hover {
+    background: var(--bg-color);
+  }
+  
+  .button-indicator:hover .button__text {
+    color: transparent;
+  }
+  
+  .button-indicator:hover .button__icon {
+    width: 175px;
+    transform: translateX(0);
+  }
+  
+  .button-indicator:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px var(--main-color);
+  }
+
+.hide-btn{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #000;
+  background-color: #f8f9fa; /* Adjust the background color as needed */
+  border: 1px solid #dee2e6
+  }
+  .collapse{
+    visibility: visible !important;
+  }

@@ -1,0 +1,36 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: Poppins;
+}
+.offcanvas-body{
+    padding: 30px
+}
+.offcanvas-body a{
+    margin: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+.offcanvas-body a li{
+    padding: 10px;
+    color: #000;
+    transition: 0.2s ease;
+}
+.offcanvas-body a li:hover{
+    transform: scale(1.05);
+    background-color: #86cdf9;
+    color: #000;
+}
+.offcanvas-body a li i{
+    padding-left: 50px;
+}
+.offcanvas-body a li span{
+    margin-left: 30px;
+    font-weight: 500;
+    font-size: 18px;
+}
+.bg .container img{
+    height: 150px; 
+    width: 150px; 
+    margin-left: 50px
+}

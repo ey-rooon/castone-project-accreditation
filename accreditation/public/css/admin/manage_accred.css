@@ -1,0 +1,121 @@
+body{
+  padding: 0;
+  margin: 0;
+  font-family: Poppins;
+}
+.card{
+  transition: 0.2s all ease;
+}
+
+.card:hover{
+transform: scale(1.05);
+}
+
+.button-manage{
+  transition: 0.5s all ease;
+}
+.button-manage:active{
+  transform: scale(0.96);
+}
+/* add accreditation */
+.button-manage {
+  --main-focus: #2d8cf0;
+  --font-color: #323232;
+  --bg-color-sub: #dedede;
+  --bg-color: #eee;
+  --main-color: #323232;
+  position: relative;
+  width: 205px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--main-color);
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.button-manage, .button__icon, .button__text {
+  transition: all 0.3s;
+}
+
+.button-manage .button__text {
+  transform: translateX(22px);
+  color: var(--font-color);
+  font-weight: 600;
+}
+
+.button-manage .button__icon {
+  position: absolute;
+  transform: translateX(166px);
+  height: 100%;
+  width: 40px;
+  background-color: var(--bg-color-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-manage .svg {
+  width: 20px;
+  fill: var(--main-color);
+}
+
+.button-manage:hover {
+  background: var(--bg-color);
+}
+
+.button-manage:hover .button__text {
+  color: transparent;
+}
+
+.button-manage:hover .button__icon {
+  width: 220px;
+  transform: translateX(0);
+}
+
+.button-manage:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px var(--main-color);
+}
+/* modal for adding accreditation */
+.internal{
+  margin-top: 10px;
+  font-weight: 700;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+.external{
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.modal-bd{
+  padding: 15px;
+}
+.modal-bd label{
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.modal-bd input{
+  margin-bottom: 12px;
+}
+.modal-bd select{
+  margin-bottom: 12px;
+}
+.modal-header{
+  font-size: 22px;
+  text-align: center;
+  font-weight: bold;
+}
+.modal-title{
+  width: 100%;
+}
+h4{
+  text-align: center;
+}

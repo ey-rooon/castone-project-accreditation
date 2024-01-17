@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:wght@300&display=swap');
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: Poppins;
+}
+
+.container-program-list{
+  border: 1px solid rgb(189, 188, 188);
+  border-radius: 7px;
+  position: absolute;
+  width: 600px;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -300px;
+}
+
+.container-program-list .program-input{
+  margin-top: 0.25rem; 
+  width: 100%; 
+  border-radius: 5px;
+  border: 1px solid #0000;
+}
+
+/* back button */
+.CartBtn-program {
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 140px;
+    height: 40px;
+    border-radius: 12px;
+    border: none;
+    background-color: rgb(209, 209, 209);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: .5s;
+    overflow: hidden;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
+    position: relative;
+  }
+  
+  .IconContainer {
+    position: absolute;
+    left: -30px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 2;
+    transition-duration: .5s;
+  }
+  
+  .fas {
+    color: #000;
+    border-radius: 1px;
+  }
+  
+  .text {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(17, 17, 17);
+    z-index: 1;
+    transition-duration: .5s;
+    font-size: 1.04em;
+    font-weight: 600;
+  }
+  
+  .CartBtn-program:hover .IconContainer {
+    color: #000;
+    transform: translateX(58px);
+    border-radius: 40px;
+    transition-duration: .5s;
+  }
+  
+  .CartBtn-program:hover .text {
+    transform: translate(10px,0px);
+    transition-duration: .5s;
+  }
+  
+  .CartBtn-program:active {
+    transform: scale(0.95);
+    transition-duration: .5s;
+  }
