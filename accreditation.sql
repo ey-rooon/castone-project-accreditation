@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2024 at 11:50 AM
+-- Generation Time: Jan 18, 2024 at 06:41 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,7 +47,8 @@ CREATE TABLE `accreditations` (
 --
 
 INSERT INTO `accreditations` (`id`, `accreditation_name`, `program_level_id`, `instrument_id`, `accreditation_type`, `apply_type`, `internal_accreditation_date_start`, `internal_accreditation_date_end`, `external_accreditation_date_start`, `external_accreditation_date_end`, `created_at`, `updated_at`) VALUES
-(27, 'IT ACCREDITATION 2023', 1, 21, 'Old', 'Re-Visit', '2024-01-22', '2024-01-29', NULL, NULL, '2024-01-17 07:44:17', '2024-01-17 07:44:17');
+(28, 'IT ACCREDITATION 2023', 1, 26, 'New', 'Re-Accreditation', '2024-01-22', '2024-01-29', NULL, NULL, '2024-01-18 05:07:50', '2024-01-18 05:07:50'),
+(29, 'Asingan IT Accreditation 2024', 5, 21, 'Old', 'Re-Accreditation', '2024-02-05', '2024-02-12', NULL, NULL, '2024-01-18 08:22:44', '2024-01-18 08:22:44');
 
 -- --------------------------------------------------------
 
@@ -68,13 +69,20 @@ CREATE TABLE `accreditation_areas` (
 --
 
 INSERT INTO `accreditation_areas` (`id`, `accreditation_id`, `area_id`, `created_at`, `updated_at`) VALUES
-(142, 27, 56, '2024-01-17 07:44:24', '2024-01-17 07:44:24'),
-(143, 27, 65, '2024-01-17 09:36:43', '2024-01-17 09:36:43'),
-(144, 27, 64, '2024-01-17 09:36:53', '2024-01-17 09:36:53'),
-(145, 27, 58, '2024-01-17 10:00:41', '2024-01-17 10:00:41'),
-(146, 27, 57, '2024-01-17 10:00:43', '2024-01-17 10:00:43'),
-(147, 27, 59, '2024-01-17 10:00:49', '2024-01-17 10:00:49'),
-(148, 27, 60, '2024-01-17 10:00:50', '2024-01-17 10:00:50');
+(149, 28, 66, '2024-01-18 05:07:50', '2024-01-18 05:07:50'),
+(150, 28, 67, '2024-01-18 05:07:50', '2024-01-18 05:07:50'),
+(151, 28, 68, '2024-01-18 05:07:50', '2024-01-18 05:07:50'),
+(153, 28, 69, '2024-01-18 05:33:30', '2024-01-18 05:33:30'),
+(154, 29, 56, '2024-01-18 08:22:44', '2024-01-18 08:22:44'),
+(155, 29, 57, '2024-01-18 08:22:44', '2024-01-18 08:22:44'),
+(156, 29, 58, '2024-01-18 08:22:44', '2024-01-18 08:22:44'),
+(157, 29, 59, '2024-01-18 08:22:45', '2024-01-18 08:22:45'),
+(158, 29, 60, '2024-01-18 08:22:45', '2024-01-18 08:22:45'),
+(159, 29, 61, '2024-01-18 08:22:45', '2024-01-18 08:22:45'),
+(160, 29, 62, '2024-01-18 08:22:45', '2024-01-18 08:22:45'),
+(161, 29, 63, '2024-01-18 08:22:45', '2024-01-18 08:22:45'),
+(162, 29, 64, '2024-01-18 08:22:45', '2024-01-18 08:22:45'),
+(163, 29, 65, '2024-01-18 08:22:45', '2024-01-18 08:22:45');
 
 -- --------------------------------------------------------
 
@@ -136,20 +144,10 @@ CREATE TABLE `area_members` (
 --
 
 INSERT INTO `area_members` (`id`, `accreditation_id`, `user_id`, `area_id`, `member_type`, `disableInternal`, `disableExternal`, `created_at`, `updated_at`) VALUES
-(110, 27, 3, 56, 'chair', 0, 0, '2024-01-17 07:45:10', '2024-01-17 07:45:10'),
-(116, 27, 13, 56, 'chair', 0, 0, '2024-01-17 09:18:55', '2024-01-17 09:18:55'),
-(129, 27, 14, 64, 'internal', 0, 0, '2024-01-17 09:37:13', '2024-01-17 09:37:13'),
-(140, 27, 27, 64, 'external', 0, 0, '2024-01-17 09:58:07', '2024-01-17 09:58:07'),
-(141, 27, 3, 65, 'internal', 0, 0, '2024-01-17 10:01:00', '2024-01-17 10:01:00'),
-(142, 27, 3, 57, 'chair', 0, 0, '2024-01-17 10:01:55', '2024-01-17 10:01:55'),
-(143, 27, 2, 57, 'member', 0, 0, '2024-01-17 10:02:10', '2024-01-17 10:02:10'),
-(144, 27, 11, 57, 'member', 0, 0, '2024-01-17 10:02:11', '2024-01-17 10:02:11'),
-(145, 27, 24, 59, 'external', 0, 0, '2024-01-17 10:02:26', '2024-01-17 10:02:26'),
-(146, 27, 10, 56, 'internal', 0, 0, '2024-01-18 01:12:14', '2024-01-18 01:12:14'),
-(147, 27, 2, 56, 'member', 0, 0, '2024-01-18 01:16:51', '2024-01-18 01:16:51'),
-(148, 27, 13, 58, 'chair', 0, 0, '2024-01-18 01:50:59', '2024-01-18 01:50:59'),
-(149, 27, 2, 58, 'member', 0, 0, '2024-01-18 01:51:09', '2024-01-18 01:51:09'),
-(150, 27, 10, 58, 'internal', 0, 0, '2024-01-18 01:57:15', '2024-01-18 01:57:15');
+(151, 28, 2, 66, 'chair', 0, 0, '2024-01-18 05:34:18', '2024-01-18 05:34:18'),
+(152, 28, 3, 66, 'internal', 0, 0, '2024-01-18 08:06:40', '2024-01-18 08:06:40'),
+(153, 29, 3, 56, 'internal', 0, 0, '2024-01-18 08:23:08', '2024-01-18 08:23:08'),
+(154, 29, 6, 56, 'chair', 0, 0, '2024-01-18 08:23:22', '2024-01-18 08:23:22');
 
 -- --------------------------------------------------------
 
@@ -238,6 +236,97 @@ CREATE TABLE `compliance_report_files` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `compliance_report_files`
+--
+
+INSERT INTO `compliance_report_files` (`id`, `accreditation_id`, `user_id`, `area_id`, `screen_name`, `file_name`, `file_type`, `file_location`, `created_at`, `updated_at`) VALUES
+(2, 28, 2, 66, 'Compliance report Area 1 Instruction', 'ef30b9fc-980e-43fa-9b9f-0d7ececc1413.pdf', 'pdf', 'storage/files/compliance reports/ef30b9fc-980e-43fa-9b9f-0d7ececc1413.pdf', '2024-01-18 08:03:56', '2024-01-18 08:03:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `criterias`
+--
+
+CREATE TABLE `criterias` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `criteria_description` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `criterias`
+--
+
+INSERT INTO `criterias` (`id`, `criteria_description`, `created_at`, `updated_at`) VALUES
+(1, 'Well-defined objectives', '2024-01-18 04:34:44', '2024-01-18 04:34:44'),
+(2, 'Adequate and relevant projects/activities to achieve objectives', '2024-01-18 04:37:22', '2024-01-18 04:37:22'),
+(3, 'Systematic and effective procedures, (teaching methods, curriculum development, testing, etc.', '2024-01-18 04:38:27', '2024-01-18 04:38:27'),
+(4, 'Reasonable budget', '2024-01-18 04:38:37', '2024-01-18 04:38:37'),
+(5, 'Provision of materials and other Resources', '2024-01-18 04:38:49', '2024-01-18 04:38:49'),
+(6, 'Participation of significant number of faculty/staff/Students/community in major projects/activities', '2024-01-18 04:39:17', '2024-01-18 04:39:17'),
+(7, 'Well-documented', '2024-01-18 04:39:36', '2024-01-18 04:39:36'),
+(8, 'Distinctions, Achievements and Grants of this Program.', '2024-01-18 04:39:51', '2024-01-18 04:39:51'),
+(9, 'Best Practices', '2024-01-18 04:40:02', '2024-01-18 04:40:02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `criteria_files`
+--
+
+CREATE TABLE `criteria_files` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `area_id` bigint(20) UNSIGNED NOT NULL,
+  `criteria_id` bigint(20) UNSIGNED NOT NULL,
+  `accreditation_id` bigint(20) UNSIGNED NOT NULL,
+  `screen_name` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `file_type` varchar(255) NOT NULL,
+  `file_location` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `criteria_files`
+--
+
+INSERT INTO `criteria_files` (`id`, `user_id`, `area_id`, `criteria_id`, `accreditation_id`, `screen_name`, `file_name`, `file_type`, `file_location`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 66, 1, 28, 'test critera', 'ddb153b6-bced-4046-9279-0a0820258e93.jpg', 'jpg', 'storage/files/ddb153b6-bced-4046-9279-0a0820258e93.jpg', 'pending', '2024-01-18 07:38:49', '2024-01-18 08:00:28'),
+(2, 2, 66, 1, 28, 'test 2', '5df49e3b-1ce7-4ee4-a3e9-fc816631d2cf.pdf', 'pdf', 'storage/files/5df49e3b-1ce7-4ee4-a3e9-fc816631d2cf.pdf', 'pending', '2024-01-18 08:00:25', '2024-01-18 08:00:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `criteria_messages`
+--
+
+CREATE TABLE `criteria_messages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sender_id` bigint(20) UNSIGNED NOT NULL,
+  `criteria_file_id` bigint(20) UNSIGNED NOT NULL,
+  `accreditation_id` bigint(20) UNSIGNED NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `criteria_messages`
+--
+
+INSERT INTO `criteria_messages` (`id`, `sender_id`, `criteria_file_id`, `accreditation_id`, `message`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 28, 'hi', '2024-01-18 07:51:30', '2024-01-18 07:51:30'),
+(2, 2, 1, 28, 'test', '2024-01-18 07:58:51', '2024-01-18 07:58:51'),
+(3, 2, 1, 28, 'test', '2024-01-18 07:59:57', '2024-01-18 07:59:57'),
+(4, 2, 1, 28, 'hatdog', '2024-01-18 08:00:04', '2024-01-18 08:00:04'),
+(5, 2, 2, 28, 'okay na ito', '2024-01-18 08:02:01', '2024-01-18 08:02:01');
 
 -- --------------------------------------------------------
 
@@ -524,9 +613,6 @@ INSERT INTO `indicators` (`id`, `parameter_id`, `indicator_category_id`, `indica
 (221, 64, 3, 'I.8.', 'Indicators on performance of graduates are studied such as:', 0, '2024-01-11 21:20:29', '2024-01-11 21:20:29'),
 (222, 64, 6, 'O.1.', 'The faculty students have commendable performance as a result of administrative support.', 0, '2024-01-11 21:21:00', '2024-01-11 21:21:00'),
 (223, 64, 6, 'O.2.', 'The graduates of the program are employable.', 0, '2024-01-11 21:21:09', '2024-01-11 21:21:09'),
-(224, 92, 7, 'qwe', 'qwe', 0, '2024-01-16 04:59:56', '2024-01-16 04:59:56'),
-(225, 92, 1, 'asd', 'asdasd', 0, '2024-01-16 05:02:33', '2024-01-16 05:02:33'),
-(226, 92, 7, 'asd', 'asd', 0, '2024-01-16 05:09:17', '2024-01-16 05:09:17'),
 (227, 93, 1, 'S.1.', 'The institution has a system of determining its Vision and Mission.', 0, '2024-01-18 00:26:58', '2024-01-18 00:26:58'),
 (228, 93, 1, 'S.2.', 'The vision clearly reflects what the institution hopes to become in the future.', 0, '2024-01-18 00:26:58', '2024-01-18 00:26:58'),
 (229, 93, 1, 'S.3.', 'The Mission clearly reflects the institution’s legal and other statutory mandates.', 0, '2024-01-18 00:26:58', '2024-01-18 00:26:58'),
@@ -590,16 +676,6 @@ CREATE TABLE `indicator_files` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `indicator_files`
---
-
-INSERT INTO `indicator_files` (`id`, `user_id`, `accreditation_id`, `parameter_id`, `indicator_id`, `screen_name`, `file_name`, `file_type`, `file_location`, `status`, `created_at`, `updated_at`) VALUES
-(29, 3, 27, 49, 45, '111', 'f33b9b08-696c-4384-9046-39547a2429ad.pdf', 'pdf', 'storage/files/f33b9b08-696c-4384-9046-39547a2429ad.pdf', 'pending', '2024-01-17 08:42:08', '2024-01-18 01:11:04'),
-(30, 3, 27, 49, 45, '222', '0fe100be-c3f5-46ee-bc75-ace7e675d251.pdf', 'pdf', 'storage/files/0fe100be-c3f5-46ee-bc75-ace7e675d251.pdf', 'pending', '2024-01-17 08:42:17', '2024-01-17 08:46:30'),
-(32, 2, 27, 49, 46, 'Aaron uploaded', '8a55279b-c24e-452a-a9c4-1e31beafefa9.png', 'png', 'storage/files/8a55279b-c24e-452a-a9c4-1e31beafefa9.png', 'pending', '2024-01-18 01:22:08', '2024-01-18 01:22:08'),
-(33, 13, 27, 49, 46, 'Mike uploaded', '921408d1-17dc-4d7d-84bc-199093fa9f8f.pdf', 'pdf', 'storage/files/921408d1-17dc-4d7d-84bc-199093fa9f8f.pdf', 'pending', '2024-01-18 01:35:22', '2024-01-18 01:35:22');
-
 -- --------------------------------------------------------
 
 --
@@ -662,6 +738,20 @@ CREATE TABLE `internal_ratings` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `internal_ratings`
+--
+
+INSERT INTO `internal_ratings` (`id`, `user_id`, `parameter_id`, `indicator_id`, `accreditation_id`, `rating`, `created_at`, `updated_at`) VALUES
+(394, 3, 50, 54, 29, '5.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(395, 3, 50, 55, 29, '2.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(396, 3, 50, 56, 29, '1.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(397, 3, 50, 57, 29, '1.75', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(398, 3, 50, 58, 29, '2.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(399, 3, 50, 59, 29, '3.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(400, 3, 50, 60, 29, '1.33', '2024-01-18 09:34:50', '2024-01-18 09:34:50'),
+(401, 3, 50, 61, 29, '1.00', '2024-01-18 09:34:50', '2024-01-18 09:34:50');
+
 -- --------------------------------------------------------
 
 --
@@ -696,6 +786,22 @@ CREATE TABLE `internal_sub_ratings` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `internal_sub_ratings`
+--
+
+INSERT INTO `internal_sub_ratings` (`id`, `user_id`, `parameter_id`, `sub_indicator_id`, `accreditation_id`, `rating`, `created_at`, `updated_at`) VALUES
+(355, 3, 50, 21, 29, NULL, '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(356, 3, 50, 22, 29, '1.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(357, 3, 50, 23, 29, '1.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(358, 3, 50, 24, 29, '2.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(359, 3, 50, 25, 29, '2.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(360, 3, 50, 26, 29, '1.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(361, 3, 50, 27, 29, '2.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(362, 3, 50, 28, 29, '1.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(363, 3, 50, 29, 29, '2.00', '2024-01-18 09:34:49', '2024-01-18 09:34:49'),
+(364, 3, 50, 30, 29, '1.00', '2024-01-18 09:34:50', '2024-01-18 09:34:50');
+
 -- --------------------------------------------------------
 
 --
@@ -710,13 +816,6 @@ CREATE TABLE `members` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `members`
---
-
-INSERT INTO `members` (`id`, `accreditation_id`, `user_id`, `isCoordinator`, `created_at`, `updated_at`) VALUES
-(53, 27, 13, 1, '2024-01-18 00:56:59', '2024-01-18 00:56:59');
 
 -- --------------------------------------------------------
 
@@ -773,7 +872,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (78, '2023_12_08_185345_create_notifications_table', 13),
 (79, '2023_12_14_112921_create_compliance_report_files_table', 14),
 (80, '2024_01_14_051925_create_area_ratings_table', 15),
-(81, '2024_01_14_151916_create_parameter_reports_table', 16);
+(81, '2024_01_14_151916_create_parameter_reports_table', 16),
+(82, '2023_08_26_084038_create_universities_table', 17),
+(83, '2023_08_28_104003_create_program_instruments_table', 18),
+(84, '2024_01_13_081058_create_parameter_ratings_table', 19),
+(85, '2024_01_18_110230_create_criterias_table', 20),
+(86, '2024_01_18_144117_create_criteria_files_table', 20),
+(87, '2024_01_18_150742_create_criteria_messages_table', 21);
 
 -- --------------------------------------------------------
 
@@ -801,12 +906,14 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('027a04a4-0335-46c8-9fe5-02fe6b177340', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 11, '{\"content\":\"You have been added as a Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 03:33:37', '2024-01-15 03:33:37'),
 ('03e415fa-0a7a-46fc-b869-bcbffc0f3a49', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', '2024-01-12 09:46:53', '2024-01-12 09:15:05', '2024-01-12 09:46:53'),
 ('04491be8-c2ad-4424-8a34-864a3ca3c476', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 13, '{\"content\":\"You have been added as chair for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-18 01:51:00', '2024-01-18 01:51:00'),
+('0472ebed-0c6c-4228-8eac-220a78c1590e', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/28\"}', '2024-01-18 08:20:19', '2024-01-18 08:06:40', '2024-01-18 08:20:19'),
 ('051cf128-f198-4818-8ca8-9875f641a877', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 14, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 09:37:13', '2024-01-17 09:37:13'),
 ('0887af88-f771-4ab4-9f76-b8f35f464e61', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been added as external for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 09:14:30', '2024-01-17 09:14:30'),
+('09b7a7cb-ed0e-41a1-90cd-c70be87c2886', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as internal for the Asingan IT Accreditation 2024\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/29\"}', '2024-01-18 09:36:53', '2024-01-18 08:23:08', '2024-01-18 09:36:53'),
 ('0b30d12c-5bb0-4a6c-ba7e-cd663f0e2f7c', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 10, '{\"content\":\"You have been added as a Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 03:33:37', '2024-01-15 03:33:37'),
 ('0e993e64-5ea9-4702-aa31-16ed5c2f931d', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as Internal Accreditor for the sdffghgjkl;\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/7\"}', '2024-01-13 23:58:58', '2023-12-21 06:27:07', '2024-01-13 23:58:58'),
 ('0e9bf454-918c-4148-a966-c6ae70f12630', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 12, '{\"content\":\"You have been remove as Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Removed!\",\"url\":\"\"}', NULL, '2024-01-15 04:01:21', '2024-01-15 04:01:21'),
-('0ee1fa8b-6a73-44ac-bbe4-33d942d059db', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as chair for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 10:01:55', '2024-01-17 10:01:55'),
+('0ee1fa8b-6a73-44ac-bbe4-33d942d059db', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as chair for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', '2024-01-18 08:20:19', '2024-01-17 10:01:55', '2024-01-18 08:20:19'),
 ('108f0836-e95b-4931-afb2-952003378086', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 13, '{\"content\":\"You have been added as a Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-18 00:56:59', '2024-01-18 00:56:59'),
 ('14975a8f-58f3-40ec-b7a0-fe0615b688a4', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 5, '{\"content\":\"Account has been disabled for the IT ACCREDITATION 2024\",\"title\":\"Account Notice!\",\"url\":\"\"}', '2023-12-14 14:30:25', '2023-12-14 14:30:19', '2023-12-14 14:30:25'),
 ('154909ed-c6dd-478e-a3b0-89d03292eb23', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 13, '{\"content\":\"You have been added as chair for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 07:32:18', '2024-01-15 07:32:18'),
@@ -814,7 +921,7 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('166ca450-59bf-4313-8c09-59f067e03c79', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', '2024-01-15 09:47:56', '2024-01-15 08:27:16', '2024-01-15 09:47:56'),
 ('1a7ea219-58c5-4f3f-8848-452057e2d507', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as member for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', '2024-01-16 05:30:08', '2024-01-15 08:38:44', '2024-01-16 05:30:08'),
 ('1a967f2e-d82e-4534-bec9-60022f92728b', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 5, '{\"content\":\"Account has been disabled for the IT ACCREDITATION 2024\",\"title\":\"Account Notice!\",\"url\":\"\\/manage_accreditation\"}', '2023-12-14 14:30:59', '2023-12-14 14:30:54', '2023-12-14 14:30:59'),
-('1c1956df-f0a2-49d6-9fd4-22fef879b5ec', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 10:01:00', '2024-01-17 10:01:00'),
+('1c1956df-f0a2-49d6-9fd4-22fef879b5ec', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', '2024-01-18 08:20:19', '2024-01-17 10:01:00', '2024-01-18 08:20:19'),
 ('1c8be1c5-1b29-44c0-9953-0af5358366b7', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 13, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2024-01-15 08:28:43', '2024-01-15 08:28:43'),
 ('26ce10ea-aa78-4970-b2c7-de7c0c703780', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"Account has been disabled for the IT ACCREDITATION 2024\",\"title\":\"Account Notice!\",\"url\":\"\\/manage_accreditation\"}', '2023-12-21 06:27:27', '2023-12-14 14:30:54', '2023-12-21 06:27:27'),
 ('285487be-6f21-4345-8a7e-744b7d8fa9d7', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 8, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2024-01-17 09:50:03', '2024-01-17 09:50:03'),
@@ -825,12 +932,13 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('2ca55548-1260-410a-b9f7-ec9a5ecc3e4f', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 9, '{\"content\":\"You have been added as external for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 09:25:22', '2024-01-17 09:25:22'),
 ('2ca572b6-56c1-46fc-95a5-1236416eb0ed', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 13, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2024\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', '2023-12-14 07:02:10', '2023-12-13 23:35:17', '2023-12-14 07:02:10'),
 ('2ef22a73-a8c2-4aa9-b5fe-12111ba6f45e', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as Internal Accreditor for the ASDAD\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/17\"}', '2024-01-07 14:11:19', '2024-01-07 04:39:33', '2024-01-07 14:11:19'),
-('2f8c87fc-4bbf-4d68-a7c5-e7a78dc66b36', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as member for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-18 01:16:51', '2024-01-18 01:16:51'),
+('2f8c87fc-4bbf-4d68-a7c5-e7a78dc66b36', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as member for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', '2024-01-18 05:37:26', '2024-01-18 01:16:51', '2024-01-18 05:37:26'),
 ('3181a182-ce89-4d0b-afbb-d93d1550cc48', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as Internal Accreditor for the ASDAD\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/17\"}', '2024-01-07 14:11:19', '2024-01-07 04:41:57', '2024-01-07 14:11:19'),
 ('34122e27-ae75-4d32-b21d-6915d4435ea4', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 10, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 09:25:04', '2024-01-17 09:25:04'),
 ('35a52405-178c-4ec7-aad8-aa3056c71f7d', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 14, '{\"content\":\"You have been added as external for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 08:34:13', '2024-01-15 08:34:13'),
 ('35f2bbe4-5d1b-4d27-8de2-c95033463aaf', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/16\"}', '2024-01-07 14:11:19', '2024-01-06 09:06:01', '2024-01-07 14:11:19'),
 ('37cbdb26-87cb-4e77-be6d-4e6951c4fcbe', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 13, '{\"content\":\"You have been added as a Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 03:57:54', '2024-01-15 03:57:54'),
+('3f3614b1-579c-42ed-bf5b-c2881d1d8807', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been added as chair for the Asingan IT Accreditation 2024\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/29\"}', NULL, '2024-01-18 08:23:23', '2024-01-18 08:23:23'),
 ('3f4e6e05-8d91-401e-9cb9-5b1ee06a4ccd', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 28, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2024-01-17 10:00:33', '2024-01-17 10:00:33'),
 ('4100339d-b5a2-448f-9c88-6250f1e1438a', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 21, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2024-01-17 09:53:59', '2024-01-17 09:53:59'),
 ('412daf9f-0e4c-4f64-9de9-15e5d28a7750', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/21\"}', '2024-01-12 19:57:46', '2024-01-12 19:52:49', '2024-01-12 19:57:46'),
@@ -839,7 +947,7 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('43321755-1df3-433f-8546-e577f6e6b590', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as chair for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', '2024-01-15 09:47:56', '2024-01-15 09:47:41', '2024-01-15 09:47:56'),
 ('43645c8d-1683-40ed-9044-6a6d96fdc5ca', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as Internal Accreditor for the sdffghgjkl;\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/7\"}', '2023-12-21 06:27:27', '2023-12-21 06:26:44', '2023-12-21 06:27:27'),
 ('4b6f8f9e-fb83-4cf3-9ffd-e5cf368b30ed', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 14, '{\"content\":\"You have been added as Internal Accreditor for the ASDAD\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/17\"}', NULL, '2024-01-07 04:41:18', '2024-01-07 04:41:18'),
-('4e1f9b14-e32f-43c3-9291-5504ea2a1b5e', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as member for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 10:02:11', '2024-01-17 10:02:11'),
+('4e1f9b14-e32f-43c3-9291-5504ea2a1b5e', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as member for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', '2024-01-18 05:37:26', '2024-01-17 10:02:11', '2024-01-18 05:37:26'),
 ('4e3d9b0b-cc78-4a69-827f-8a54527afc20', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been remove as Internal Accreditor for the ASDAD\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', '2024-01-07 14:11:19', '2024-01-07 04:41:37', '2024-01-07 14:11:19'),
 ('4eb7aa34-09bf-4e31-b8de-07250bb0205b', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been added as external for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 09:14:23', '2024-01-17 09:14:23'),
 ('4eff8605-002c-4e63-b5de-6c999c12f1d2', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 14, '{\"content\":\"You have been remove as Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Removed!\",\"url\":\"\"}', NULL, '2024-01-15 03:52:51', '2024-01-15 03:52:51'),
@@ -901,7 +1009,7 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('9d4ef88e-eb70-4b1d-836a-e363991c669b', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"Account has been enabled for the IT ACCREDITATION 2024\",\"title\":\"Account Notice!\",\"url\":\"\"}', '2023-12-21 06:27:27', '2023-12-14 14:29:48', '2023-12-21 06:27:27'),
 ('9dc50ab0-c080-43dd-8d67-54bad7d1d6c1', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/16\"}', '2024-01-13 23:58:58', '2024-01-07 05:17:31', '2024-01-13 23:58:58'),
 ('9f2a33f5-a560-48ef-af15-b47827f71916', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 10, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-18 01:12:14', '2024-01-18 01:12:14'),
-('9f82b2c7-6202-4fb9-9a84-d1b6d608e1ee', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as member for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-18 01:51:09', '2024-01-18 01:51:09'),
+('9f82b2c7-6202-4fb9-9a84-d1b6d608e1ee', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as member for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', '2024-01-18 05:37:26', '2024-01-18 01:51:09', '2024-01-18 05:37:26'),
 ('a03a1d9a-167c-40cc-bb7f-feb84437a810', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been added as chair for the Asingan IT Accreditation 2024\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/24\"}', NULL, '2024-01-17 03:16:13', '2024-01-17 03:16:13'),
 ('a0fb2548-f064-4d9e-b10d-227a37fba65f', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2024-01-17 09:33:08', '2024-01-17 09:33:08'),
 ('a29980a0-c1a0-4d77-8914-54e94081e5c7', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/16\"}', '2024-01-07 14:11:18', '2024-01-07 05:18:34', '2024-01-07 14:11:18'),
@@ -926,6 +1034,7 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('b4f6600b-a302-4f64-a05e-05acc1778dd2', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 31, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 09:57:58', '2024-01-17 09:57:58'),
 ('b544ec46-136c-4768-b1c6-c65960c04d80', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 14, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2024-01-17 09:24:58', '2024-01-17 09:24:58'),
 ('b57618ea-7ce4-44b0-8e23-65821ad3386e', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as Internal Accreditor for the ASDAD\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/17\"}', '2024-01-07 14:11:18', '2024-01-07 07:53:15', '2024-01-07 14:11:18'),
+('b7348bc8-c394-4c7e-835f-7c05b711b1cb', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as chair for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/28\"}', '2024-01-18 05:37:25', '2024-01-18 05:34:18', '2024-01-18 05:37:25'),
 ('b7ddbdf3-fbca-4dd9-a7b9-ded7f6937585', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"Account has been enabled for the IT ACCREDITATION 2024\",\"title\":\"Account Notice!\",\"url\":\"\"}', '2023-12-21 06:27:27', '2023-12-14 14:29:17', '2023-12-21 06:27:27'),
 ('b84abf7d-32c0-4e30-91bb-dee7ff1a568f', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been remove as Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Removed!\",\"url\":\"\"}', '2023-12-13 06:22:18', '2023-12-09 07:09:26', '2023-12-13 06:22:18'),
 ('b86dfe73-7cdd-4ac5-bfdd-d86de707599a', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 5, '{\"content\":\"Account has been enabled for the IT ACCREDITATION 2024\",\"title\":\"Account Notice!\",\"url\":\"\"}', '2023-12-14 14:29:25', '2023-12-14 14:29:17', '2023-12-14 14:29:25'),
@@ -946,13 +1055,13 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('c20bb639-2c1f-4669-a89c-a099ab165807', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 9, '{\"content\":\"You have been added as a Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 03:57:53', '2024-01-15 03:57:53'),
 ('c30f1f1c-2335-47a4-a8d4-28439d351fd6', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 11, '{\"content\":\"You have been added as member for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 10:02:11', '2024-01-17 10:02:11'),
 ('c33e055d-f1ad-4784-abc3-8ce566c1998d', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 10, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 08:36:59', '2024-01-15 08:36:59'),
-('c4ad5036-8f41-4c33-b989-fa01f670b1ca', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been added as Internal Accreditor for the IT ACCREDITATION 2024\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/5\"}', NULL, '2023-12-13 23:35:35', '2023-12-13 23:35:35'),
+('c4ad5036-8f41-4c33-b989-fa01f670b1ca', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been added as Internal Accreditor for the IT ACCREDITATION 2024\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/5\"}', NULL, '2023-12-13 23:35:35', '2023-12-13 23:35:35');
+INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `data`, `read_at`, `created_at`, `updated_at`) VALUES
 ('c727c3ac-301a-41a7-9cce-d59156dae971', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 13, '{\"content\":\"You have been added as Internal Accreditor for the IT ACCREDITATION 2024\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/5\"}', '2023-12-14 07:02:10', '2023-12-13 23:35:35', '2023-12-14 07:02:10'),
 ('c839c9b4-a89f-4c5f-833f-5e4c3a5587a7', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 14, '{\"content\":\"You have been added as external for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 08:40:38', '2024-01-15 08:40:38'),
 ('cb73b577-5c34-4222-93db-668b289bb464', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 8, '{\"content\":\"You have been added as external for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 09:19:04', '2024-01-17 09:19:04'),
 ('cb7e153c-d951-40d5-a13c-0653e9f40893', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 3, '{\"content\":\"You have been added as internal for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/21\"}', '2024-01-14 06:17:31', '2024-01-14 06:17:25', '2024-01-14 06:17:31'),
-('cb83a5d6-ea2b-4ea5-bc34-94fc33138ead', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been added as external for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 09:26:29', '2024-01-17 09:26:29');
-INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `data`, `read_at`, `created_at`, `updated_at`) VALUES
+('cb83a5d6-ea2b-4ea5-bc34-94fc33138ead', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been added as external for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 09:26:29', '2024-01-17 09:26:29'),
 ('cc3f37a5-29b8-4503-912b-299a42cd5fb2', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been added as a Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 03:33:36', '2024-01-15 03:33:36'),
 ('cd890c0a-3e04-4df0-92ce-e56e52040406', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 9, '{\"content\":\"You have been added as Internal Accreditor for the IT ACCREDITATION 2024\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/5\"}', '2023-12-14 08:01:46', '2023-12-13 23:34:57', '2023-12-14 08:01:46'),
 ('ceede0d3-5e0d-42a5-bf4f-514c4eff5076', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as a Coordinator for the IT ACCREDITATION 2023\",\"title\":\"Member Added!\",\"url\":\"\\/manage_member\\/3\"}', '2023-12-13 06:22:18', '2023-12-09 07:09:47', '2023-12-13 06:22:18'),
@@ -966,11 +1075,11 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('d3f0bdf1-a7e8-4b1e-a0d9-79b657e30808', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/16\"}', '2024-01-13 23:58:58', '2024-01-07 08:38:56', '2024-01-13 23:58:58'),
 ('d483ea0d-514d-4733-a7f7-c86a20cd367f', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as chair for the ASDAD\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/17\"}', '2024-01-13 23:58:58', '2024-01-07 14:18:34', '2024-01-13 23:58:58'),
 ('d6969c22-48a3-4870-9f1b-e6c5fe2b144e', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 5, '{\"content\":\"Account has been enabled for the IT ACCREDITATION 2024\",\"title\":\"Account Notice!\",\"url\":\"\"}', '2023-12-14 14:29:52', '2023-12-14 14:29:48', '2023-12-14 14:29:52'),
-('d6a66833-99c8-48f3-8265-bff101453cd4', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as chair for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-16 05:30:44', '2024-01-16 05:30:44'),
+('d6a66833-99c8-48f3-8265-bff101453cd4', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been added as chair for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', '2024-01-18 05:37:26', '2024-01-16 05:30:44', '2024-01-18 05:37:26'),
 ('d6e3f970-04aa-4d30-b48a-387660d8e4cb', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 13, '{\"content\":\"You have been added as chair for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/20\"}', NULL, '2024-01-15 08:28:34', '2024-01-15 08:28:34'),
 ('d763cd0e-d47c-450c-a744-c9ccd71f8903', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 11, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2024\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2023-12-13 23:35:19', '2023-12-13 23:35:19'),
 ('d83eee79-1f92-4a5a-9bf4-d81ca550adb8', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 6, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2024-01-17 09:17:57', '2024-01-17 09:17:57'),
-('d9eaa569-bc7e-49a1-b40e-1ebdcb0f1953', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2024-01-15 22:21:54', '2024-01-15 22:21:54'),
+('d9eaa569-bc7e-49a1-b40e-1ebdcb0f1953', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 2, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', '2024-01-18 05:37:26', '2024-01-15 22:21:54', '2024-01-18 05:37:26'),
 ('dbd7c79a-688c-49ae-b793-449731772eb0', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 13, '{\"content\":\"You have been remove as Internal Accreditor for the IT ACCREDITATION 2023\",\"title\":\"You Have been Removed!\",\"url\":\"\"}', NULL, '2024-01-15 08:28:10', '2024-01-15 08:28:10'),
 ('dca0ceb6-0f4f-4bdb-b0e2-dd1b92f91d03', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 24, '{\"content\":\"You have been added as external for the IT ACCREDITATION 2023\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/27\"}', NULL, '2024-01-17 10:02:26', '2024-01-17 10:02:26'),
 ('e035e075-3331-46bc-91ee-15f313883744', 'App\\Notifications\\AccreditationNotification', 'App\\Models\\User', 7, '{\"content\":\"You have been added as Internal Accreditor for the IT ACCREDITATION 2024\",\"title\":\"You Have been Added!\",\"url\":\"\\/manage_member\\/5\"}', NULL, '2023-12-13 23:34:57', '2023-12-13 23:34:57'),
@@ -1058,7 +1167,6 @@ INSERT INTO `parameters` (`id`, `area_id`, `parameter`, `parameter_title`, `desc
 (89, 62, 'H', 'Food Services Unit/Canteen', 'Clean and sanitary food services unit/canteen must be set up and managed effectively. It should serve balanced yet affordable meals and snacks to the school community.', '2024-01-12 20:10:02', '2024-01-12 20:10:02'),
 (90, 62, 'I', 'Accreditation Center', 'There should be a properly maintained and equipped Accreditation Center with necessary facilities.', '2024-01-12 20:10:20', '2024-01-12 20:10:20'),
 (91, 62, 'J', 'Housing (Optional)', 'Housing should be maintained and provided with electricity and water. should have proper drainage and waste disposal system.', '2024-01-12 20:10:34', '2024-01-12 20:10:34'),
-(92, 66, 'A', 'asd', 'asd', '2024-01-16 04:59:45', '2024-01-16 04:59:45'),
 (93, 70, 'A', 'Vision, Mission, Goals and Objectives', 'The Vision is the state the Institution hopes to become in the future. The MGO represents the hierarchy of aims of the Institution. The Mission reflects the mandate/aim of the whole state university or state college. The Goals are the aims at the hierarchical structure below the Institutional level (the academic Unit/Institute/School); and the Objectives are the aims at the program level, i. e., what the program hopes to achieve.\r\n\r\nThe Institution shall define its mission in accordance with its legal and educational development mandate and the thrusts of the government.\r\n\r\nThe program outcomes are the foci of program accreditation. These are the competencies (knowledge and skills), values and other attributes, which the Institution hopes their graduates shall acquire to enable them to compete for employment, locally and internationally', '2024-01-18 00:26:58', '2024-01-18 00:26:58'),
 (94, 70, 'B', 'Dissemination and Acceptability', 'It is expected that the Institution disseminates, and work for the acceptance of the Vision, Mission, Goals and Objectives by the stakeholders. In order to facilitate awareness and acceptance, it is a good practice that the faculty, non-teaching staff, students, linkages, the community, and other stakeholders are involved in the formulation, review and/or revision of the VMGO.\r\n\r\nAn outcomes-based assessment will focus on the extent to which the program objectives are attained as shown in the outcomes. Thus, there must be a common understanding and acceptance of the end results of the program by both the faculty and the students.\r\n\r\nIt should be demonstrated that the program objectives (outcomes) are consistent with the College goals; and the College goals with the Mission of the Institution. On a long-term perspective, the accomplishment of the Mission will lead to the realization of the Vision of the Institution', '2024-01-18 00:26:59', '2024-01-18 00:26:59');
 
@@ -1083,14 +1191,8 @@ CREATE TABLE `parameter_ratings` (
 --
 
 INSERT INTO `parameter_ratings` (`id`, `user_id`, `parameter_id`, `accreditation_id`, `rating`, `created_at`, `updated_at`) VALUES
-(5, 3, 54, 20, '2.44', '2024-01-13 19:48:59', '2024-01-14 00:23:11'),
-(6, 3, 51, 20, '3.27', '2024-01-13 19:50:09', '2024-01-13 20:23:42'),
-(7, 3, 49, 20, '3.88', '2024-01-13 20:49:50', '2024-01-16 05:23:06'),
-(8, 3, 50, 20, '4.04', '2024-01-13 20:50:11', '2024-01-13 20:50:11'),
-(9, 3, 49, 21, '3.51', '2024-01-13 23:40:27', '2024-01-14 00:16:01'),
-(10, 3, 50, 21, '5.00', '2024-01-13 23:40:56', '2024-01-13 23:40:56'),
-(11, 3, 58, 20, '0.00', '2024-01-14 00:17:00', '2024-01-14 00:17:00'),
-(12, 3, 59, 20, '3.40', '2024-01-15 09:54:02', '2024-01-15 09:54:02');
+(15, 3, 49, 29, '0.00', '2024-01-18 09:18:10', '2024-01-18 09:20:59'),
+(16, 3, 50, 29, '2.82', '2024-01-18 09:21:48', '2024-01-18 09:34:50');
 
 -- --------------------------------------------------------
 
@@ -1284,13 +1386,6 @@ CREATE TABLE `sub_component_files` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `sub_component_files`
---
-
-INSERT INTO `sub_component_files` (`id`, `user_id`, `accreditation_id`, `parameter_id`, `sub_component_id`, `screen_name`, `file_name`, `file_type`, `file_location`, `status`, `created_at`, `updated_at`) VALUES
-(6, 2, 27, 51, 7, 'sub component file', 'ed8ed27d-8667-4e42-84e0-b0f137abfd4b.png', 'png', 'storage/files/ed8ed27d-8667-4e42-84e0-b0f137abfd4b.png', 'pending', '2024-01-18 02:27:27', '2024-01-18 02:27:27');
-
 -- --------------------------------------------------------
 
 --
@@ -1306,13 +1401,6 @@ CREATE TABLE `sub_component_messages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `sub_component_messages`
---
-
-INSERT INTO `sub_component_messages` (`id`, `accreditation_id`, `sender_id`, `sub_component_file_id`, `message`, `created_at`, `updated_at`) VALUES
-(3, 27, 13, 6, 'asd', '2024-01-18 02:45:07', '2024-01-18 02:45:07');
 
 -- --------------------------------------------------------
 
@@ -1609,14 +1697,6 @@ CREATE TABLE `sub_indicator_files` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `sub_indicator_files`
---
-
-INSERT INTO `sub_indicator_files` (`id`, `user_id`, `accreditation_id`, `parameter_id`, `sub_indicator_id`, `screen_name`, `file_name`, `file_type`, `file_location`, `status`, `created_at`, `updated_at`) VALUES
-(11, 13, 27, 51, 31, 'asda', 'ed0887e2-7228-4080-9678-b48811588872.pdf', 'pdf', 'storage/files/ed0887e2-7228-4080-9678-b48811588872.pdf', 'pending', '2024-01-18 01:51:56', '2024-01-18 01:51:56'),
-(12, 2, 27, 51, 31, 'asdasd', '6dc4ff69-0e2c-4a02-a93e-4bd07f90ee45.pdf', 'pdf', 'storage/files/6dc4ff69-0e2c-4a02-a93e-4bd07f90ee45.pdf', 'pending', '2024-01-18 01:52:25', '2024-01-18 01:52:25');
-
 -- --------------------------------------------------------
 
 --
@@ -1693,17 +1773,17 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `university_id`, `campus_id`, `program_id`, `email`, `email_verified_at`, `password`, `user_type`, `isInternal`, `isExternal`, `current_role`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'admin', NULL, 1, 1, 'admin@gmail.com', NULL, '$2y$10$sYdGtY2c1zLGM4CNCAjcP.oZ7MvwT7RwKvRGXxtfN./86cgfnfNki', 'admin', 0, 0, 'none', '', '2023-09-18 03:29:01', '2023-12-10 21:06:16'),
-(2, 'Aaron', 'Espiritu', NULL, 1, 2, 'aaron.espiritulopez07@gmail.com', NULL, '$2y$10$G5n2qfgUMclO/Ug94J3nBeuXYBOVir62rkbPMxggFqQrI2XIyEaBK', 'user', 0, 0, 'area member', NULL, '2023-09-18 03:30:51', '2024-01-18 01:52:10'),
-(3, 'Errol', 'Lopez', NULL, 1, 7, 'errol@gmail.com', NULL, '$2y$10$bFekmR4XZHSvuq.iWzf9SOd79dP4a3dWaesH2Othl/SPsr7ry6Axq', 'user', 1, 0, 'area member', 'nb7eodKRfqPix4OoXuJQIYcShGfySux4yZVohu4yRTzuNecOFdueCDSWxeRt', '2023-09-18 03:33:57', '2024-01-17 08:41:49'),
+(2, 'Aaron', 'Espiritu', NULL, 1, 2, 'aaron.espiritulopez07@gmail.com', NULL, '$2y$10$G5n2qfgUMclO/Ug94J3nBeuXYBOVir62rkbPMxggFqQrI2XIyEaBK', 'user', 0, 0, 'chair', NULL, '2023-09-18 03:30:51', '2024-01-18 08:03:57'),
+(3, 'Errol', 'Lopez', NULL, 1, 7, 'errol@gmail.com', NULL, '$2y$10$bFekmR4XZHSvuq.iWzf9SOd79dP4a3dWaesH2Othl/SPsr7ry6Axq', 'user', 1, 0, 'internal', 'tODB51mvMJLfqORvu8bh2GLxUhFyJR7ATI3SDK4KCh2Txlygq3jFlEHy5pyk', '2023-09-18 03:33:57', '2024-01-18 08:25:01'),
 (4, 'Fredirick', 'Patacsil', NULL, 1, 1, 'patacsil@gmail.com', NULL, '$2y$10$A9C39u0E3m0/Emyn1IbyW.DqR4lIxTPaWgXAmQdP2TRPe9fOL1v.S', 'user', 0, 1, 'area member', NULL, '2023-09-18 03:34:24', '2024-01-07 02:49:17'),
-(6, 'Amos Ezra', 'Aduan', NULL, 3, 2, 'amos@gmail.com', NULL, '$2y$10$.VP5o7QZkfIk0FJ4PJVMCu2EsBAuMds8SayrFkj26H4ytZxIX0U16', 'user', 0, 0, 'none', NULL, '2023-09-18 03:46:15', '2023-09-18 03:46:15'),
+(6, 'Amos Ezra', 'Aduan', NULL, 3, 2, 'amos@gmail.com', NULL, '$2y$10$.VP5o7QZkfIk0FJ4PJVMCu2EsBAuMds8SayrFkj26H4ytZxIX0U16', 'user', 0, 0, 'chair', NULL, '2023-09-18 03:46:15', '2024-01-18 08:23:43'),
 (7, 'John Azriel', 'Perez', NULL, 1, 2, 'azriel@gmail.com', NULL, '$2y$10$VhantScrbmCANaEyTf1qt.96b/GTzl5SseJoIDH2IXWj.qk0/bPsa', 'user', 1, 1, 'none', NULL, '2023-09-18 03:49:03', '2024-01-07 02:36:46'),
 (8, 'Aries', 'Reyes', NULL, 1, 7, 'aries@gmail.com', NULL, '$2y$10$XvWHMCOqcqnCtY//mLB1huCRG5Azuv5Z6zxIO.XiGy9O2zziBXTa.', 'user', 0, 0, 'none', NULL, '2023-09-18 03:50:24', '2023-09-18 03:50:24'),
 (9, 'Arni', 'Tamayo', NULL, 1, 2, 'arni@gmail.com', NULL, '$2y$10$WdRQMYTpMzfriWZ.us.WTOAGiCA5da4pyh2XJt6Bq8POsCzr4HNLi', 'user', 0, 0, 'area member', NULL, '2023-09-18 03:51:00', '2023-12-14 07:57:00'),
 (10, 'Cherry Mae', 'Centino', NULL, 5, 19, 'cherry@gmail.com', NULL, '$2y$10$oRt75/dEYKJReFQK0ysGXeEbVm.RlOnwroxnkeL8du./MMmC9MxYu', 'user', 1, 0, 'internal', NULL, '2023-09-18 06:46:24', '2024-01-18 01:57:22'),
 (11, 'Raygeena Franchesca Ashley', 'Fernandez', NULL, 1, 2, 'fernandez.ashley@yahoo.com', NULL, '$2y$10$pNdpL3Np2fCkmdo34EpXQuzoqqYIagbAqDTkdOsZyrGopkT1XRmAm', 'user', 0, 0, 'none', NULL, '2023-09-19 04:48:48', '2023-09-19 04:48:48'),
 (12, 'Bonifacio', 'Salazar Jr', NULL, 1, 2, 'salazar@gmail.com', NULL, '$2y$10$F8jRtJjIHZnwWP98rsjcZuy5L5Jd92/fjUgqLv0ohjejVZg4oIzBO', 'user', 1, 0, 'none', NULL, '2023-09-19 04:49:17', '2024-01-07 02:36:56'),
-(13, 'Michael', 'Acosta', NULL, 1, 2, 'micheal@gmail.com', NULL, '$2y$10$HPvpISZX0qaY3nc2B5sE.ujXL0rAj3e7q2VPi4V9faDP5BF.13Mce', 'user', 1, 0, 'chair', NULL, '2023-09-19 04:49:52', '2024-01-18 02:27:44'),
+(13, 'Michael', 'Acosta', NULL, 1, 2, 'micheal@gmail.com', NULL, '$2y$10$HPvpISZX0qaY3nc2B5sE.ujXL0rAj3e7q2VPi4V9faDP5BF.13Mce', 'user', 1, 0, 'chair', NULL, '2023-09-19 04:49:52', '2024-01-18 02:54:07'),
 (14, 'Juan', 'Dela Cruz', NULL, 5, 17, 'juan@gmail.com', NULL, '$2y$10$WsoCzNMqxNjzu5b3euCiEOhWx7pBhKbVDhqSUv2mL1GO56DTqJY.G', 'user', 1, 0, 'none', NULL, '2023-09-21 06:13:46', '2024-01-16 18:33:54'),
 (16, 'Dick', 'Lomibao', NULL, 4, 18, 'sorianokid771@gmail.com', NULL, '$2y$10$TNQqDbY1FiW6dCux.8JOC.HLPekd.cfy0Qi3tGvKP4q1UphI/QIqa', 'user', 0, 0, 'none', NULL, '2024-01-13 22:48:05', '2024-01-13 22:48:05'),
 (21, 'Irene', 'Perez', NULL, 3, 13, 'ireneperez@gmail.com', NULL, '$2y$10$a72UAF5C4q4Ek8gviUjX.eWksfH6z5VzqOZvLdXalEt2zPoie0QeO', 'user', 1, 0, 'none', NULL, '2024-01-15 04:46:31', '2024-01-15 04:49:16'),
@@ -1785,6 +1865,31 @@ ALTER TABLE `compliance_report_files`
   ADD KEY `compliance_report_files_accreditation_id_foreign` (`accreditation_id`),
   ADD KEY `compliance_report_files_user_id_foreign` (`user_id`),
   ADD KEY `compliance_report_files_area_id_foreign` (`area_id`);
+
+--
+-- Indexes for table `criterias`
+--
+ALTER TABLE `criterias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `criteria_files`
+--
+ALTER TABLE `criteria_files`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `criteria_files_user_id_foreign` (`user_id`),
+  ADD KEY `criteria_files_area_id_foreign` (`area_id`),
+  ADD KEY `criteria_files_criteria_id_foreign` (`criteria_id`),
+  ADD KEY `criteria_files_accreditation_id_foreign` (`accreditation_id`);
+
+--
+-- Indexes for table `criteria_messages`
+--
+ALTER TABLE `criteria_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `criteria_messages_accreditation_id_foreign` (`accreditation_id`),
+  ADD KEY `criteria_messages_sender_id_foreign` (`sender_id`),
+  ADD KEY `criteria_messages_criteria_file_id_foreign` (`criteria_file_id`);
 
 --
 -- Indexes for table `designated_accreditor_areas`
@@ -2064,13 +2169,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accreditations`
 --
 ALTER TABLE `accreditations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `accreditation_areas`
 --
 ALTER TABLE `accreditation_areas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT for table `areas`
@@ -2082,7 +2187,7 @@ ALTER TABLE `areas`
 -- AUTO_INCREMENT for table `area_members`
 --
 ALTER TABLE `area_members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `area_programs`
@@ -2106,7 +2211,25 @@ ALTER TABLE `campuses`
 -- AUTO_INCREMENT for table `compliance_report_files`
 --
 ALTER TABLE `compliance_report_files`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `criterias`
+--
+ALTER TABLE `criterias`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `criteria_files`
+--
+ALTER TABLE `criteria_files`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `criteria_messages`
+--
+ALTER TABLE `criteria_messages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `designated_accreditor_areas`
@@ -2172,7 +2295,7 @@ ALTER TABLE `instruments`
 -- AUTO_INCREMENT for table `internal_ratings`
 --
 ALTER TABLE `internal_ratings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=350;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=402;
 
 --
 -- AUTO_INCREMENT for table `internal_sub_component_ratings`
@@ -2184,7 +2307,7 @@ ALTER TABLE `internal_sub_component_ratings`
 -- AUTO_INCREMENT for table `internal_sub_ratings`
 --
 ALTER TABLE `internal_sub_ratings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=365;
 
 --
 -- AUTO_INCREMENT for table `members`
@@ -2196,7 +2319,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `parameters`
@@ -2208,7 +2331,7 @@ ALTER TABLE `parameters`
 -- AUTO_INCREMENT for table `parameter_ratings`
 --
 ALTER TABLE `parameter_ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `parameter_reports`
@@ -2354,6 +2477,23 @@ ALTER TABLE `compliance_report_files`
   ADD CONSTRAINT `compliance_report_files_accreditation_id_foreign` FOREIGN KEY (`accreditation_id`) REFERENCES `accreditations` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `compliance_report_files_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `compliance_report_files_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `criteria_files`
+--
+ALTER TABLE `criteria_files`
+  ADD CONSTRAINT `criteria_files_accreditation_id_foreign` FOREIGN KEY (`accreditation_id`) REFERENCES `accreditations` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `criteria_files_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `criteria_files_criteria_id_foreign` FOREIGN KEY (`criteria_id`) REFERENCES `criterias` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `criteria_files_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `criteria_messages`
+--
+ALTER TABLE `criteria_messages`
+  ADD CONSTRAINT `criteria_messages_accreditation_id_foreign` FOREIGN KEY (`accreditation_id`) REFERENCES `accreditations` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `criteria_messages_criteria_file_id_foreign` FOREIGN KEY (`criteria_file_id`) REFERENCES `criteria_files` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `criteria_messages_sender_id_foreign` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `designated_accreditor_areas`
