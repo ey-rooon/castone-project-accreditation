@@ -43,87 +43,71 @@
     <div class="modal fade" id="addCampusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Area</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form method="POST" action="/addArea">
-                <div class="modal-body">
-                    @csrf
-                    <input type="hidden" name="ins_id" value="{{$id}}">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Area</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="/addArea">
+                    <div class="modal-body">
+                        @csrf
+                        <input type="hidden" name="ins_id" value="{{$id}}">
 
-                    <div class="mb-3">
-                        <label for="areaname">Area Name</label>
-                        @if($areas != NULL && $areas->count() > 0)
-                            @php
-                                $area = $areas->last();
-                                $areaCount = $areas->count() + 1;
-                                $areaName =  substr( $area->area_name, 0, -1).$areaCount;
-                            @endphp
-                            <input id="areaname" class="form-control" type="text" name="areaname" value="{{ $areaName  }}" required autofocus>
-                        @else
-                            <input id="areaname" class="form-control" type="text" name="areaname" value="Area 1" required autofocus>
+                        <div class="mb-3">
+                            <label for="areaname">Area Name</label>
+                            @if($areas != NULL && $areas->count() > 0)
+                                @php
+                                    $area = $areas->last();
+                                    $areaCount = $areas->count() + 1;
+                                    $areaName =  substr( $area->area_name, 0, -1).$areaCount;
+                                @endphp
+                                <input id="areaname" class="form-control" type="text" name="areaname" value="{{ $areaName  }}" required autofocus>
+                            @else
+                                <input id="areaname" class="form-control" type="text" name="areaname" value="Area 1" required autofocus>
+                            @endif
+                            <div id="areanameError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
+                                Please enter area.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="areatitle">Area Title</label>
+                            <input id="areatitle" class="form-control" type="text" name="areatitle" value="{{ old('areatitle') }}" required autofocus>
+                            <div id="areatitleError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
+                                Please enter area name.
+                            </div>
+                        </div>
+                        @if($instrument->instrument_type != "PSV")
+                        <div class="mb-3">
+                            <label for="weight">Area Weight</label>
+                            <input type="number" name="weight" id="weight" class="form-control" value="{{old('weight')}}">
+                        </div>
                         @endif
-                        <div id="areanameError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
-                            Please enter area.
-                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="areatitle">Area Title</label>
-                        <input id="areatitle" class="form-control" type="text" name="areatitle" value="{{ old('areatitle') }}" required autofocus>
-                        <div id="areatitleError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
-                            Please enter area name.
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-success">Add Area</button>
                     </div>
-                    @if($instrument->instrument_type != "PSV")
-                    <div class="mb-3">
-                        <label for="weight">Area Weight</label>
-                        <input type="number" name="weight" id="weight" class="form-control" value="{{old('weight')}}">
-                    </div>
-                    @endif
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-outline-success">Add Area</button>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
     </div>
-    <!-- <form action="/add_area_program" method="post">
-        @csrf
-        <div class="row mb-5 d-flex align-items-center justify-content-center mx-auto">
-            <div class="col">
-                <div class="form-floating">
-                    <select class="form-select" name="area" id="area">
-                        <option selected>Select Area</option>
-                        @forelse($areas As $area)
-                            <option value="{{$area->id}}">{{$area->area_name}}</option>
-                        @empty
-                        @endforelse
-                    </select>
-                    <label for="area" class="form-label">Area</label>
-                </div>
+    <div class="row justify-content-center">
+        @if($instrument->instrument_type == "New")
+            <div class="col-12">
+                <h4>
+                    New Accreditation Instrument will be base on Criteria. 
+                    <span>
+                        <a href="/criteria" data-bs-toggle="tooltip" data-bs-title="See Criteria">
+                            See Criteria
+                        </a>
+                    </span>
+                </h4>
             </div>
             <div class="col">
-                <div class="form-floating">
-                    <select class="form-select" name="program" id="program">
-                        <option selected>Select Program</option>
-                        @forelse($programs As $program)
-                            <option value="{{$program->id}}">{{$program->program}}</option>
-                        @empty
-                        @endforelse
-                    </select>
-                    <label for="area" class="form-label">Program</label>
-                </div>
+                
             </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary">Add Program</button>
-            </div>
-        </div>
-    </form> -->
-    
+        @endif
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -140,9 +124,11 @@
                     <td>{{$area->area_title}}</td>
                     <td>{{$area->area_weight}}</td>
                     <td>
+                        @if($instrument->instrument_type != "New")
                         <a href="/manage_parameter/{{$area->id}}" data-bs-toggle="tooltip" data-bs-title="See Parameter">
                             <button class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button>
                         </a>
+                        @endif
                         <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editAreaModal{{$area->id}}">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>

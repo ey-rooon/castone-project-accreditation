@@ -130,12 +130,20 @@
                         @endif
                     </td>
                     @endif
-                    <td>
-                        <a href="/view_parameters/{{$area->id}}/{{$accreditation_id}}"
-                            ><button class="btn btn-outline-primary">
-                                View Parameters
-                            </button>
-                        </a>
+                    <td> 
+                        @if($accreditation->accreditation_type == "New")
+                            <a href="/view_criteria/{{$area->id}}/{{$accreditation_id}}"
+                                ><button class="btn btn-outline-primary">
+                                    View Criteria
+                                </button>
+                            </a>
+                        @else
+                            <a href="/view_parameters/{{$area->id}}/{{$accreditation_id}}"
+                                ><button class="btn btn-outline-primary">
+                                    View Parameters
+                                </button>
+                            </a>
+                        @endif
                     </td>
                 </tr>
                 @empty
