@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\AreaMemberController;
 use App\Http\Controllers\Admin\IndicatorCategoryController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\ExternalUserController;
+use App\Http\Controllers\Admin\CriteriaController;
 
 use App\Http\Controllers\IndicatorFileController;
 use App\Http\Controllers\SubIndicatorFileController;
@@ -159,6 +160,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Route::get('disable_accounts_external/{id}', [MemberController::class, 'disabledAccountExternal']);
     // Route::get('enable_accounts_external/{id}', [MemberController::class, 'enabledAccountExternal']);
+
+    Route::get('criteria', [CriteriaController::class, 'index'])->name('criteria');
+    Route::post('add_criteria', [CriteriaController::class, 'store']);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -167,6 +171,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('view_areas/{role}/{acc_id}', [AreaController::class, 'showAreas'])->name('view_areas');
     Route::get('view_parameters/{id}/{acc_id?}', [ParameterController::class, 'index'])->name('view_parameters');
     Route::get('view_indicator_areachair/{id}/{acc_id?}', [IndicatorController::class, 'index'])->name('indicator_view');
+
+    Route::get('view_criteria/{area_id}/{acc_id}', [CriteriaController::class, 'showCriteria']);
 
     Route::get('manage_member/{id}', [MemberController::class, 'show'])->name('admin.manage_member.show');
     Route::post('add_member', [MemberController::class, 'store']);

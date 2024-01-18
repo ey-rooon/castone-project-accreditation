@@ -179,29 +179,11 @@
             </div>
 
             @if(Auth::user()->user_type == 'admin' || $coordinator)
-                @if($accreditation->accreditation_type == "New")
-                    @if($acc_areas->count() != 4)
-                        <div class="row">
-                            <div class="col-4 mx-auto">
-                                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#areaModal">DESIGNATED AREA</button>
-                            </div>
-                        </div>
-                    @endif
-                @elseif($accreditation->accreditation_type == "Old")
-                    <div class="row">
-                        <div class="col-4 mx-auto">
-                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#areaModal">DESIGNATED AREA</button>
-                        </div>
+                <div class="row">
+                    <div class="col-4 mx-auto">
+                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#areaModal">DESIGNATED AREA</button>
                     </div>
-                @else
-                    @if($acc_areas->count() == 0)
-                        <div class="row">
-                            <div class="col-4 mx-auto">
-                                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#areaModal">DESIGNATED AREA</button>
-                            </div>
-                        </div>
-                    @endif
-                @endif
+                </div>
             @endif
             <div id="designated_areas">
 

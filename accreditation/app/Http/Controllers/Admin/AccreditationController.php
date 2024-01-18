@@ -219,14 +219,15 @@ class AccreditationController extends Controller
         if ($accreditation) {
             // Add a flash message to indicate successful deletion
             if($apply_type == "Re-Accreditation"){
-                $acc_id = $accreditation->id;
-                $area_id = Area::select()->where('instrument_id', $instrument_id)->pluck('id');
-                foreach($area_id as $id){
-                    AccreditationArea::create([
-                        'accreditation_id'=>$acc_id,
-                        'area_id' => $id,
-                    ]);
-
+                if($acc_type == "Old"){
+                    $acc_id = $accreditation->id;
+                    $area_id = Area::select()->where('instrument_id', $instrument_id)->pluck('id');
+                    foreach($area_id as $id){
+                        AccreditationArea::create([
+                            'accreditation_id'=>$acc_id,
+                            'area_id' => $id,
+                        ]);
+                    }
                 }
             }
             session()->flash('success', 'Accretitation added successfully.');

@@ -99,6 +99,16 @@
     </x-sidebar.link>
 
     <x-sidebar.link
+        title="Criteria"
+        href="/criteria"
+        :isActive="request()->routeIs('criteria')"
+    >
+        <x-slot name="icon">
+            <i class="far fa-clipboard-list-check" aria-hidden="true"></i>
+        </x-slot>
+    </x-sidebar.link>
+
+    <x-sidebar.link
         title="Program Level"
         href="/program_level_list"
         :isActive="request()->routeIs('program_level_list')"
