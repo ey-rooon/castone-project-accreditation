@@ -40,6 +40,7 @@ class SubIndicatorFileController extends Controller
         $messages = SubIndicatorMessage::join('users', 'sub_indicator_messages.sender_id', '=', 'users.id')
             ->join('sub_indicator_files', 'sub_indicator_messages.sub_indicator_file_id', '=', 'sub_indicator_files.id')
             ->select()
+            ->where('sub_indicator_files.accreditation_id', $acc_id)
             ->get();
 
         $parameter = Parameter::select()
@@ -50,6 +51,7 @@ class SubIndicatorFileController extends Controller
             ->select('users.firstname AS fname', 'users.lastname AS lname', 'users.*', 'area_members.*', 'area_members.id as amId')
             ->where('area_members.user_id', $uid)
             ->where('area_members.area_id', $parameter->area_id)
+            ->where('area_members.accreditation_id', $acc_id)
             ->first();
 
 

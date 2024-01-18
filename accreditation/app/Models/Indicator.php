@@ -13,4 +13,10 @@ class Indicator extends Model
     {
         return $this->hasOne(IndicatorCategory::class);
     }
+
+    public function sub_indicators()
+    {
+        return $this->hasMany(SubIndicator::class);
+    }
+
 }

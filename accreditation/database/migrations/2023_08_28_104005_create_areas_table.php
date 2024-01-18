@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('instrument_id')->references('id')->on('instruments')->onDelete('cascade');
             $table->string('area_name');
             $table->string('area_title');
+            $table->smallInteger('area_weight');
             $table->timestamps();
         });
     }

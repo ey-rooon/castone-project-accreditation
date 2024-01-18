@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('indicator_file_id');
+            $table->unsignedBigInteger('accreditation_id');
+            $table->foreign('accreditation_id')->references('id')->on('accreditations')->onDelete('cascade');
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('indicator_file_id')->references('id')->on('indicator_files')->onDelete('cascade');
             $table->text('message');

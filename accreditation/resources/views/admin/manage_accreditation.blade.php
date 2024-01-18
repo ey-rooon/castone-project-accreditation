@@ -140,19 +140,22 @@
                                                 <h1 class="fs-3 text-center">View as:</h1>
                                             </div>
                                             <div class="row mx-auto d-flex justify-content-center">
-                                                @if($area_member || $area_chair)
+                                                @if($area_chair)
                                                     @if($area_chair->member_type == 'chair')
                                                         <div class="col text-center"> <!-- Added text-center class -->
-                                                            <a data-bs-toggle="tooltip" data-bs-title="View As Area Chair/Member" href="/view_areas/area member/{{$accreditation->id}}" class="btn btn-outline-primary">
+                                                            <a data-bs-toggle="tooltip" data-bs-title="View As Area Chair/Member" href="/view_areas/chair/{{$accreditation->id}}" class="btn btn-outline-primary">
                                                                 Area Chair/Member
                                                             </a>
                                                         </div>
-                                                    @elseif($area_member->member_type == 'member')
-                                                        <div class="col text-center"> <!-- Added text-center class -->
-                                                            <a data-bs-toggle="tooltip" data-bs-title="View As Area Chair/Member" href="/view_areas/area member/{{$accreditation->id}}" class="btn btn-outline-primary">
-                                                                Area Chair/Member
-                                                            </a>
-                                                        </div>
+                                                    @endif
+                                                @endif
+                                                @if($area_member)
+                                                    @if($area_member->member_type == 'member')
+                                                    <div class="col text-center"> <!-- Added text-center class -->
+                                                        <a data-bs-toggle="tooltip" data-bs-title="View As Area Chair/Member" href="/view_areas/area member/{{$accreditation->id}}" class="btn btn-outline-primary">
+                                                            Area Chair/Member
+                                                        </a>
+                                                    </div>
                                                     @endif
                                                 @endif
                                                 @if($internalMember)
@@ -229,7 +232,6 @@
                                                     <option selected disabled>Select Option</option>
                                                     <option value="Re-Accreditation" {{ $accreditation->apply_type == 'Re-Accreditation' ? 'selected':''  }}>Re-Accreditation</option>
                                                     <option value="Re-Visit" {{ $accreditation->apply_type == 'Re-Visit' ? 'selected':''  }}>Re-Visit (1 Area)</option>
-                                                    <option value="Leveling Up" {{ $accreditation->apply_type == 'Leveling Up' ? 'selected':''  }}>Level Up</option>
                                                     <option value="PSV" {{ $accreditation->apply_type == 'PSV' ? 'selected':''  }}>PSV (Preliminary Survey Visit)</option>
                                                 </select>
                                                 <div id="apply_typeError" class="invalid-feedback">

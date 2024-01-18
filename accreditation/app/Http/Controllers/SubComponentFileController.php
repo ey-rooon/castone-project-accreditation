@@ -41,6 +41,7 @@ class SubComponentFileController extends Controller
         $messages = SubComponentMessage::join('users', 'sub_component_messages.sender_id', '=', 'users.id')
             ->join('sub_component_files', 'sub_component_messages.sub_component_file_id', '=', 'sub_component_files.id')
             ->select()
+            ->where('sub_component_files.accreditation_id', $acc_id)
             ->get();
 
         $parameter = Parameter::select()
@@ -51,7 +52,7 @@ class SubComponentFileController extends Controller
             ->select('users.firstname AS fname', 'users.lastname AS lname', 'users.*', 'area_members.*', 'area_members.id as amId')
             ->where('area_members.user_id', $uid)
             ->where('area_members.area_id', $parameter->area_id)
-            ->orderBy('updated_at', 'DESC')
+            ->where('area_members.accreditation_id', $acc_id)
             ->first();
 
         return view('area chair.view_files_subcomponent')

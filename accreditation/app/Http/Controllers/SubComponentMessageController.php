@@ -45,10 +45,12 @@ class SubComponentMessageController extends Controller
 
         $message = $request->input('message');
         $file_id = $request->input('file_id');
+        $acc_id = $request->input('accreditation_id');
         $subcomponentMessage = new SubComponentMessage();
         $subcomponentMessage->sender_id = Auth::id();
         $subcomponentMessage->sub_component_file_id = $file_id;
         $subcomponentMessage->message = $message;
+        $subcomponentMessage->accreditation_id = $acc_id;
         $subcomponentMessage->save();
 
         if ($subcomponentMessage) {

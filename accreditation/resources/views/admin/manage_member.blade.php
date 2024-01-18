@@ -157,13 +157,15 @@
                         @empty
                         <tr>
                             <td></td>
-                            <td></td>
                             <td>
                                 <center>
                                     <i class="fa-solid fa-user-plus"></i> No coordinators yet,
+                                    @if(Auth::user()->user_type == 'admin' || $coordinator)
                                     <span data-bs-toggle="modal" data-bs-target="#addMemberModal" style="cursor:pointer;"><u>Add here </u></span>
+                                    @endif
                                 </center>
                             </td>
+                            <td></td>
                             @if(Auth::user()->user_type == 'admin')
                             <td></td>
                             @endif

@@ -488,11 +488,11 @@
             var area_member_id = $(this).data('area-member-id');
             var area_name = $(this).data('area-name');
             swal({
-            title: "Confirmation?",
-            text: "Remove user from " + area_name+ "?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
+                title: "Confirmation?",
+                text: "Remove user from " + area_name+ "?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
             })
             .then((willDelete) => {
             if (willDelete) {

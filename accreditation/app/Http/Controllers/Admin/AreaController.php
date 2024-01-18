@@ -270,6 +270,19 @@ class AreaController extends Controller
                 $newIndicator = $indicator->replicate();
                 $newIndicator->parameter_id = $newParameter->id;
                 $newIndicator->push();
+
+                foreach($indicator->sub_indicators as $sub_indicator){
+                    $newSubIndicator = $sub_indicator->replicate();
+                    $newSubIndicator->indicator_id = $newIndicator->id;
+                    $newSubIndicator->push();
+ 
+                    foreach($sub_indicator->sub_components as $sub_component){
+                        $newSubComponent = $sub_component->replicate();
+                        $newSubComponent->sub_indicator_id = $newSubIndicator->id;
+                        $newSubComponent->push();
+                    }
+                }
+                
             }
         }
 
@@ -290,6 +303,7 @@ class AreaController extends Controller
         $rules = [
             'areaname' => 'required',
             'areatitle' => 'required',
+            'weight'=> 'nullable|numeric',
         ];
 
         $customMessage = [
@@ -301,10 +315,12 @@ class AreaController extends Controller
         $areaname = $request->input('areaname');
         $areatitle = $request->input('areatitle');
         $ins_id = $request->input('ins_id');
+        $area_weight = $request->input('weight');
         $area = new Area();
         $area->instrument_id = $ins_id;
         $area->area_name = $areaname;
         $area->area_title = $areatitle;
+        $area->area_weight = $area_weight;
         $area->save();
         if ($area) {
             // Add a flash message to indicate successful deletion
@@ -365,6 +381,7 @@ class AreaController extends Controller
         $rules = [
             'areaname' => 'required',
             'areatitle' => 'required',
+            'weight'=> 'nullable|numeric',
         ];
 
         $customMessage = [
@@ -375,9 +392,11 @@ class AreaController extends Controller
 
         $areaname = $request->input('areaname');
         $areatitle = $request->input('areatitle');
+        $area_weight = $request->input('weight');
         $area = Area::find($id);
         $area->area_name = $areaname;
         $area->area_title = $areatitle;
+        $area->area_weight = $area_weight;
         $area->updated_at = NOW();
         $area->save();
         if ($area) {

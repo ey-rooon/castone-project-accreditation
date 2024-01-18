@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SubIndicator extends Model
 {
     use HasFactory;
+
+    public function sub_components()
+    {
+        return $this->hasMany(SubIndicatorComponent::class);
+    }
 }

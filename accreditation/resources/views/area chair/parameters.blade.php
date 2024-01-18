@@ -36,7 +36,9 @@
                     <th>Area Name</th>
                     <th>Area Title</th>
                     <th>Action</th>
+                    @if(Auth::user()->current_role == 'internal')
                     <th class="text-center">Rating</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -55,16 +57,19 @@
                                 @if(Auth::user()->current_role == 'internal') Rate Indicators @else View Indicators @endif
                             </button>
                         </a>
-
-                        @if($parameter_rating)
-                        <a href="/generate_report/{{$accreditation_id}}/{{$parameter->id}}" class="btn btn-outline-danger">
-                            Generate Report
-                        </a>
-                        @else
-                        <button class="btn btn-outline-danger" disabled>Generate Report</button>
+                        @if(Auth::user()->current_role == 'internal')
+                            @if($parameter_rating)
+                            <a href="/generate_report/{{$accreditation_id}}/{{$parameter->id}}" class="btn btn-outline-danger">
+                                Generate Report
+                            </a>
+                            @else
+                            <button class="btn btn-outline-danger" disabled>Generate Report</button>
+                            @endif
                         @endif
                     </td>
+                    @if(Auth::user()->current_role == 'internal')
                     <td class="text-center">{{$parameter_rating ? $parameter_rating : 'No Rating yet'}}</td>
+                    @endif
                 </tr>
                 @empty
                 <tr>

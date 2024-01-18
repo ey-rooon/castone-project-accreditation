@@ -45,10 +45,12 @@ class SubIndicatorMessageController extends Controller
 
         $message = $request->input('message');
         $file_id = $request->input('file_id');
+        $acc_id = $request->input('accreditation_id');
         $subindicatorMessage = new SubIndicatorMessage();
         $subindicatorMessage->sender_id = Auth::id();
         $subindicatorMessage->sub_indicator_file_id = $file_id;
         $subindicatorMessage->message = $message;
+        $subindicatorMessage->accreditation_id = $acc_id;
         $subindicatorMessage->save();
 
         if ($subindicatorMessage) {

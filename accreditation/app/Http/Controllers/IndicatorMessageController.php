@@ -45,10 +45,12 @@ class IndicatorMessageController extends Controller
 
         $message = $request->input('message');
         $file_id = $request->input('file_id');
+        $acc_id = $request->input('accreditation_id');
         $indicatorMessage = new IndicatorMessage();
         $indicatorMessage->sender_id = Auth::id();
         $indicatorMessage->indicator_file_id = $file_id;
         $indicatorMessage->message = $message;
+        $indicatorMessage->accreditation_id = $acc_id;
         $indicatorMessage->save();
 
         if ($indicatorMessage) {

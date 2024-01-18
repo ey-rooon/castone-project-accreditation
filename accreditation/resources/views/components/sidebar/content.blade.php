@@ -9,10 +9,10 @@
         :isActive="request()->routeIs('home')"
     >
         <x-slot name="icon">
-            <x-icons.dashboard
-                class="flex-shrink-0 w-6 h-6"
+            <i
+                class="far fa-home-alt"
                 aria-hidden="true"
-            />
+            ></i>
         </x-slot>
     </x-sidebar.link>
 

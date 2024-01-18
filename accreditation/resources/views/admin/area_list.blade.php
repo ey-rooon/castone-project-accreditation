@@ -49,9 +49,10 @@
             </div>
             <form method="POST" action="/addArea">
                 <div class="modal-body">
-                        @csrf
-                        
-                        <input type="hidden" name="ins_id" value="{{$id}}">
+                    @csrf
+                    <input type="hidden" name="ins_id" value="{{$id}}">
+
+                    <div class="mb-3">
                         <label for="areaname">Area Name</label>
                         @if($areas != NULL && $areas->count() > 0)
                             @php
@@ -66,12 +67,21 @@
                         <div id="areanameError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
                             Please enter area.
                         </div>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="areatitle">Area Title</label>
                         <input id="areatitle" class="form-control" type="text" name="areatitle" value="{{ old('areatitle') }}" required autofocus>
                         <div id="areatitleError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
                             Please enter area name.
                         </div>
-                    
+                    </div>
+                    @if($instrument->instrument_type != "PSV")
+                    <div class="mb-3">
+                        <label for="weight">Area Weight</label>
+                        <input type="number" name="weight" id="weight" class="form-control" value="{{old('weight')}}">
+                    </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
@@ -119,6 +129,7 @@
             <tr>
                 <th>Area Name</th>
                 <th>Area Title</th>
+                <th>Area Weight</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -127,6 +138,7 @@
                 <tr>
                     <td>{{$area->area_name}}</td>
                     <td>{{$area->area_title}}</td>
+                    <td>{{$area->area_weight}}</td>
                     <td>
                         <a href="/manage_parameter/{{$area->id}}" data-bs-toggle="tooltip" data-bs-title="See Parameter">
                             <button class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></button>
@@ -166,18 +178,26 @@
             <form method="POST" action="/edit_area/{{$area->id}}">
                 <div class="modal-body">
                     @csrf
-                    <div>
+                    <div class="mb-3">
                         <label for="areaname" class="form-label">Area Name</label>
                         <input id="areaname" type="text" class="form-control" name="areaname" value="{{$area->area_name}}" required autofocus>
                         <div id="areanameError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
                             Please enter area.
                         </div>
+                    </div>
+                    <div class="mb-3">
                         <label for="areatitle"  class="form-label">Area Title</label>
                         <input id="areatitle" type="text" class="form-control" name="areatitle" value="{{$area->area_title}}" required autofocus>
                         <div id="areatitleError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
                             Please enter area name.
                         </div>
                     </div>
+                    @if($instrument->instrument_type != "PSV")
+                    <div class="mb-3">
+                        <label for="weight">Area Weight</label>
+                        <input type="number" name="weight" id="weight" class="form-control" value="{{ $area->area_weight}}">
+                    </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>

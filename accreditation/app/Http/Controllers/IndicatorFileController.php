@@ -42,6 +42,7 @@ class IndicatorFileController extends Controller
         $messages = IndicatorMessage::join('users', 'indicator_messages.sender_id', '=', 'users.id')
             ->join('indicator_files', 'indicator_messages.indicator_file_id', '=', 'indicator_files.id')
             ->select()
+            ->where('indicator_files.accreditation_id', $acc_id)
             ->get();
 
         $parameter = Parameter::select()
@@ -52,6 +53,7 @@ class IndicatorFileController extends Controller
             ->select('users.firstname AS fname', 'users.lastname AS lname', 'users.*', 'area_members.*', 'area_members.id as amId')
             ->where('area_members.user_id', $uid)
             ->where('area_members.area_id', $parameter->area_id)
+            ->where('area_members.accreditation_id', $acc_id)
             ->first();
 
         return view('area chair.view_files_indicator')
