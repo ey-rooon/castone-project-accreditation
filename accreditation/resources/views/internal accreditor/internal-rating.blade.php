@@ -73,7 +73,7 @@
                 </div>
             </div>
         </div>
-        @if (sizeof($indicators)) 
+        @if(sizeof($indicators)) 
             @if($parameter_rating) 
                 <form action="/edit_ratings" method="POST">
                 <input type="hidden" name="area_id", value="{{$area->id}}">
