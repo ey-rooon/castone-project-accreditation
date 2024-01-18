@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if(Schema::hasTable('criterias')) return;
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
             $table->string('criteria_description');

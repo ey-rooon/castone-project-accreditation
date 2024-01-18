@@ -85,6 +85,9 @@ class InternalRatingController extends Controller
                     $hasSubIndicators = count($subindicators->where('indicator_id', $indicator->id)) > 0;
                     if (!$hasSubIndicators) {
                         $rate_ind = $request->input('ind_' . $indicator->id);
+                        if($rate_ind == "NA"){
+                            $rate_ind = NULL;
+                        }
                         $internalRating = InternalRating::create([
                             'accreditation_id' => $acc_id,
                             'user_id' => $user_id,
@@ -98,6 +101,9 @@ class InternalRatingController extends Controller
                             $hasSubComponents = count($subcomponents->where('sub_indicator_id', $subindicator->id)) > 0;
                             if (!$hasSubComponents) {
                                 $rate_sub = $request->input('sub_' . $subindicator->id);
+                                if($rate_sub == "NA"){
+                                    $rate_sub = NULL;
+                                }
                                 $internalSubRating = InternalSubRating::create([
                                     'accreditation_id' => $acc_id,
                                     'user_id' => $user_id,
@@ -109,6 +115,9 @@ class InternalRatingController extends Controller
                                 $comp_ids = [];
                                 foreach ($subcomponents->where('sub_indicator_id', $subindicator->id) as $subcomponent) {
                                     $rate_comp = $request->input('comp_' . $subcomponent->id);
+                                    if($rate_comp == "NA"){
+                                        $rate_comp = NULL;
+                                    }
                                     $internalCompRating = InternalSubComponentRating::create([
                                         'accreditation_id' => $acc_id,
                                         'user_id' => auth()->user()->id,
@@ -175,7 +184,7 @@ class InternalRatingController extends Controller
         $indicatorCategories = IndicatorCategory::select()->get();
         $category = $indicatorCategories;
 
-        if ($instrument->instrument_type == 'old') {
+        if ($instrument->instrument_type == 'Old') {
             $indicatorCategories = $indicatorCategories->where('forOld', 1);
         } else {
             $indicatorCategories = $indicatorCategories->where('forOld', 0);
@@ -189,11 +198,14 @@ class InternalRatingController extends Controller
         $param_avg = (float) 0.0;
         foreach ($indicatorCategories as $category) {
             $ind_ids = [];
-            foreach ($indicators as $index => $indicator) {
+            foreach ($indicators as $indicator) {
                 if ($category->id == $indicator->indicator_category_id) {
                     $hasSubIndicators = count($subindicators->where('indicator_id', $indicator->id)) > 0;
                     if (!$hasSubIndicators) {
                         $rate_ind = $request->input('ind_' . $indicator->id);
+                        if($rate_ind == "NA"){
+                            $rate_ind = NULL;
+                        }
                         $internalRating = InternalRating::create([
                             'accreditation_id' => $acc_id,
                             'user_id' => $user_id,
@@ -207,6 +219,9 @@ class InternalRatingController extends Controller
                             $hasSubComponents = count($subcomponents->where('sub_indicator_id', $subindicator->id)) > 0;
                             if (!$hasSubComponents) {
                                 $rate_sub = $request->input('sub_' . $subindicator->id);
+                                if($rate_sub == "NA"){
+                                    $rate_sub = NULL;
+                                }
                                 $internalSubRating = InternalSubRating::create([
                                     'accreditation_id' => $acc_id,
                                     'user_id' => $user_id,
@@ -218,6 +233,9 @@ class InternalRatingController extends Controller
                                 $comp_ids = [];
                                 foreach ($subcomponents->where('sub_indicator_id', $subindicator->id) as $subcomponent) {
                                     $rate_comp = $request->input('comp_' . $subcomponent->id);
+                                    if($rate_comp == "NA"){
+                                        $rate_comp = NULL;
+                                    }
                                     $internalCompRating = InternalSubComponentRating::create([
                                         'accreditation_id' => $acc_id,
                                         'user_id' => auth()->user()->id,
