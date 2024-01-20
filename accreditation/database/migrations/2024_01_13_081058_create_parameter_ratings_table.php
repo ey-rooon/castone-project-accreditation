@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if(Schema::hasTable('parameter_ratings')) return;
         Schema::create('parameter_ratings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');

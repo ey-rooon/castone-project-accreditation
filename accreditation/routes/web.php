@@ -24,6 +24,8 @@ use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\ExternalUserController;
 use App\Http\Controllers\Admin\CriteriaController;
 
+use App\Http\Controllers\CriteriaFileController;
+use App\Http\Controllers\CriteriaMessageController;
 use App\Http\Controllers\IndicatorFileController;
 use App\Http\Controllers\SubIndicatorFileController;
 use App\Http\Controllers\SubComponentFileController;
@@ -173,6 +175,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('view_indicator_areachair/{id}/{acc_id?}', [IndicatorController::class, 'index'])->name('indicator_view');
 
     Route::get('view_criteria/{area_id}/{acc_id}', [CriteriaController::class, 'showCriteria']);
+    Route::get('view_files_criteria/{criteria_id}/{area_id}/{acc_id}', [CriteriaFileController::class, 'index']);
+    Route::post('upload_files_criteria', [CriteriaFileController::class, 'store']);
+    Route::get('delete_criteria_file/{id}', [CriteriaFileController::class, 'destroy']);
+    Route::post('send_message_criteria', [CriteriaMessageController::class, 'store']);
+    Route::post("move_file_order_criteria", [CriteriaFileController::class, 'moveOrderCriteria']);
 
     Route::get('manage_member/{id}', [MemberController::class, 'show'])->name('admin.manage_member.show');
     Route::post('add_member', [MemberController::class, 'store']);
@@ -211,6 +218,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('indicator_updatefile_status/{id}', [IndicatorFileController::class, 'update']);
     Route::post('subindicator_updatefile_status/{id}', [SubIndicatorFileController::class, 'update']);
     Route::post('subcomponent_updatefile_status/{id}', [SubComponentFileController::class, 'update']);
+    Route::post('criteria_updatefile_status/{id}', [CriteriaFileController::class, 'update']);
 });
 
 Route::middleware(['auth'])->group(function () {

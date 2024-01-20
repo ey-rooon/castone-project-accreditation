@@ -24,9 +24,12 @@
                     <td>{{$index+1}}</td>
                     <td>{{$criteria->criteria_description}}</td>
                     <td>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewFilesModal{{$criteria->id}}">View Files</button>
+                        <a href="/view_files_criteria/{{$criteria->id}}/{{$area->id}}/{{$acc_id}}">
+                            <button class="btn btn-primary">View Files</button>
+                        </a>
+                        <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewFilesModal{{$criteria->id}}">View Files</button> -->
                         <!-- Modal -->
-                        <div class="modal fade" id="viewFilesModal{{$criteria->id}}" tabindex="-1" aria-labelledby="viewFilesModalLabel{{$criteria->id}}" aria-hidden="true">
+                        <!-- <div class="modal fade" id="viewFilesModal{{$criteria->id}}" tabindex="-1" aria-labelledby="viewFilesModalLabel{{$criteria->id}}" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -35,27 +38,27 @@
                                     </div>
                                     <div class="modal-body">
                                     </div>
-                                    <div class="modal-footer" style="margin-left: 0px;">
+                                    <div class="modal-footer" style="display: block;">
                                         <form action="">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="mb-3">
-                                                        <label for="" class="form-label">Choose file</label>
-                                                        <input
-                                                            type="file"
-                                                            class="form-control"
-                                                            name="file"
-                                                            id="file"
-                                                        />
-                                                    </div>
-                                                </div>
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Choose file</label>
+                                                <input
+                                                    type="file"
+                                                    class="form-control"
+                                                    name="file"
+                                                    id="file"
+                                                />
                                             </div>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <div class="mb-3">
+                                                <label for="screen_name">File Title</label>
+                                                <input type="text" name="screen_name" id="screen_name" class="form-control">
+                                            </div>
+                                            <button type="button" class="btn btn-success">Upload</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </td>
                 </tr>
                 @empty

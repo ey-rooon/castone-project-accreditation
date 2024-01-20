@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Criteria;
 use App\Models\Area;
+use Illuminate\Support\Facades\Auth;
 
 class CriteriaController extends Controller
 {
@@ -24,13 +25,27 @@ class CriteriaController extends Controller
 
     public function showCriteria($area_id, $acc_id)
     {
+        $current_role = Auth::user()->current_role;
         $criterias = Criteria::Select()->get();
+
         $area = Area::select()->where('id', $area_id)->first();
-        return view('area chair.areachair_view_criteria')
-        ->with('criterias', $criterias)        
-        ->with('area_id', $area_id)
-        ->with('acc_id', $acc_id)
-        ->with('area', $area);
+        if (Auth::user()->user_type == "user"){
+            if ($current_role == 'internal'){
+                return view('internal accreditor.internal-criteria-rating')
+                ->with('criterias', $criterias)        
+                ->with('area_id', $area_id)
+                ->with('acc_id', $acc_id)
+                ->with('area', $area);
+            }else if($current_role == 'external'){
+
+            }else{
+                return view('area chair.areachair_view_criteria')
+                ->with('criterias', $criterias)        
+                ->with('area_id', $area_id)
+                ->with('acc_id', $acc_id)
+                ->with('area', $area);
+            }
+        }
     }
 
     /**

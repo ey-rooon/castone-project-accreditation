@@ -23,9 +23,38 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col">
                                      Your Total Rating: @if($parameter_rating) {{$parameter_rating->rating}} @else No Rating yet @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h4>Rating Scale</h4>
+                                    <table class="table table-bordered align-middle text-center" style="font-size: 18px;">
+                                        <thead>
+                                            <tr>
+                                                <th>NA</th>
+                                                <th>0</th>
+                                                <th>1</th>
+                                                <th>2</th>
+                                                <th>3</th>
+                                                <th>4</th>
+                                                <th>5</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Not Applicable</td>
+                                                <td>Missing</td>
+                                                <td>Poor</td>
+                                                <td>Fair</td>
+                                                <td>Satisfactory</td>
+                                                <td>Very Satisfactory</td>
+                                                <td>Excellent</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </h4>
@@ -44,7 +73,7 @@
                 </div>
             </div>
         </div>
-        @if (sizeof($indicators)) 
+        @if(sizeof($indicators)) 
             @if($parameter_rating) 
                 <form action="/edit_ratings" method="POST">
                 <input type="hidden" name="area_id", value="{{$area->id}}">
@@ -56,6 +85,11 @@
                 <input type="hidden" name="parameter_id" value="{{$id}}">
                 @csrf
                 @forelse($categories as $category)
+                    @php
+                        $ind_ids = $indicators->where('indicator_category_id', $category->id)->pluck('id');
+                        $cat_avg = $internalRatings->whereIn('indicator_id', $ind_ids)->avg('rating');
+                        $cat_avg_formatted = number_format($cat_avg, 2);
+                    @endphp
                     @if($category->category_name == 'NOT APPLICABLE')
                         <div class="container">
                             <div class="accordion accordion-flush" id="accordionIndicator">
@@ -73,7 +107,7 @@
                         @if ($counter == 0)
                             <div class="pt-5">
                                 <center>
-                                    <b>{{ $category->category_name }}</b>
+                                    <b>{{ $category->category_name }} <span class="text-danger"> ({{$cat_avg_formatted}})</span></b>
                                 </center>
                             </div> 
                             <div class="container">
@@ -97,14 +131,15 @@
                                                         </button> -->
                                                         <!-- <input type="number" name="" id="" min="0" max="5" step="1" class="form-control"> -->
                                                         <select name="ind_{{$indicator->id}}" id="" class="form-select" {{$indicator->isOptional == 1 ? '' : 'required' }}>
-                                                            <option value="" selected>N/A</option>
-                                                            <option value="0" {{$rating_ind == 0 ? 'selected' : ''}}>0</option>
-                                                            <option value="1" {{$rating_ind == 1 ? 'selected' : ''}}>1</option>
-                                                            <option value="2" {{$rating_ind == 2 ? 'selected' : ''}}>2</option>
-                                                            <option value="3" {{$rating_ind == 3 ? 'selected' : ''}}>3</option>
-                                                            <option value="4" {{$rating_ind == 4 ? 'selected' : ''}}>4</option>
-                                                            <option value="5" {{$rating_ind == 5 ? 'selected' : ''}}>5</option>
+                                                            <option value="NA" {{ is_null($rating_ind) ? 'selected' : '' }}>N/A</option>
+                                                            <option value="0" {{ $rating_ind === 0 ? 'selected' : '' }}>0</option>
+                                                            <option value="1" {{ $rating_ind == 1 ? 'selected' : '' }}>1</option>
+                                                            <option value="2" {{ $rating_ind == 2 ? 'selected' : '' }}>2</option>
+                                                            <option value="3" {{ $rating_ind == 3 ? 'selected' : '' }}>3</option>
+                                                            <option value="4" {{ $rating_ind == 4 ? 'selected' : '' }}>4</option>
+                                                            <option value="5" {{ $rating_ind == 5 ? 'selected' : '' }}>5</option>
                                                         </select>
+                                                        
                                                     @else
                                                         <div class="text-center">
                                                             {{$rating_ind}}
@@ -140,8 +175,8 @@
                                                                 </button> -->
                                                                 <!-- <input type="number" name="" id="" min="0" max="5" step="1" class="form-control"> -->
                                                                 <select name="sub_{{$subindicator->id}}" id="" class="form-select" {{$subindicator->isOptional == 1 ? '' : 'required' }}>
-                                                                    <option value="" selected>N/A</option>
-                                                                    <option value="0" {{$rating_sub == 0 ? 'selected' : ''}}>0</option>
+                                                                    <option value="NA" {{is_null($rating_sub) ? 'selected' : ''}}>N/A</option>
+                                                                    <option value="0" {{(string)$rating_sub === '0' ? 'selected' : ''}}>0</option>
                                                                     <option value="1" {{$rating_sub == 1 ? 'selected' : ''}}>1</option>
                                                                     <option value="2" {{$rating_sub == 2 ? 'selected' : ''}}>2</option>
                                                                     <option value="3" {{$rating_sub == 3 ? 'selected' : ''}}>3</option>
@@ -185,8 +220,8 @@
                                                                         @if($cc3 == 1) Rated @else Rate @endif
                                                                     </button> -->
                                                                     <select name="comp_{{$subcomponent->id}}" id="" class="form-select" {{$subcomponent->isOptional == 1 ? '' : 'required' }}>
-                                                                        <option value="" selected>N/A</option>
-                                                                        <option value="0" {{$rating_comp == 0 ? 'selected' : ''}}>0</option>
+                                                                        <option value="NA" {{is_null($rating_comp) ? 'selected' : ''}}>N/A</option>
+                                                                        <option value="0" {{(string)$rating_comp == '0' ? 'selected' : ''}}>0</option>
                                                                         <option value="1" {{$rating_comp == 1 ? 'selected' : ''}}>1</option>
                                                                         <option value="2" {{$rating_comp == 2 ? 'selected' : ''}}>2</option>
                                                                         <option value="3" {{$rating_comp == 3 ? 'selected' : ''}}>3</option>
