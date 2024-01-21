@@ -68,6 +68,32 @@ class SubIndicatorFileController extends Controller
             ->with('accreditation_id', $acc_id);
         ;
     }
+    public function revertfile($current_id, $backup_id)
+    {
+
+        $current_file = SubIndicatorFile::findOrFail($current_id);
+        $backup = IndicatorBackup::findOrFail($backup_id);
+
+        $temp_screen_name = $current_file->screen_name;
+        $temp_file_name =   $current_file->file_name;
+        $temp_file_type =  $current_file->file_type;
+        $temp_file_location =   $current_file->file_location;
+        $current_file->screen_name = $backup->screen_name;
+        $current_file->file_name = $backup->file_name;
+        $current_file->file_type = $backup->file_type;
+        $current_file->file_location = $backup->file_location;
+
+        $current_file->save();
+
+        $backup->screen_name = $temp_screen_name;
+        $backup->file_name =   $temp_file_name;
+        $backup->file_type =  $temp_file_type;
+        $backup->file_location =   $temp_file_location;
+
+        $backup->save();
+
+        return redirect()->back();;
+    }
     public function updateFile(Request $request, $id)
     {
         $temp = SubIndicatorFile::findOrFail($id);

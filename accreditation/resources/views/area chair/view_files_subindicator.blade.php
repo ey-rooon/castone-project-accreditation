@@ -102,7 +102,8 @@
                                 <td>{{ $file->file_type }}</td>
                                 @if (Auth::User()->current_role == 'area member' || Auth::User()->current_role == 'chair')
                                     <td>{{ date('M d, Y h:i A', strtotime($file->created_at)) }}
-                                        ({{ \Carbon\Carbon::parse($file->created_at)->diffForHumans() }})</td>
+                                        ({{ \Carbon\Carbon::parse($file->created_at)->diffForHumans() }})
+                                    </td>
                                     <td>{{ $file->firstname }} {{ $file->lastname }}</td>
                                 @endif
                                 <td>
@@ -270,9 +271,16 @@ if ($area) {
                                                                     <h6>Screeename: {{ $log->screen_name }}</h6>
                                                                     <h6>Filename: {{ $log->file_name }}</h6>
                                                                 </div>
+                                                                <div>
+                                                                    <a
+                                                                        href="/revertsubindicatorfile/{{ $file->id }}/{{ $log->id }}"><i
+                                                                            class="far fa-history"></i></a>
 
-                                                                <a href="/backupdownload/{{ $log->id }}"><i
-                                                                        class="far fa-download"></i></a>
+
+                                                                    <a href="/backupdownload/{{ $log->id }}"><i
+                                                                            class="far fa-download"></i></a>
+                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -356,7 +364,7 @@ if ($area) {
                                 console.log('2');
                                 // Handle success, you may want to update the table after a successful move
                                 location
-                            .reload(); // For simplicity, just reload the page
+                                    .reload(); // For simplicity, just reload the page
                             },
                             error: function(xhr, status, error) {
                                 // Handle error
