@@ -18,7 +18,7 @@
     @endif
     <div class="container py-4">
         {{ Breadcrumbs::render('indicator_view', $param->area_id, $accreditation_id) }}
-        <div class="row justify-content-end py-4">
+        <div class="row py-4">
             <div class="col-12 col-md-9">
                 <div class="card">
                     <div class="card-body">

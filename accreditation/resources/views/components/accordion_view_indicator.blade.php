@@ -137,7 +137,9 @@
                             @forelse($filterInd as $file)
                             <tr>
                                 <td>
-                                    <a href="/view_indicator_file/{{$file->id}}" target="_blank"><u>{{$file->screen_name}}</u></a>
+                                    <a href="/view_indicator_file/{{$file->id}}" target="_blank">
+                                        <u>{{$file->screen_name}}</u>
+                                    </a>
                                 </td>
                             </tr>
                             @empty

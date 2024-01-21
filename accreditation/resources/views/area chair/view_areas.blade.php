@@ -84,7 +84,9 @@
         <table class="table">
             <thead>
                 <tr>
+                    @if($user->current_role != 'external')
                     <th>Rating</th>
+                    @endif
                     <th>Area Name</th>
                     <th>Area Title</th>
                     @if($accreditation->apply_type != 'PSV')
@@ -101,6 +103,7 @@
                         $complianceReport = $complianceReports->where('area_id', $area->id)->where('accreditation_id', $accreditation->id)->first();
                     @endphp
                 <tr>
+                    @if($user->current_role != 'external')
                     <td>
                         @if($area_rating)
                             {{$area_rating->rating}}
@@ -108,6 +111,7 @@
                             No rating yet
                         @endif
                     </td>
+                    @endif
                     <td>{{$area->area_name}}</td>
                     <td>{{$area->area_title}}</td>
                     @if($accreditation->apply_type != 'PSV')

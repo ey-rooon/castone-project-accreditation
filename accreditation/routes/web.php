@@ -81,6 +81,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('external_users', [ExternalUserController::class, 'index'])->name('external_users');
     Route::get('getCampus/{id}', [ExternalUserController::class, 'getCampus']);
     Route::post('addExternalUsers', [ExternalUserController::class, 'store']);
+    Route::post('edit_external_user/{id}', [UserController::class, 'updateExternal']);
 
     Route::get('university_list', [UniversityController::class, 'index'])->name('university_list');
     Route::post('add_university', [UniversityController::class, 'store']);

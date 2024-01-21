@@ -123,6 +123,34 @@ class UserController extends Controller
 
     }
 
+    public function updateExternal(Request $request, $id)
+    {
+        //
+        $request->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'university'=>'required',
+            'campus' => 'required',
+            'program' => 'required',
+        ]);
+        $user = User::where('id', $id)->update([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'university_id' => $request->university,
+            'campus_id' => $request->campus,
+            'program_id' => $request->program,
+        ]);
+        if ($user) {
+            // Add a flash message to indicate successful deletion
+            session()->flash('success', 'User updated successfully.');
+        } else {
+            // Add a flash message to indicate that the record was not found
+            session()->flash('error', 'Something went wrong, please try again.');
+        }
+        return redirect('/external_users');
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *

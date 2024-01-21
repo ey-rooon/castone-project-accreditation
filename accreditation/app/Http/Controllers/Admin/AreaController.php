@@ -123,6 +123,7 @@ class AreaController extends Controller
                 ->with('indicators', $indicators)
                 ->with('accreditation', $accreditation)
                 ->with('complianceReports', $complianceReports)
+                ->with('area_ratings', $area_ratings)
                 ->with('user', $user);
         } else {
             $acc_areas = AccreditationArea::select()
