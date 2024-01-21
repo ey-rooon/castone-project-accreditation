@@ -162,8 +162,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('disable_accounts_internal/{id}', [MemberController::class, 'disabledAccountInternal']);
     Route::get('enable_accounts_internal/{id}', [MemberController::class, 'enabledAccountInternal']);
 
-    // Route::get('disable_accounts_external/{id}', [MemberController::class, 'disabledAccountExternal']);
-    // Route::get('enable_accounts_external/{id}', [MemberController::class, 'enabledAccountExternal']);
+    Route::get('disable_accounts_external/{id}', [MemberController::class, 'disabledAccountExternal']);
+    Route::get('enable_accounts_external/{id}', [MemberController::class, 'enabledAccountExternal']);
 
     Route::get('criteria', [CriteriaController::class, 'index'])->name('criteria');
     Route::post('add_criteria', [CriteriaController::class, 'store']);

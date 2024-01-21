@@ -9,6 +9,7 @@ use App\Models\Area;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CriteriaRating;
 use App\Models\AreaRating;
+use App\Models\CriteriaFile;
 
 class CriteriaController extends Controller
 {
@@ -43,6 +44,10 @@ class CriteriaController extends Controller
         ->where('user_id', $user_id)
         ->first();
 
+        $criteriafiles = CriteriaFile::Select()
+        ->where('accreditation_id', $acc_id)
+        ->where('area_id', $area_id)
+        ->get();
 
         $area = Area::select()->where('id', $area_id)->first();
         if (Auth::user()->user_type == "user"){
@@ -53,9 +58,15 @@ class CriteriaController extends Controller
                 ->with('acc_id', $acc_id)
                 ->with('area', $area)
                 ->with('criteriaRatings', $criteriaRatings)
-                ->with('areaRating', $areaRating);
+                ->with('areaRating', $areaRating)
+                ->with('criteriafiles', $criteriafiles);
             }else if($current_role == 'external'){
-
+                return view('external accreditor.external-criteria-rating')
+                ->with('criterias', $criterias)        
+                ->with('area_id', $area_id)
+                ->with('acc_id', $acc_id)
+                ->with('area', $area)
+                ->with('criteriafiles', $criteriafiles);
             }else{
                 return view('area chair.areachair_view_criteria')
                 ->with('criterias', $criterias)        

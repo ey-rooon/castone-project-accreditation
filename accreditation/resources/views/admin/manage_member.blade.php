@@ -62,6 +62,18 @@
                                 </button>
                             </a>
                         </div>
+                        <div class="col">
+                            <a href="/disable_accounts_external/{{$id}}" @if(Auth::user()->user_type == 'user') onclick="return false;" @endif>
+                                <button class="btn btn-danger" @if(Auth::user()->user_type == 'user') disabled @endif> 
+                                    <i class="fa-solid fa-circle-exclamation"></i> Disable Account External 
+                                </button>
+                            </a>
+                            <a href="/enable_accounts_external/{{$id}}" @if(Auth::user()->user_type == 'user') onclick="return false;" @endif>
+                                <button class="btn btn-success" @if(Auth::user()->user_type == 'user') disabled @endif> 
+                                    <i class="fa-solid fa-circle-check"></i> Enaled Account External 
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </center>
             @endif

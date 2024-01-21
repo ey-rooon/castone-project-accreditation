@@ -222,14 +222,14 @@
                                                                     <!-- <input type="number" name="" id="" min="0" max="5" step="1" class="form-control"> -->
                                                                 </td>
                                                                 <td>
-                                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#compFilesModalviewcompFileModal{{$subcomponent->id}}">Files</button>
+                                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#compFilesModal{{$subcomponent->id}}">Files</button>
                                                                     <!-- <a href="/view_files_subcomponent/{{$subcomponent->id}}/{{$id}}/{{$accreditation_id}}" class="btn btn-warning">Files</a> -->
                                                                 </td>
                                                             </tr>
 
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="compFilesModalviewcompFileModal{{$subcomponent->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
+                                                            <div class="modal fade" id="compFilesModal{{$subcomponent->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
                                                                             <h1 class="modal-title fs-5" id="exampleModalLabel">{{$subcomponent->component_name}}: {{$subcomponent->component_desc}} Files </h1>
@@ -259,7 +259,7 @@
                                                             @forelse($componentFiles as $compFile)
                                                                 <!-- Modal -->
                                                                 <div class="modal fade" id="viewcompFileModal{{$compFile->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-xl">
+                                                                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">File of {{$subcomponent->component_name}}: {{$subcomponent->component_desc}}</h1>
@@ -288,7 +288,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#compFilesModalviewcompFileModal{{$subcomponent->id}}">Go Back</button>
+                                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#compFilesModal{{$subcomponent->id}}">Go Back</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -301,7 +301,7 @@
 
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="subFilesModal{{$subindicator->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
+                                                        <div class="modal-dialog modal-dialog-scrollable">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">{{$subindicator->sub_indicator_name}}: {{$subindicator->sub_indicator_desc}} Files </h1>
@@ -331,7 +331,7 @@
                                                     @forelse($subindicatorFiles as $subFile)
                                                         <!-- Modal -->
                                                         <div class="modal fade" id="viewsubFileModal{{$subFile->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-xl">
+                                                            <div class="modal-dialog modal-xl modal-dialog-scrollable">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h1 class="modal-title fs-5" id="exampleModalLabel">File of {{$subindicator->sub_indicator_name}}: {{$subindicator->sub_indicator_desc}}</h1>
@@ -373,7 +373,7 @@
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="indicatorFilesModal{{$indicator->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                                <div class="modal-dialog modal-dialog-scrollable">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5" id="exampleModalLabel">{{$indicator->indicator_name}}: {{$indicator->indicator_desc}} Files </h1>
@@ -403,7 +403,7 @@
                                             @forelse($indicatorFiles as $indFile)
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="viewindicatorFileModal{{$indFile->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-xl">
+                                                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">File of {{$indicator->indicator_name}}: {{$indicator->indicator_desc}}</h1>

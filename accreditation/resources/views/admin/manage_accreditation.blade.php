@@ -37,13 +37,29 @@
         <div class="p-4">
             {{ Breadcrumbs::render('manage_accreditation') }}
             @if(Auth::user()->user_type == "admin")
-            <button class="button-manage" type="button" data-bs-toggle="modal" data-bs-target="#addAccreditationModal">
-                <span class="button__text">Add Accreditation</span>
-                <span class="button__icon"><svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <line x1="12" x2="12" y1="5" y2="19"></line>
-                        <line x1="5" x2="19" y1="12" y2="12"></line>
-                    </svg></span>
-            </button>
+            <div class="row justify-content-between">
+                <div class="col">
+                    <button class="button-manage" type="button" data-bs-toggle="modal" data-bs-target="#addAccreditationModal">
+                        <span class="button__text">Add Accreditation</span>
+                        <span class="button__icon"><svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="12" x2="12" y1="5" y2="19"></line>
+                                <line x1="5" x2="19" y1="12" y2="12"></line>
+                            </svg></span>
+                    </button>
+                </div>
+                <div class="col-3">
+                    <form action="/manage_accreditation" method="get">
+                        <select name="campus" id="campus" class="form-select" onchange="this.form.submit()">
+                            <option disabled selected>Filter Campus</option>
+                            <option value="">All</option>
+                            @forelse($campuses as $campus)
+                            <option value="{{$campus->id}}" {{ $request->campus == $campus->id ? 'selected' : '' }}>{{$campus->name}}</option>
+                            @empty
+                            @endforelse
+                        </select>
+                    </form>
+                </div>
+            </div>
             @endif
             <div class="row mt-5">
                 <table class="table display">
@@ -170,26 +186,30 @@
                                                     </div>
                                                     @endif
                                                 @endif
-                                                @if($internalMember)
-                                                    @if($internalMember->disableInternal == 1)
-                                                        <a onclick="showAlert()"></a>
-                                                    @else
-                                                        <div class="col text-center"> <!-- Added text-center class -->
-                                                            <a href="/view_areas/internal/{{$accreditation->id}}" class="btn btn-outline-success">
-                                                                Internal Accreditor
-                                                            </a>
-                                                        </div>
+                                                <div class="col text-center">
+                                                    @if($internalMember)
+                                                        @if($internalMember->disableInternal == 1)
+                                                            <a onclick="showAlert()" class="btn btn-outline-success">Internal Accreditor</a>
+                                                        @else
+                                                            <!-- Added text-center class -->
+                                                                <a href="/view_areas/internal/{{$accreditation->id}}" class="btn btn-outline-success">
+                                                                    Internal Accreditor
+                                                                </a>
+                                                            
+                                                        @endif
                                                     @endif
-                                                @endif
-                                                @if($externalMember)
-                                                    @if($externalMember->disableExternal == 1)
-                                                        <a onclick="showAlert()"></a>
-                                                    @else
-                                                        <div class="col text-center"> <!-- Added text-center class -->
-                                                            <a href="/view_areas/external/{{$accreditation->id}}" class="btn btn-outline-danger">External Accreditor</a>
-                                                        </div>
+                                                </div>
+                                                <div class="col text-center">
+                                                    @if($externalMember)
+                                                        @if($externalMember->disableExternal == 1)
+                                                            <a onclick="showAlert()" class="btn btn-outline-danger">External Accreditor</a>
+                                                        @else
+                                                            <!-- Added text-center class -->
+                                                                <a href="/view_areas/external/{{$accreditation->id}}" class="btn btn-outline-danger">External Accreditor</a>
+                                                            
+                                                        @endif
                                                     @endif
-                                                @endif
+                                                </div>
                                                 @if($coordinator)
                                                 <div class="col text-center"> <!-- Added text-center class -->
                                                     <a href="/view_areas/coordinator/{{$accreditation->id}}" class="btn btn-outline-warning">Coordinator</a>

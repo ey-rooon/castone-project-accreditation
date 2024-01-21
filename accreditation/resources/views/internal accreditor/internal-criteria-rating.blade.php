@@ -68,59 +68,98 @@
             <table class="table table-bordered">
                 <tbody>
                     @forelse($criterias as $index => $criteria)
-                    @php
-                        $criteriaRating = $criteriaRatings->where('criteria_id', $criteria->id)->value('rating');
-                    @endphp
-                    <tr>
-                        <td>{{$index+1}}</td>
-                        <td>{{$criteria->criteria_description}}</td>
-                        <td>
-                            <select name="rating{{$criteria->id}}" id="rating" class="form-select">
-                                <option value="1" {{$criteriaRating == 1 ? 'selected': ''}}>1</option>
-                                <option value="2" {{$criteriaRating == 2 ? 'selected': ''}}>2</option>
-                                <option value="3" {{$criteriaRating == 3 ? 'selected': ''}}>3</option>
-                                <option value="4" {{$criteriaRating == 4 ? 'selected': ''}}>4</option>
-                                <option value="5" {{$criteriaRating == 5 ? 'selected': ''}}>5</option>
-                            </select>
-                        </td>
-                        <td>
-                            <a href="/view_files_criteria/{{$criteria->id}}/{{$area->id}}/{{$acc_id}}">
-                                <button class="btn btn-primary">View Files</button>
-                            </a>
-                            <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewFilesModal{{$criteria->id}}">View Files</button> -->
+                        @php
+                            $criteriaRating = $criteriaRatings->where('criteria_id', $criteria->id)->value('rating');
+                            $criterFile = $criteriafiles->where('criteria_id', $criteria->id);
+                        @endphp
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{$criteria->criteria_description}}</td>
+                            <td>
+                                <select name="rating{{$criteria->id}}" id="rating" class="form-select">
+                                    <option value="1" {{$criteriaRating == 1 ? 'selected': ''}}>1</option>
+                                    <option value="2" {{$criteriaRating == 2 ? 'selected': ''}}>2</option>
+                                    <option value="3" {{$criteriaRating == 3 ? 'selected': ''}}>3</option>
+                                    <option value="4" {{$criteriaRating == 4 ? 'selected': ''}}>4</option>
+                                    <option value="5" {{$criteriaRating == 5 ? 'selected': ''}}>5</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criteriaFilesModal{{$criteria->id}}">View Files</button>
+                                <!-- <a href="/view_files_criteria/{{$criteria->id}}/{{$area->id}}/{{$acc_id}}">
+                                    <button class="btn btn-primary">View Files</button>
+                                </a> -->
+                            </td>
+                        </tr>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="criteriaFilesModal{{$criteria->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">{{$criteria->criteria_description}} Files </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <div class="row">
+                                                @forelse($criterFile as $file)
+                                                <div class="col">
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#viewCriteriaFileModal{{$file->id}}">
+                                                        {{$file->screen_name}}
+                                                    </a>
+                                                </div>
+                                                @empty
+                                                @endforelse
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @forelse($criteriafiles as $file)
                             <!-- Modal -->
-                            <!-- <div class="modal fade" id="viewFilesModal{{$criteria->id}}" tabindex="-1" aria-labelledby="viewFilesModalLabel{{$criteria->id}}" aria-hidden="true">
-                                <div class="modal-dialog">
+                            <div class="modal fade" id="viewCriteriaFileModal{{$file->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="viewFilesModalLabel{{$criteria->id}}">View Files for: {{$criteria->criteria_description}}</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">File of {{$criteria->criteria_description}}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
+                                            <div class="container">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-12 col-md-9">
+                                                        @if ($file->file_type == 'JPG' || $file->file_type == 'jpg' || $file->file_type == 'png')
+                                                            <img src="{{ asset($file->file_location) }}"
+                                                                style="min-height:640px;" />
+                                                        @elseif($file->file_type == 'pdf' || $file->file_type == 'mp4')
+                                                            <iframe src="{{ asset($file->file_location) }}"
+                                                                style="width:100%;min-height:640px;"></iframe>
+                                                        @elseif($file->file_type == 'doc' || $file->file_type == 'docx')
+                                                            <iframe
+                                                                src="https://view.officeapps.live.com/op/view.aspx?src={{ urlencode(asset($file->file_location)) }}"
+                                                                frameborder="0"
+                                                                style="width: 62%; min-height: 562px;"></iframe>
+                                                        @else
+                                                            //manage things here
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-footer" style="display: block;">
-                                            <form action="">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">Choose file</label>
-                                                    <input
-                                                        type="file"
-                                                        class="form-control"
-                                                        name="file"
-                                                        id="file"
-                                                    />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="screen_name">File Title</label>
-                                                    <input type="text" name="screen_name" id="screen_name" class="form-control">
-                                                </div>
-                                                <button type="button" class="btn btn-success">Upload</button>
-                                            </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criteriaFilesModal{{$criteria->id}}">Go Back</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
-                        </td>
-                    </tr>
+                            </div>
+                        @empty
+                        @endforelse
                     @empty
                     @endforelse
                 </tbody>

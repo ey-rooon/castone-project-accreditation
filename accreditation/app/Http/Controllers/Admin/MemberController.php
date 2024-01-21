@@ -424,5 +424,45 @@ class MemberController extends Controller
 
         return redirect()->back();
     }
+
+    public function disabledAccountExternal($id)
+    {
+        $member = AreaMember::where('accreditation_id', $id)->where('member_type', 'external')->update(['disableExternal' => 1]);
+
+        if ($member) {
+            $accreditation = Accreditation::select()->where('id', $id)->first();
+            $user = User::whereIn('id', AreaMember::select('user_id')->where('accreditation_id', $id)->where('member_type', 'external')->get())->get();
+            $content = 'Account has been disabled for the ' . $accreditation->accreditation_name;
+            $title = 'Account Notice!';
+            $url = '/manage_accreditation';
+            Notification::send($user, new AccreditationNotification($content, $title, $url));
+            session()->flash('success', 'External Accounts disabled successfully.');
+        } else {
+            // Add a flash message to indicate that the record was not found
+            session()->flash('error', 'Something went wrong, please try again.');
+        }
+
+        return redirect()->back();
+    }
+
+    public function enabledAccountExternal($id)
+    {
+        $member = AreaMember::where('accreditation_id', $id)->where('member_type', 'external')->update(['disableExternal' => 0]);
+
+        if ($member) {
+            $accreditation = Accreditation::select()->where('id', $id)->first();
+            $user = User::whereIn('id', AreaMember::select('user_id')->where('accreditation_id', $id)->where('member_type', 'external')->get())->get();
+            $content = 'Account has been disabled for the ' . $accreditation->accreditation_name;
+            $title = 'Account Notice!';
+            $url = '/manage_accreditation';
+            Notification::send($user, new AccreditationNotification($content, $title, $url));
+            session()->flash('success', 'External Accounts enabled successfully.');
+        } else {
+            // Add a flash message to indicate that the record was not found
+            session()->flash('error', 'Something went wrong, please try again.');
+        }
+
+        return redirect()->back();
+    }
 }
 

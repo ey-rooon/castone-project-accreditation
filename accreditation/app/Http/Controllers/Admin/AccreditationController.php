@@ -30,7 +30,7 @@ class AccreditationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $user_id = Auth::id();
@@ -59,9 +59,11 @@ class AccreditationController extends Controller
                 ->join('programs', 'program_levels.program_id', '=', 'programs.id')
                 ->join('campuses', 'program_levels.campus_id', '=', 'campuses.id')
                 ->select('program_levels.*', 'program_levels.id as plID', 'program_levels.level as prog_level', 'campuses.*', 'campuses.name AS cname', 'programs.program AS prog', 'programs.id AS prog_id', 'programs.*', 'accreditations.*')
-                ->get();
+                ->when($request->campus, function ($query) use ($request) {
+                    $query->where('program_levels.campus_id', $request->campus);
+                })->get();
 
-            return view('admin.manage_accreditation', compact('user', 'campuses', 'programLevels', 'accreditations', 'instruments'));
+            return view('admin.manage_accreditation', compact('user', 'campuses', 'programLevels', 'accreditations', 'instruments', 'request'));
         } else {
             $queryMembers = Accreditation::join('program_levels', 'accreditations.program_level_id', '=', 'program_levels.id')
                 ->join('programs', 'program_levels.program_id', '=', 'programs.id')

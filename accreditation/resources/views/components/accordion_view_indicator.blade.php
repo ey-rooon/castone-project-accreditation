@@ -62,15 +62,55 @@
                                             @endphp
                                             <table>
                                                 <tbody>
-                                                    @forelse($filterSub as $file)
-                                                    <tr>
-                                                        <td>
-                                                            <a href="/view_subindicator_file/{{$file->id}}" target="_blank"><u>{{$file->screen_name}}</u></a>
-                                                        </td>
+                                                    <tr class="p-5">
+                                                        <td><b>Files:</b></td>
+                                                        @forelse($filterSub as $file)
+                                                        
+                                                            <td class="pe-4">
+                                                                <!-- <a href="/view_subindicator_file/{{$file->id}}" ><u>{{$file->screen_name}}</u></a> -->
+                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#viewsubFileModal{{$file->id}}"><u>{{$file->screen_name}}</u></a>
+                                                            </td>
+
+                                                            <div class="modal fade" id="viewsubFileModal{{$file->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">File of {{$subindicator->sub_indicator_name}}: {{$subindicator->sub_indicator_desc}}</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="container">
+                                                                                <div class="row justify-content-center">
+                                                                                    <div class="col-12 col-md-9">
+                                                                                        @if ($file->file_type == 'JPG' || $file->file_type == 'jpg' || $file->file_type == 'png')
+                                                                                            <img src="{{ asset($file->file_location) }}"
+                                                                                                style="min-height:640px;" />
+                                                                                        @elseif($file->file_type == 'pdf' || $file->file_type == 'mp4')
+                                                                                            <iframe src="{{ asset($file->file_location) }}"
+                                                                                                style="width:100%;min-height:640px;"></iframe>
+                                                                                        @elseif($file->file_type == 'doc' || $file->file_type == 'docx')
+                                                                                            <iframe
+                                                                                                src="https://view.officeapps.live.com/op/view.aspx?src={{ urlencode(asset($file->file_location)) }}"
+                                                                                                frameborder="0"
+                                                                                                style="width: 62%; min-height: 562px;"></iframe>
+                                                                                        @else
+                                                                                            //manage things here
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        @empty
+                                                            <td>No Files Uploaded on this Sub-Indicator</td>
+                                                        @endforelse
                                                     </tr>
-                                                    @empty
-                                                        <div class="fs-5 p-3">No Files Uploaded on this Sub-Indicator</div>
-                                                    @endforelse
                                                 </tbody>
                                             </table>
                                         @else
@@ -100,15 +140,56 @@
                                                                 @endphp
                                                                 <table>
                                                                     <tbody>
-                                                                        @forelse($filterComp as $file)
-                                                                        <tr>
-                                                                            <td>
-                                                                                <a href="/view_subcomponent_file/{{$file->id}}" target="_blank"><u>{{$file->screen_name}}</u></a>
-                                                                            </td>
+                                                                        <tr class="p-5">
+                                                                            <td><b>Files:</b></td>
+                                                                            @forelse($filterComp as $file)
+                                                                            
+                                                                                <td class="pe-4">
+                                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#viewcompFileModal{{$file->id}}"><u>{{$file->screen_name}}</u></a>
+                                                                                    <!-- <a href="/view_subcomponent_file/{{$file->id}}" target="_blank"><u>{{$file->screen_name}}</u></a> -->
+                                                                                </td>
+
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade" id="viewcompFileModal{{$file->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">File of {{$subcomponent->component_name}}: {{$subcomponent->component_desc}}</h1>
+                                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                            </div>
+                                                                                            <div class="modal-body">
+                                                                                                <div class="container">
+                                                                                                    <div class="row justify-content-center">
+                                                                                                        <div class="col-12 col-md-9">
+                                                                                                            @if ($file->file_type == 'JPG' || $file->file_type == 'jpg' || $file->file_type == 'png')
+                                                                                                                <img src="{{ asset($file->file_location) }}"
+                                                                                                                    style="min-height:640px;" />
+                                                                                                            @elseif($file->file_type == 'pdf' || $file->file_type == 'mp4')
+                                                                                                                <iframe src="{{ asset($file->file_location) }}"
+                                                                                                                    style="width:100%;min-height:640px;"></iframe>
+                                                                                                            @elseif($file->file_type == 'doc' || $file->file_type == 'docx')
+                                                                                                                <iframe
+                                                                                                                    src="https://view.officeapps.live.com/op/view.aspx?src={{ urlencode(asset($file->file_location)) }}"
+                                                                                                                    frameborder="0"
+                                                                                                                    style="width: 62%; min-height: 562px;"></iframe>
+                                                                                                            @else
+                                                                                                                //manage things here
+                                                                                                            @endif
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#compFilesModalviewcompFileModal{{$subcomponent->id}}">Go Back</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            
+                                                                            @empty
+                                                                                <td>No Files Uploaded for this Sub-Component</td>
+                                                                            @endforelse
                                                                         </tr>
-                                                                        @empty
-                                                                            <div class="fs-5 p-3">No Files Uploaded for this Sub-Component</div>
-                                                                        @endforelse
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -134,17 +215,57 @@
                     @endphp
                     <table>
                         <tbody>
-                            @forelse($filterInd as $file)
-                            <tr>
-                                <td>
-                                    <a href="/view_indicator_file/{{$file->id}}" target="_blank">
-                                        <u>{{$file->screen_name}}</u>
-                                    </a>
-                                </td>
+                            <tr class="p-5">
+                                <td><b>FILES:</b></td>
+                                @forelse($filterInd as $file)
+                                
+                                    <td class="pe-4">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#viewindicatorFileModal{{$file->id}}">
+                                            <u>{{$file->screen_name}}</u>
+                                        </a>
+                                    </td>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="viewindicatorFileModal{{$file->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">File of {{$indicator->indicator_name}}: {{$indicator->indicator_desc}}</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="container">
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-12 col-md-9">
+                                                                @if ($file->file_type == 'JPG' || $file->file_type == 'jpg' || $file->file_type == 'png')
+                                                                    <img src="{{ asset($file->file_location) }}"
+                                                                        style="min-height:640px;" />
+                                                                @elseif($file->file_type == 'pdf' || $file->file_type == 'mp4')
+                                                                    <iframe src="{{ asset($file->file_location) }}"
+                                                                        style="width:100%;min-height:640px;"></iframe>
+                                                                @elseif($file->file_type == 'doc' || $file->file_type == 'docx')
+                                                                    <iframe
+                                                                        src="https://view.officeapps.live.com/op/view.aspx?src={{ urlencode(asset($file->file_location)) }}"
+                                                                        frameborder="0"
+                                                                        style="width: 62%; min-height: 562px;"></iframe>
+                                                                @else
+                                                                    //manage things here
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                @empty
+                                    <td>No Files Uploaded for this Indicator</td>
+                                @endforelse
                             </tr>
-                            @empty
-                                <div class="fs-5 p-3">No Files Uploaded for this Indicator</div>
-                            @endforelse
                         </tbody>
                     </table>
                     
