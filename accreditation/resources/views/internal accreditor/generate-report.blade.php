@@ -77,7 +77,7 @@
                             <tr>
                                 <td>
                                     <center>
-                                        <img src="{{ asset('storage/images/psu_logo.png') }}" alt="" height="150px" width="150px">
+                                        <img src="{{ asset('storage/images/psu_logo.png') }}" alt="" height="100px" width="100px">
                                     </center>
                                 </td>
                                 <td>

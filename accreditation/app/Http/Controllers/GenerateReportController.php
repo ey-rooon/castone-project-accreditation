@@ -145,8 +145,7 @@ class GenerateReportController extends Controller
           style="font-family:\'Arial\',sans-serif">Local Accreditation</span></h1>
           <p align="center" style="margin:0in;text-align:center"><span style="font-family:
           \'Arial\',sans-serif;text-transform:uppercase">Pangasinan State University</span></p>
-          <p align="center" style="text-align:center"><u><span style="font-family:\'Arial\',sans-serif">Asingan
-          Campus</span></u></p>
+          <p align="center" style="text-align:center"><u><span style="font-family:\'Arial\',sans-serif">'.$accreditation->cname.'</span></u></p>
           </td>
          </tr>
          </thead>
@@ -156,8 +155,7 @@ class GenerateReportController extends Controller
          </td>
          <td style="border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
          border-right:solid windowtext 1.0pt;padding:.75pt .75pt .75pt .75pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">Bachelor
-         of Science in Information Technology</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$accreditation->prog.'</span></p>
          </td>
          </tr>
          <tr>
@@ -167,7 +165,7 @@ class GenerateReportController extends Controller
          </td>
          <td style="border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
          border-right:solid windowtext 1.0pt;padding:.75pt .75pt .75pt .75pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">Re-Accreditation</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$accreditation->apply_type.'</span></p>
          </td>
          </tr>
          <tr>
@@ -177,8 +175,7 @@ class GenerateReportController extends Controller
          </td>
          <td style="border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
          border-right:solid windowtext 1.0pt;padding:.75pt .75pt .75pt .75pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">Errol
-         Lopez</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$fname.' '.$lname.'</span></p>
          </td>
          </tr>
          <tr>
@@ -187,7 +184,7 @@ class GenerateReportController extends Controller
          </td>
          <td style="border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
          border-right:solid windowtext 1.0pt;padding:.75pt .75pt .75pt .75pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">2024-01-14</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.NOW().'</span></p>
          </td>
          </tr>
          <tr>
@@ -197,8 +194,7 @@ class GenerateReportController extends Controller
          </td>
          <td style="border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
          border-right:solid windowtext 1.0pt;padding:.75pt .75pt .75pt .75pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">Area
-         1 Vision, Mission, Goals and objectives</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$area->area_name.' '.$area->area_title.'</span></p>
          </td>
          </tr>
         </table>
@@ -225,12 +221,12 @@ class GenerateReportController extends Controller
          <td style="border:solid windowtext 1.0pt;border-top:none;padding:.75pt .75pt .75pt .75pt;
          height:27.1pt">
          <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">Parameter:
-         <u>&nbsp;&nbsp; A&nbsp;&nbsp;</u></span></p>
+         <u>&nbsp;&nbsp; '.$parameter->parameter.' &nbsp;&nbsp;</u></span></p>
          </td>
          <td width="16%" style="width:16.36%;border-top:none;border-left:none;
          border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
          padding:.75pt .75pt .75pt .75pt;height:27.1pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">3.51</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$parameter_rating->rating.'</span></p>
          </td>
          <td width="51%" style="width:51.92%;border-top:none;border-left:none;
          border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -244,12 +240,12 @@ class GenerateReportController extends Controller
          <td width="16%" style="width:16.36%;border-top:none;border-left:none;
          border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
          padding:.75pt .75pt .75pt .75pt;height:25.25pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">asd</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$system_r.'</span></p>
          </td>
          <td width="51%" style="width:51.92%;border-top:none;border-left:none;
          border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
          padding:.75pt .75pt .75pt .75pt;height:25.25pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">fgh</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$system_s.'</span></p>
          </td>
          </tr>
          <tr style="height:27.1pt">
@@ -260,12 +256,12 @@ class GenerateReportController extends Controller
          <td width="16%" style="width:16.36%;border-top:none;border-left:none;
          border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
          padding:.75pt .75pt .75pt .75pt;height:27.1pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">jkl</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$implementation_r.'</span></p>
          </td>
          <td width="51%" style="width:51.92%;border-top:none;border-left:none;
          border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
          padding:.75pt .75pt .75pt .75pt;height:27.1pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">qwe</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$implementation_s.'</span></p>
          </td>
          </tr>
          <tr style="height:27.1pt">
@@ -276,12 +272,12 @@ class GenerateReportController extends Controller
          <td width="16%" style="width:16.36%;border-top:none;border-left:none;
          border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
          padding:.75pt .75pt .75pt .75pt;height:27.1pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">rty</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$outcome_r.'</span></p>
          </td>
          <td width="51%" style="width:51.92%;border-top:none;border-left:none;
          border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
          padding:.75pt .75pt .75pt .75pt;height:27.1pt">
-         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">yui</span></p>
+         <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$outcome_s.'</span></p>
          </td>
          </tr>
          <tr style="height:74.05pt">
@@ -289,7 +285,7 @@ class GenerateReportController extends Controller
          border-top:none;padding:.75pt .75pt .75pt .75pt;height:74.05pt">
          <p><em><span style="font-size:9.0pt;font-family:\'Arial\',sans-serif">Other
          Observations:</span></em></p>
-         <p class="MsoNormal"><i><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">asfdfdghdfg</span></i></p>
+         <p class="MsoNormal"><i><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$observation.'</span></i></p>
          </td>
          </tr>
          <tr style="height:108.3pt">
@@ -305,8 +301,7 @@ class GenerateReportController extends Controller
           </tr>
           <tr style="height:25.25pt">
           <td style="padding:.75pt .75pt .75pt .75pt;height:25.25pt">
-          <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">Errol
-          Lopez</span></p>
+          <p class="MsoNormal"><span style="font-size:12.0pt;font-family:\'Arial\',sans-serif">'.$fname.' '.$lname.'</span></p>
           </td>
           </tr>
          </table>
