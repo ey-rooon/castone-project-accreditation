@@ -11,6 +11,7 @@ use App\Models\Indicator;
 use App\Models\IndicatorFile;
 use App\Models\IndicatorMessage;
 use App\Models\AreaMember;
+use App\Models\IndicatorBackup;
 use LaravelFileViewer;
 
 
@@ -24,21 +25,20 @@ class IndicatorFileController extends Controller
     public function index($indicator_id, $parameter_id, $acc_id)
     {
         //
-
         $uid = Auth::id();
 
         $indicator = Indicator::select()
             ->where('id', $indicator_id)
             ->first();
 
-        $files = indicatorFile::join('users', 'indicator_files.user_id', '=', 'users.id')
+        $files = indicatorFile::with('backUp')->join('users', 'indicator_files.user_id', '=', 'users.id')
             ->select('users.id as uid', 'indicator_files.*', 'users.firstname', 'users.lastname')
             ->where('parameter_id', $parameter_id)
             ->where('indicator_id', $indicator_id)
             ->where('accreditation_id', $acc_id)
             ->orderBy('indicator_files.updated_at', 'DESC')
             ->get();
-
+        
         $messages = IndicatorMessage::join('users', 'indicator_messages.sender_id', '=', 'users.id')
             ->join('indicator_files', 'indicator_messages.indicator_file_id', '=', 'indicator_files.id')
             ->select()
@@ -87,7 +87,43 @@ class IndicatorFileController extends Controller
     {
         //
     }
+    public function updateFile(Request $request, $id)
+    {
+        $temp = IndicatorFile::findOrFail($id);
+       
+        if ($request->exists('file')) {
+            $file = $request->file('file');
+         
+            $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension(); // Generate a unique filename
+            $fileExtension = $file->getClientOriginalExtension();
+            if ($file->storeAs('public/files/', $fileName)) {
+                IndicatorBackup::create([
+                    'file_id' => $id,
+                    'user_id' => $temp->user_id,
+                    'file_name' => $temp->file_name,
+                    'screen_name' => $temp->screen_name,
+                    'file_type' => $temp->file_type,
+                    'file_location' => $temp->file_location,
+                ]);
+                $temp->file_name = $fileName;
+                $temp->file_type =  $fileExtension;
+                $temp->file_location = 'storage/files/' . $fileName;
+            }
+        }
+        $temp->screen_name = $request->screen_name;
+        $temp->save();
 
+        return redirect()->back();;
+    }
+    public function downLoadBackup( $id)
+    {
+        $temp = IndicatorBackup::findOrFail($id);
+       
+       
+
+        return response()->download($temp->file_location);;
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -161,7 +197,6 @@ class IndicatorFileController extends Controller
         }
 
         return redirect()->back();
-
     }
 
     /**
@@ -226,7 +261,6 @@ class IndicatorFileController extends Controller
         }
 
         return redirect()->back();
-
     }
 
     /**
@@ -250,6 +284,5 @@ class IndicatorFileController extends Controller
         }
 
         return redirect()->back();
-
     }
 }

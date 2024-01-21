@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\SubComponentFile;
 use App\Models\Parameter;
 use App\Models\AreaMember;
+use App\Models\IndicatorBackup;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SubComponentMessage;
 use LaravelFileViewer;
@@ -30,7 +31,7 @@ class SubComponentFileController extends Controller
             ->where('id', $subcomponent_id)
             ->first();
 
-        $files = SubComponentFile::join('users', 'sub_component_files.user_id', '=', 'users.id')
+        $files = SubComponentFile::with('backUp')->join('users', 'sub_component_files.user_id', '=', 'users.id')
             ->select('users.id as uid', 'sub_component_files.*', 'users.firstname', 'users.lastname')
             ->where('parameter_id', $parameter_id)
             ->where('sub_component_id', $subcomponent_id)
@@ -66,7 +67,35 @@ class SubComponentFileController extends Controller
             ->with('accreditation_id', $acc_id);
         ;
     }
+    public function updateFile(Request $request, $id)
+    {
+        $temp = SubComponentFile::findOrFail($id);
+       
+        if ($request->exists('file')) {
+            $file = $request->file('file');
+         
+            $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension(); // Generate a unique filename
+            $fileExtension = $file->getClientOriginalExtension();
+            if ($file->storeAs('public/files/', $fileName)) {
+                IndicatorBackup::create([
+                    'file_id' => $id,
+                    'user_id' => $temp->user_id,
+                    'file_name' => $temp->file_name,
+                    'screen_name' => $temp->screen_name,
+                    'file_type' => $temp->file_type,
+                    'file_location' => $temp->file_location,
+                    'type'=>3,
+                ]);
+                $temp->file_name = $fileName;
+                $temp->file_type =  $fileExtension;
+                $temp->file_location = 'storage/files/' . $fileName;
+            }
+        }
+        $temp->screen_name = $request->screen_name;
+        $temp->save();
 
+        return redirect()->back();;
+    }
     public function moveOrder(Request $request)
     {
         $fileId = $request->input('file_id');
