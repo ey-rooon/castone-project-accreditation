@@ -1,0 +1,11 @@
+parameter summary
+area summary
+area weight
+disable user when not scheduled
+filter accreditation
+see pass accreditation
+view files, meka it modal modal
+edit external users. make it modal nalang
+coordinator will generate parameter and area summary
+new accreditation report or summary
+
