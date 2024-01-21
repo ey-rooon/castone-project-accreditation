@@ -223,6 +223,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('add_criteria_rating', [CriteriaRatingController::class, 'store']);
     Route::post('edit_criteria_rating', [CriteriaRatingController::class, 'update']);
+
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -255,6 +256,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get("generate_report/{id}/{area_id}", [GenerateReportController::class, 'index']);
     Route::post('generate_parameter_report', [GenerateReportController::class, 'store']);
+    Route::get('generate_area_summary/{acc_id}', [GenerateReportController::class, 'areaSummary']);
+    Route::get('generate_parameter_summary/{area_id}/{acc_id}', [GenerateReportController::class, 'parameterSummary']);
 });
 
 require __DIR__ . '/auth.php';

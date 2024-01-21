@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 use App\Models\Parameter;
 use App\Models\ParameterRating;
 use App\Models\ParameterReport;
-use HTML_TO_DOC;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\AreaRating;
+use App\Models\AccreditationArea;
+use HTML_TO_DOC;
 
 class GenerateReportController extends Controller
 {
@@ -46,6 +49,42 @@ class GenerateReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function areaSummary(Request $request, $acc_id)
+    {
+        $accreditation = Accreditation::select()->where('id', $acc_id)->first();
+        $areaRatings = AreaRating::select()->where('accreditation_id', $acc_id)->get();
+        $accArea_ids = AccreditationArea::select()->where('accreditation_id', $acc_id)->pluck('area_id');
+        $areas = Area::select()->whereIn('id', $accArea_ids)->get();
+        // dd($accArea_ids);
+        if($request->has('download'))
+	    {
+	        $pdf = Pdf::loadView('pdf-views.area_summary', ['accreditation'=>$accreditation, 'areas'=>$areas, 'areaRatings'=>$areaRatings]);
+ 
+            return $pdf->download('COMPUTING AND INTERPRETING THE RATINGS'.NOW().'.pdf');
+            
+	    }
+        // return view('pdf-views.area_summary', compact('accreditation', 'areas', 'areaRatings'));
+        
+    }
+
+    public function parameterSummary(Request $request, $area_id, $acc_id)
+    {
+        $accreditation = Accreditation::select()->where('id', $acc_id)->first();
+        $area = Area::select()->where('id', $area_id)->first();
+        $parameters = Parameter::Select()->where('area_id', $area_id)->get();
+        $parameter_ids = $parameters->pluck('id');
+        $parameterRatings = ParameterRating::select()->where('accreditation_id', $acc_id)->whereIn('parameter_id', $parameter_ids)->get();
+        $areaRating = AreaRating::select()->where('accreditation_id', $acc_id)->where('area_id', $area_id)->first();
+        if($request->has('download'))
+	    {
+	        $pdf = Pdf::loadView('pdf-views.parameter_summary', ['accreditation'=>$accreditation, 'area'=>$area, 'parameterRatings'=> $parameterRatings, 'areaRating'=> $areaRating, 'parameters'=>$parameters]);
+ 
+            return $pdf->download('SUMMARY OF RATINGS'.$area->area_name.NOW().'.pdf');
+            
+	    }
+
+    }
     public function create()
     {
         //

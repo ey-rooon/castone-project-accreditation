@@ -6,9 +6,10 @@
         @php
             $colorClass = $headerColors[$index % count($headerColors)];
             $areaMembersInArea = $area_membersAll->where('area_id', $area->id); // Filter area_members for the current area
-            $internalInArea = $internal_members->where('area_id', $area->id); // Filter area_members for the current area
-            $externalInArea = $external_members->where('area_id', $area->id); // Filter area_members for the current area
+            $internalInArea = $internal_members->where('area_id', $area->id); // Filter internal_members for the current area
+            $externalInArea = $external_members->where('area_id', $area->id); // Filter external_members for the current area
             $accreditation_area = $accreditation_areas->where('area_id', $area->id)->where('accreditation_id', $id)->first();
+            $isAreaChair = $area_chairs->where('area_id', $area->id)->where('user_id', Auth::user()->id)->first();
         @endphp
         <div class="col-12 col-md-6 p-2">
             <div class="card card-name shadow">
@@ -25,13 +26,14 @@
                     </div>
                 </div>
                 <div class="card-body" style="height: 500px; overflow-y:auto">
+
                     <!-- AREA CHAIR TABLES -->
                     <div class="row justify-content-between align-items-center">
                         <div class="col-12 col-md-7">
                             <h5 class="card-title">Area Chair/s:</h5>
                         </div>
                         <div class="col-12 col-md-5 text-end">
-                            @if(Auth::user()->user_type == 'admin' || $coordinator)
+                            @if(Auth::user()->user_type == 'admin' || $coordinator || $isAreaChair)
                             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addAreaMemberModal{{$area->id}}">
                                 Add Area Members
                             </button>
@@ -42,7 +44,7 @@
                         <thead class="table-success">
                             <tr>
                                 <th>Name</th>
-                                @if(Auth::user()->user_type == 'admin' || $coordinator)
+                                @if(Auth::user()->user_type == 'admin' || $coordinator || $isAreaChair)
                                 <th class="text-end">Action</th>
                                 @endif
                             </tr>
@@ -53,9 +55,9 @@
                                     <td>
                                         <b>{{$member->lname}} {{$member->fname}}</b>
                                     </td>
-                                    @if(Auth::user()->user_type == 'admin' || $coordinator)
+                                    @if(Auth::user()->user_type == 'admin' || $coordinator || $isAreaChair)
                                     <td class="text-end">
-                                        <button class="btn btn-outline-danger remove-area-member" data-area-name="{{ $area->area_name }}" data-area-member-id="{{$member->amId}}">Remove</button>
+                                        <button class="btn btn-outline-danger remove-area-member" data-area-name="{{ $area->area_name }}" data-area-member-id="{{$member->amId}}" {{$member->user_id == Auth::user()->id  ? 'disabled' : ""}}>Remove</button>
                                     </td>
                                     @endif
                                 </tr>
@@ -77,7 +79,7 @@
                         <thead class="table-warning">
                             <tr>
                                 <th>Name</th>
-                                @if(Auth::user()->user_type == 'admin' || $coordinator)
+                                @if(Auth::user()->user_type == 'admin' || $coordinator || $isAreaChair)
                                 <th class="text-end">Action</th>
                                 @endif
                             </tr>
@@ -88,7 +90,7 @@
                                     <td>
                                         <b>{{$member->lname}} {{$member->fname}}</b>
                                     </td>
-                                    @if(Auth::user()->user_type == 'admin' || $coordinator)
+                                    @if(Auth::user()->user_type == 'admin' || $coordinator || $isAreaChair)
                                         <td class="text-end">
                                             <button class="btn btn-outline-danger remove-area-member" data-area-name="{{ $area->area_name }}" data-area-member-id="{{$member->amId}}">Remove</button>
                                         </td>

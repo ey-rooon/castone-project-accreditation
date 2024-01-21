@@ -50,6 +50,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $university = University::where('university_id', 'psu')->first();
         $temp_pass = Str::random(8);
         $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
@@ -64,6 +65,7 @@ class RegisteredUserController extends Controller
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
+            'university_id'=>$university->id,
             'campus_id' =>$request->campus,
             'program_id' =>$request->program,
             'user_type'=>'user',

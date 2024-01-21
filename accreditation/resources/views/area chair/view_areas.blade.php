@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl leading-tight">
-            {{ __("Area") }} of {{$program->program}}
+            {{ __("Area") }} for {{$program->program}}
         </h2>
     </x-slot>
     @if(session('success'))
@@ -22,10 +22,19 @@
     </div>
     @endif
     <div class="container p-4">
-        {{ Breadcrumbs::render('view_areas', $role, $accreditation_id) }}
-
-        <br />
-        @if(Auth::user()->current_role == 'member' || Auth::user()->current_role == 'chair')
+        <div class="row mb-3">
+            {{ Breadcrumbs::render('view_areas', $role, $accreditation_id) }}
+        </div>
+        @if($user->current_role == 'coordinator')
+        <div class="row">
+            <div class="col">
+                <a href="/generate_area_summary/{{$accreditation_id}}?download=1" class="btn btn-primary">
+                    <i class="far fa-download"></i> Generate Area Summary
+                </a>
+            </div>
+        </div>
+        @endif
+        @if($user->current_role == 'member' || $user->current_role == 'chair')
             @if($accreditation->apply_type != 'PSV')
             <div class="row mb-3 justify-content-center">
                 <div class="col-12 col-md-6">
@@ -143,6 +152,13 @@
                                     View Parameters
                                 </button>
                             </a>
+                        @endif
+                        @if($area_rating)
+                            @if($user->current_role == 'coordinator' || $user->current_role == 'internal')
+                                <a href="/generate_parameter_summary/{{$area->id}}/{{$accreditation_id}}?download=1" class="btn btn-outline-danger">
+                                    Generate Parameter Summary
+                                </a>
+                            @endif
                         @endif
                     </td>
                 </tr>

@@ -46,7 +46,7 @@ class AccreditationController extends Controller
             ->where('area_members.user_id', $user_id)
             ->get();
 
-        $members = Member::select()
+        $coordinators = Member::select()
             ->where('members.user_id', $user_id)
             ->get();
 
@@ -63,7 +63,6 @@ class AccreditationController extends Controller
 
             return view('admin.manage_accreditation', compact('user', 'campuses', 'programLevels', 'accreditations', 'instruments'));
         } else {
-
             $queryMembers = Accreditation::join('program_levels', 'accreditations.program_level_id', '=', 'program_levels.id')
                 ->join('programs', 'program_levels.program_id', '=', 'programs.id')
                 ->join('campuses', 'program_levels.campus_id', '=', 'campuses.id')
@@ -85,7 +84,7 @@ class AccreditationController extends Controller
                 ->with('programLevels', $programLevels)
                 ->with('campuses', $campuses)
                 ->with('area_members', $area_members)
-                ->with('members', $members)
+                ->with('coordinators', $coordinators)
                 ->with('user', $user)
                 ->with('instruments', $instruments);
         }

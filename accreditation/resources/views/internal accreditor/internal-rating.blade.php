@@ -90,20 +90,7 @@
                         $cat_avg = $internalRatings->whereIn('indicator_id', $ind_ids)->avg('rating');
                         $cat_avg_formatted = number_format($cat_avg, 2);
                     @endphp
-                    @if($category->category_name == 'NOT APPLICABLE')
-                        <div class="container">
-                            <div class="accordion accordion-flush" id="accordionIndicator">
-                                @forelse($indicators as $indicator) 
-                                    @if ($category->id == $indicator->indicator_category_id)
-                                    @endif 
-                                @empty
-                                    <div>
-                                        <center class="fs-2 p-3">No Indicators yet</center>
-                                    </div>
-                                @endforelse
-                            </div>
-                        </div>
-                    @else 
+                    
                         @if ($counter == 0)
                             <div class="pt-5">
                                 <center>
@@ -249,7 +236,6 @@
                                 </table>
                             </div>
                         @endif 
-                    @endif 
                 @empty
                     <div></div>
                 @endforelse 

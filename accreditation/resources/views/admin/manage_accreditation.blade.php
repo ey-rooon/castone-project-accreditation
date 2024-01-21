@@ -72,9 +72,10 @@
                                         $area_member = $area_members->where('accreditation_id', $accreditation->id)->where('member_type', 'member')->first();
                                         $internalMember = $area_members->where('accreditation_id', $accreditation->id)->where('member_type', 'internal')->first();
                                         $externalMember = $area_members->where('accreditation_id', $accreditation->id)->where('member_type', 'external')->first();
+                                        $coordinator = $coordinators->where('accreditation_id', $accreditation->id)->first();
                                     @endphp 
 
-                                    @if(!$area_chair && !$area_member && !$internalMember && !$externalMember)
+                                    @if(!$area_chair && !$area_member && !$internalMember && !$externalMember && !$coordinator)
                                         <a href="#">
                                     @else
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#viewAsModal{{$accreditation->id}}">
@@ -150,7 +151,7 @@
                                             <div class="row">
                                                 <h1 class="fs-3 text-center">View as:</h1>
                                             </div>
-                                            <div class="row mx-auto d-flex justify-content-center">
+                                            <div class="row d-flex justify-content-center align-items-center">
                                                 @if($area_chair)
                                                     @if($area_chair->member_type == 'chair')
                                                         <div class="col text-center"> <!-- Added text-center class -->
@@ -188,6 +189,11 @@
                                                             <a href="/view_areas/external/{{$accreditation->id}}" class="btn btn-outline-danger">External Accreditor</a>
                                                         </div>
                                                     @endif
+                                                @endif
+                                                @if($coordinator)
+                                                <div class="col text-center"> <!-- Added text-center class -->
+                                                    <a href="/view_areas/coordinator/{{$accreditation->id}}" class="btn btn-outline-warning">Coordinator</a>
+                                                </div>
                                                 @endif
                                             </div>
                                             

@@ -19,7 +19,7 @@ use App\Models\AreaRating;
 use App\Models\Area;
 use App\Models\Accreditation;
 use App\Models\Instrument;
-
+use Illuminate\Support\Facades\Auth;
 class InternalRatingController extends Controller
 {
     //aaron
@@ -71,6 +71,7 @@ class InternalRatingController extends Controller
             $indicatorCategories = $indicatorCategories->where('forOld', 0);
             $category = $indicatorCategories->first();
         }
+        $catCount = $indicatorCategories->count();
 
 
         $indicators = Indicator::select()->where('parameter_id', $parameter_id)->get();
@@ -131,6 +132,7 @@ class InternalRatingController extends Controller
                                 ->whereIn('sub_component_id', $comp_ids)
                                 ->where('accreditation_id', $acc_id)
                                 ->where('user_id', $user_id)
+                                ->whereNotNull('rating')
                                 ->avg('rating');
                                 $internalSubRating = InternalSubRating::create([
                                     'accreditation_id' => $acc_id,
@@ -146,7 +148,9 @@ class InternalRatingController extends Controller
                         ->whereIn('sub_indicator_id', $sub_ids)
                         ->where('accreditation_id', $acc_id)
                         ->where('user_id', $user_id)
+                        ->whereNotNull('rating')
                         ->avg('rating');
+
                         $internalRating = InternalRating::create([
                             'accreditation_id' => $acc_id,
                             'user_id' => $user_id,
@@ -162,12 +166,14 @@ class InternalRatingController extends Controller
             ->whereIn('indicator_id', $ind_ids)
             ->where('accreditation_id', $acc_id)
             ->where('user_id', $user_id)
+            ->whereNotNull('rating')
             ->avg('rating');
+
             $param_avg += $ind_avg;
 
 
         }
-        $param_avg /= 3;
+        $param_avg /= $catCount;
         $parameterRating = ParameterRating::create([
             'accreditation_id' => $acc_id,
             'user_id' => $user_id,
@@ -213,6 +219,7 @@ class InternalRatingController extends Controller
             $indicatorCategories = $indicatorCategories->where('forOld', 0);
             $category = $indicatorCategories->first();
         }
+        $catCount = $indicatorCategories->count();
 
         $indicators = Indicator::select()->where('parameter_id', $parameter_id)->get();
         $subindicators = SubIndicator::where('parameter_id', $parameter_id)->get();
@@ -272,6 +279,7 @@ class InternalRatingController extends Controller
                                 ->whereIn('sub_component_id', $comp_ids)
                                 ->where('accreditation_id', $acc_id)
                                 ->where('user_id', $user_id)
+                                ->whereNotNull('rating')  // Exclude null values
                                 ->avg('rating');
 
                                 $internalSubRating = InternalSubRating::create([
@@ -288,6 +296,7 @@ class InternalRatingController extends Controller
                         ->whereIn('sub_indicator_id', $sub_ids)
                         ->where('accreditation_id', $acc_id)
                         ->where('user_id', $user_id)
+                        ->whereNotNull('rating')
                         ->avg('rating');
                         $internalRating = InternalRating::create([
                             'accreditation_id' => $acc_id,
@@ -304,11 +313,16 @@ class InternalRatingController extends Controller
             ->whereIn('indicator_id', $ind_ids)
             ->where('accreditation_id', $acc_id)
             ->where('user_id', $user_id)
+            ->whereNotNull('rating')
             ->avg('rating');
+
+            
+
             $param_avg += $ind_avg;
+            // dd($param_avg);
 
         }
-        $param_avg /= 3;
+        $param_avg /= $catCount;
 
         $parameterRating = ParameterRating::where('id', $parameter_rating_id)->update([
             'rating' => $param_avg,
@@ -319,7 +333,9 @@ class InternalRatingController extends Controller
         ->whereIn('parameter_id', $parameter_ids)
         ->where('accreditation_id', $acc_id)
         ->where('user_id', $user_id)
+        ->whereNotNull('rating')
         ->avg('rating');
+
         $areaRating = AreaRating::where('area_id', $area_id)
         ->where('accreditation_id', $acc_id)
         ->where('user_id', $user_id)->update([

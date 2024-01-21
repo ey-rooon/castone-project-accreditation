@@ -192,7 +192,7 @@
                                     </div>
 
                                     <label class="label">Level</label>
-                                    <input type="number" name="level" class="form-control" min="1" max="5"  required value="{{$programLevel->level}}">
+                                    <input type="number" name="level" class="form-control" min="0" max="5"  required value="{{$programLevel->level}}">
                                     <div id="levelError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
                                         Please enter level.
                                     </div>

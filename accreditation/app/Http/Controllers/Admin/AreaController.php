@@ -64,6 +64,8 @@ class AreaController extends Controller
             'current_role' => $role,
         ]);
 
+        $user = User::select()->where('id', $uid)->first();
+
 
         $accreditation = Accreditation::Select()->where('id', $acc_id)->first();
         $program = Program::select()->where('id', $accreditation->program_level->program->id)->first();
@@ -96,7 +98,8 @@ class AreaController extends Controller
                 ->with('indicators', $indicators)
                 ->with('accreditation', $accreditation)
                 ->with('complianceReports', $complianceReports)
-                ->with('area_ratings', $area_ratings);
+                ->with('area_ratings', $area_ratings)
+                ->with('user', $user);
         } else if ($role == 'external') {
             $area_members = AreaMember::select()
                 ->where('area_members.user_id', $uid)
@@ -119,10 +122,14 @@ class AreaController extends Controller
                 ->with('parameters', $parameters)
                 ->with('indicators', $indicators)
                 ->with('accreditation', $accreditation)
-                ->with('complianceReports', $complianceReports);
+                ->with('complianceReports', $complianceReports)
+                ->with('user', $user);
         } else {
-            $acc_areas = AccreditationArea::select()->where('accreditation_id', $acc_id)->get();
-            $areaIds = $acc_areas->pluck('area_id')->toArray();
+            $acc_areas = AccreditationArea::select()
+            ->where('accreditation_id', $acc_id)->get();
+
+            $areaIds = $acc_areas->pluck('area_id')
+            ->toArray();
 
             $areas = Area::select()
                 ->whereIn('id', $areaIds)
@@ -138,7 +145,8 @@ class AreaController extends Controller
                 ->with('indicators', $indicators)
                 ->with('accreditation', $accreditation)
                 ->with('complianceReports', $complianceReports)
-                ->with('area_ratings', $area_ratings);
+                ->with('area_ratings', $area_ratings)
+                ->with('user', $user);
         }
 
 
@@ -256,6 +264,8 @@ class AreaController extends Controller
     {
         //
         $ins_id = $request->input('instrument');
+        $intrument = Instrument::where('id', $ins_id)->first();
+        $category = IndicatorCategory::select()->where('forOld', 0)->first();
         $area = Area::find($id);
         $newArea = $area->replicate();
         $newArea->instrument_id = $ins_id;
@@ -269,6 +279,10 @@ class AreaController extends Controller
             foreach ($parameter->indicators as $indicator) {
                 $newIndicator = $indicator->replicate();
                 $newIndicator->parameter_id = $newParameter->id;
+                if($intrument->instrument_type == "PSV")
+                {
+                    $newIndicator->indicator_category_id = $category->id;
+                }
                 $newIndicator->push();
 
                 foreach($indicator->sub_indicators as $sub_indicator){

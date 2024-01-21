@@ -61,12 +61,6 @@
                                     Internal
                                 </label>
                             </div>
-                            <div class="col">
-                                <input class="form-check-input" type="checkbox" name="external" id="external" {{$user->isExternal == 1 ? 'checked' : ''}}>
-                                <label class="form-check-label" for="external">
-                                External
-                                </label>
-                            </div>
                         </div>
                         <button class="btn btn-outline-success">
                             Save Changes

@@ -73,18 +73,52 @@
                         <input type="hidden" name="category" value="{{$category->id}}">
                         @endif
 
-                        <label for="indicator">Indicator</label>
-                        <input id="indicator" type="text" name="indicator" class="form-control" value="{{ old('indicator') }}" required autofocus>
-                        @error('indicator')
-                        <div id="indicatorError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
-                            Please enter indicator.
+                        <div class="mb-3">
+                            @if($categories->count() > 1)
+                                <label for="indicator">Indicator</label>
+                                <input id="indicator" type="text" name="indicator" class="form-control" value="{{ old('indicator') }}" required autofocus>
+                                @error('indicator')
+                                <div id="indicatorError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
+                                    Please enter indicator.
+                                </div>
+                                @enderror
+                            @else
+                                <label for="indicator">Indicator</label>
+                                @if($indicators != NULL && $indicators->count() > 0) 
+                                    @php
+                                        $indicator = $indicators->last();
+                                        $indCount = $indicators->count() + 1;
+                                        $indName =  substr($indicator->indicator_name, 0, -1).$indCount;
+                                        //substr($indicator->indicator_name, 0, -1).$indCount
+                                        $lastDotPosition = strrpos($indicator->indicator_name, '.');
+
+                                        if ($lastDotPosition !== false) {
+                                            $indName = substr($indicator->indicator_name, 0, $lastDotPosition+1).$indCount;
+                                        } else {
+                                            // Handle the case where there is no dot in the string
+                                            $indName = $indicator->indicator_name . '.' . $indCount;
+                                        }
+                                    @endphp
+                                    
+                                    <input id="indicator" type="text" name="indicator" class="form-control" value="{{ $indName }}" required autofocus>
+                                @else
+                                    <input id="indicator" type="text" name="indicator" class="form-control" value="{{ $param->parameter }}.1" required autofocus>
+
+                                @endif
+                                @error('indicator')
+                                    <div id="indicatorError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
+                                        Please enter indicator.
+                                    </div>
+                                @enderror
+                            @endif
                         </div>
-                        @enderror
                         
-                        <label for="indicatordesc">Indicator Description</label>
-                        <textarea id="indicatordesc" class="form-control" type="text" name="indicatordesc" required autofocus>{{ old('indicatordesc') }}</textarea>
-                        <div id="indicatordescError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
-                            Please enter Indicator Description.
+                        <div class="mb-3">
+                            <label for="indicatordesc">Indicator Description</label>
+                            <textarea id="indicatordesc" class="form-control" type="text" name="indicatordesc" required autofocus>{{ old('indicatordesc') }}</textarea>
+                            <div id="indicatordescError" style="color: red; font-size: 0.75rem; margin-top: 0.25rem; display: none;">
+                                Please enter Indicator Description.
+                            </div>
                         </div>
 
                         <div class="form-check d-flex justify-content-center">

@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\Area;
 use App\Models\Role;
 use App\Models\AccreditationArea;
+use App\Models\University;
 
 
 use DB;
@@ -54,7 +55,7 @@ class MemberController extends Controller
     public function getDesignatedAreas($id)
     {
         $uid = Auth::user()->id; // Assuming 'id' is the user identifier
-
+        $university = University::select()->where('university_id', 'psu')->first();
         $accreditation = Accreditation::join('program_levels', 'accreditations.program_level_id', '=', 'program_levels.id')
             ->join('programs', 'program_levels.program_id', '=', 'programs.id')
             ->select('programs.id as prog_id', 'accreditations.*')
@@ -81,12 +82,15 @@ class MemberController extends Controller
             ->select('users.firstname AS fname', 'users.lastname AS lname', 'users.*', 'area_members.*', 'area_members.id as amId')
             ->where('area_members.accreditation_id', $id)
             ->get();
+
+        //for the table
         $area_members = AreaMember::join('users', 'area_members.user_id', '=', 'users.id')
             ->select('users.firstname AS fname', 'users.lastname AS lname', 'users.*', 'area_members.*', 'area_members.id as amId')
             ->where('area_members.accreditation_id', $id)
             ->where('area_members.member_type', 'member')
             ->get();
 
+        //for the table
         $area_chairs = AreaMember::join('users', 'area_members.user_id', '=', 'users.id')
             ->select('users.firstname AS fname', 'users.lastname AS lname', 'users.*', 'area_members.*', 'area_members.id as amId')
             ->where('area_members.accreditation_id', $id)
@@ -94,6 +98,7 @@ class MemberController extends Controller
             ->orderBy('users.lastname')
             ->get();
 
+        //for the table
         $external_members = AreaMember::join('users', 'area_members.user_id', '=', 'users.id')
             ->select('users.firstname AS fname', 'users.lastname AS lname', 'users.*', 'area_members.*', 'area_members.id as amId')
             ->where('area_members.accreditation_id', $id)
@@ -101,20 +106,25 @@ class MemberController extends Controller
             ->orderBy('users.lastname')
             ->get();
 
+        //for the table
         $internal_members = AreaMember::join('users', 'area_members.user_id', '=', 'users.id')
             ->select('users.firstname AS fname', 'users.lastname AS lname', 'users.*', 'area_members.*', 'area_members.id as amId')
             ->where('area_members.accreditation_id', $id)
             ->where('area_members.member_type', 'internal')
             ->orderBy('users.lastname')
             ->get();
+        
+        // for the modal, see all users for internal
         $unfilteredUser = User::join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')
             ->select('users.*', 'users.id as user_id', 'campuses.id as campus_id', 'campuses.name as campus_name', 'programs.program as program')
             ->where('user_type', '!=', 'admin')
+            ->where('users.university_id', $university->id)
             ->where('program_id', '!=', $programLevel->program_id)
             ->orderBy('users.lastname')
             ->get();
 
+        //for the modal
         $internalUsers = User::join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')
             ->select('users.*', 'users.id as user_id', 'campuses.id as campus_id', 'campuses.name as campus_name', 'programs.program as program')
@@ -124,6 +134,7 @@ class MemberController extends Controller
             ->orderBy('users.lastname')
             ->get();
 
+        //for the modal
         $externalUsers = User::join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')
             ->join('universities', 'users.university_id', '=', 'universities.id')
@@ -134,16 +145,17 @@ class MemberController extends Controller
             ->orderBy('users.lastname')
             ->get();
 
-            
-
+        //users for area chair/members
         $nonAdminUsers = User::join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')
             ->select('users.*', 'users.id as user_id', 'campuses.id as campus_id', 'campuses.name as campus_name', 'programs.program as program')
             ->where('campus_id', $programLevel->campus_id)
+            ->where('program_id', $programLevel->program_id)
             ->where('user_type', '!=', 'admin')
             ->orderBy('users.lastname')
             ->get();
 
+           
         $coordinator = Member::join('users', 'members.user_id', '=', 'users.id')
             ->join('campuses', 'users.campus_id', '=', 'campuses.id')
             ->join('programs', 'users.program_id', '=', 'programs.id')
