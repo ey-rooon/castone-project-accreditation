@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\ExternalUserController;
 use App\Http\Controllers\Admin\CriteriaController;
 
+use App\Http\Controllers\CriteriaRatingController;
 use App\Http\Controllers\CriteriaFileController;
 use App\Http\Controllers\CriteriaMessageController;
 use App\Http\Controllers\IndicatorFileController;
@@ -71,7 +72,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('user_list', [UserController::class, 'index'])->name('user_list');
     Route::get('add_user', [RegisteredUserController::class, 'create'])->name('add_user');
     Route::post('add_user', [RegisteredUserController::class, 'store']);
-    Route::get('user_list/{id}', [UserController::class, 'destroy']);
+    Route::get('delete_user/{id}', [UserController::class, 'destroy']);
     Route::get('edit_user/{id}', [UserController::class, 'edit']);
     Route::post('edit_user/{id}', [UserController::class, 'update']);
 
@@ -219,6 +220,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('subindicator_updatefile_status/{id}', [SubIndicatorFileController::class, 'update']);
     Route::post('subcomponent_updatefile_status/{id}', [SubComponentFileController::class, 'update']);
     Route::post('criteria_updatefile_status/{id}', [CriteriaFileController::class, 'update']);
+
+    Route::post('add_criteria_rating', [CriteriaRatingController::class, 'store']);
+    Route::post('edit_criteria_rating', [CriteriaRatingController::class, 'update']);
 });
 
 Route::middleware(['auth'])->group(function () {

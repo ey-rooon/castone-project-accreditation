@@ -9,6 +9,8 @@ use App\Notifications\AccreditationNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Models\Accreditation;
 use App\Models\User;
+use App\Models\Area;
+use Illuminate\Support\Facades\Auth;
 
 class AreaMemberController extends Controller
 {
@@ -48,6 +50,7 @@ class AreaMemberController extends Controller
 
         $accreditation = Accreditation::select()->where('id', $acc_id)->first();
         $user = User::whereIn('id', $acc_members)->get();
+        $area = Area::Select()->where('id', $area_id)->first();
 
         $members = new AreaMember();
         foreach ($acc_members as $member) {
@@ -58,10 +61,12 @@ class AreaMemberController extends Controller
             $members->member_type = $type;
             $members->save();
         }
+        $firstname = Auth::user()->firstname;
+        $lastname = Auth::user()->lastname;
         if ($members) {
             // Add a flash message to indicate successful deletion
-            $content = 'You have been added as ' . $type . ' for the ' . $accreditation->accreditation_name;
-            $title = 'You Have been Added!';
+            $content = 'You have been added and assigned to '.$area->area_name.': '.$area->area_title.' as ' . $type . ' for the ' . $accreditation->accreditation_name;
+            $title = $firstname.' '.$lastname.' has added you! for the '.$accreditation->accreditation_name;
             $url = '/manage_member/' . $acc_id;
             Notification::send($user, new AccreditationNotification($content, $title, $url));
             session()->flash('success', 'Member/s added successfully.');
@@ -120,7 +125,7 @@ class AreaMemberController extends Controller
             $accreditation = Accreditation::select()->where('id', $areaMember->accreditation_id)->first();
             $user = User::find($areaMember->user_id);
             $content = 'You have been remove as Internal Accreditor for the ' . $accreditation->accreditation_name;
-            $title = 'You Have been Removed!';
+            $title = 'Notice! You Have been removed for the '. $accreditation->accreditation_name;
             $url = '';
             Notification::send($user, new AccreditationNotification($content, $title, $url));
             $areaMember->delete();

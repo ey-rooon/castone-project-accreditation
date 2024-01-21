@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Criteria;
 use App\Models\Area;
 use Illuminate\Support\Facades\Auth;
+use App\Models\CriteriaRating;
+use App\Models\AreaRating;
 
 class CriteriaController extends Controller
 {
@@ -25,8 +27,22 @@ class CriteriaController extends Controller
 
     public function showCriteria($area_id, $acc_id)
     {
+        $user_id = Auth::id();
         $current_role = Auth::user()->current_role;
         $criterias = Criteria::Select()->get();
+
+        $criteriaRatings = CriteriaRating::select()
+        ->where('accreditation_id', $acc_id)
+        ->where('area_id', $area_id)
+        ->where('user_id', $user_id)
+        ->get();
+
+        $areaRating = AreaRating::select()
+        ->where('area_id', $area_id)
+        ->where('accreditation_id', $acc_id)
+        ->where('user_id', $user_id)
+        ->first();
+
 
         $area = Area::select()->where('id', $area_id)->first();
         if (Auth::user()->user_type == "user"){
@@ -35,7 +51,9 @@ class CriteriaController extends Controller
                 ->with('criterias', $criterias)        
                 ->with('area_id', $area_id)
                 ->with('acc_id', $acc_id)
-                ->with('area', $area);
+                ->with('area', $area)
+                ->with('criteriaRatings', $criteriaRatings)
+                ->with('areaRating', $areaRating);
             }else if($current_role == 'external'){
 
             }else{

@@ -263,7 +263,12 @@
                     success: function (data) {
                         // Handle success if needed
                         getDesignatedAreas();
-                        toastr.info(data.message);
+                        if (data.message === "Max") {
+                            toastr.info('Maximum number of accreditation areas reached');
+                            $('#acc' + areaId + 'area').prop('checked', false);
+                        } else {
+                            toastr.info(data.message);
+                        }
                     },
                     error: function (error) {
                         // Handle error if needed

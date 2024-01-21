@@ -131,12 +131,12 @@
                         <td>{{$user->program}}</td>
                         <td>{{$user->email}}</td>
                         <td>
-                            <a href="/edit_user/{{$user->id}}">
+                            <a href="/edit_user/{{$user->user_id}}">
                                 <button class="btn btn-outline-success">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </button>
                             </a>
-                            <a href="/user_list/{{$user->id}}">
+                            <a href="/delete_user/{{$user->user_id}}">
                                 <button class="btn btn-outline-danger" onclick="return confirm('You are about to delete this accont')">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>

@@ -259,17 +259,33 @@ class MemberController extends Controller
         $area_id = $request->input('areaId');
 
         $accreditationArea = AccreditationArea::select()->where('accreditation_id', $acc_id)->where('area_id', $area_id)->first();
+        $accreditation = Accreditation::Select()->where('id', $acc_id)->first();
+
+        $accAreaCount = AccreditationArea::select()->where('accreditation_id', $acc_id)->count();
         if ($accreditationArea) {
             $accreditationArea->delete();
             AreaMember::where('area_id', $area_id)->where('accreditation_id', $acc_id)->delete();
             return ['message' => 'Area and Area members Removed'];
         } else {
-            AccreditationArea::create([
-                'area_id' => $area_id,
-                'accreditation_id' => $acc_id,
-            ]);
-            return ['message' => 'Area Added'];
+            if($accreditation->accreditation_type != "New"){
+                AccreditationArea::create([
+                    'area_id' => $area_id,
+                    'accreditation_id' => $acc_id,
+                ]);
+                return ['message' => 'Area Added'];
+            }else{
+                if($accAreaCount == 4){
+                    return response()->json(['message'=>"Max"]);
+                }else{
+                    AccreditationArea::create([
+                        'area_id' => $area_id,
+                        'accreditation_id' => $acc_id,
+                    ]);
+                    return ['message' => 'Area Added'];
+                }
+            }
         }
+        
 
     }
 

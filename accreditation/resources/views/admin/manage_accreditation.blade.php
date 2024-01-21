@@ -111,19 +111,30 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="/manage_member/{{$accreditation->id}}">
-                                    <button class="btn btn-outline-info">View Members</button>
-                                </a>
-                                @if(Auth::user()->user_type == "admin")
-                                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editAccreditationModal{{$accreditation->id}}">
-                                    Edit
-                                </button>
-                                <a href="/manage_accreditation/{{$accreditation->id}}">
-                                    <button class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this?')">
-                                        Delete
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Action
                                     </button>
-                                </a>
-                                @endif
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="/manage_member/{{$accreditation->id}}">
+                                                <i class="far fa-eye text-info me-2"></i> View Members
+                                            </a>
+                                        </li>
+                                        @if(Auth::user()->user_type == "admin")
+                                        <li>
+                                            <a class="dropdown-item" href="#"  data-bs-toggle="modal" data-bs-target="#editAccreditationModal{{$accreditation->id}}">
+                                                <i class="far fa-pen-to-square text-success me-2"></i> Edit
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="/manage_accreditation/{{$accreditation->id}}" onclick="return confirm('Are you sure you want to delete this?')">
+                                                <i class="far fa-trash text-danger me-2"></i> Delete
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
 
@@ -190,7 +201,7 @@
                         @endif
                         <!--Edit Accreditation Modal -->
                         <div class="modal fade" id="editAccreditationModal{{$accreditation->id}}" tabindex="-1" aria-labelledby="editAccreditationModalLabel{{$accreditation->id}}" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title" id="editAccreditationModalLabel{{$accreditation->id}}">Create Accreditation</h1>
@@ -238,14 +249,13 @@
                                                     @error('apply_type') {{$message}} @enderror
                                                 </div>
 
-                                                <label for="acc_type" class="form-label">Accreditation Type (Choose Not-Applicable if appying for Re-Visit)</label>
+                                                <label for="acc_type" class="form-label">Accreditation Type</label>
                                                 <select name="acc_type" class="form-select @error('acc_type') is-invalid @enderror" required aria-describedby="acc_typeHelp">
                                                     <option selected disabled value="">Select option</option>
                                                     <option value="New" {{ $accreditation->accreditation_type == 'New' ? 'selected':'' }}>New (4 Areas)</option>
                                                     <option value="Old" {{ $accreditation->accreditation_type  == 'Old' ? 'selected':'' }}>Old (10 Areas)</option>
-                                                    <option value="Not-Applicable" {{ $accreditation->accreditation_type  == 'Not-Applicable' ? 'selected':'' }}>Not-Applicable</option>
+                                                    <option value="PSV" {{ $accreditation->accreditation_type  == 'PSV' ? 'selected':'' }}>PSV</option>
                                                 </select>
-                                                <div id="acc_typeHelp" class="form-text">(Choose Not-Applicable if appying for Re-Visit)</div>
                                                 <div id="acc_typeError" class="invalid-feedback">
                                                     @error('acc_type') {{$message}} @enderror
                                                 </div>

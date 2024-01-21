@@ -69,7 +69,7 @@
                                     </a>
                                 </div>
                                 <div class="col-md-auto">
-                                    <a href="/user_list/{{$user->id}}">
+                                    <a href="/delete_user/{{$user->id}}">
                                         <button class="btn btn-outline-danger" onclick="return confirm('You are about to delete this accont')">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
