@@ -105,7 +105,7 @@
                                                 $rating_ind = $internalRatings->where('indicator_id', $indicator->id)->value('rating');
                                                 $cc = $internalRatings->where('indicator_id', $indicator->id)->count();
                                                 $hasSubIndicators = count($subindicators->where('indicator_id', $indicator->id)) > 0;
-                                                $indicatorfiles = $indicatorfiles->where('indicator_id', $indicator->id);
+                                                $indicatorFiles = $indicatorfiles->where('indicator_id', $indicator->id);
                                             @endphp
                                             <tr>
                                                 <td colspan="5" class="w-75">
@@ -146,7 +146,7 @@
                                                     @php
                                                         $rating_sub = $internalSubRatings->where('sub_indicator_id', $subindicator->id)->value('rating');
                                                         $cc2 = $internalSubRatings->where('sub_indicator_id', $subindicator->id)->count();
-                                                        $subindicatorfiles = $subindicatorfiles->where('sub_indicator_id', $subindicator->id);
+                                                        $subindicatorFiles = $subindicatorfiles->where('sub_indicator_id', $subindicator->id);
                                                         $hasSubComponents = count($subcomponents->where('sub_indicator_id', $subindicator->id)) > 0;
                                                     @endphp
                                                     <tr>
@@ -192,7 +192,7 @@
                                                         @if($subcomponent->sub_indicator_id == $subindicator->id)
                                                             @php
                                                                 $rating_comp = $internalComponentRatings->where('sub_component_id', $subcomponent->id)->value('rating');
-                                                                $componentfiles = $componentfiles->where('sub_component_id', $subcomponent->id);
+                                                                $componentFiles = $componentfiles->where('sub_component_id', $subcomponent->id);
                                                                 $cc3 = $internalComponentRatings->where('sub_component_id', $subcomponent->id)->count(); 
                                                             @endphp
                                                             <tr>
@@ -238,7 +238,7 @@
                                                                         <div class="modal-body">
                                                                             <div class="container">
                                                                                 <div class="row">
-                                                                                    @forelse($componentfiles as $compFile)
+                                                                                    @forelse($componentFiles as $compFile)
                                                                                     <div class="col">
                                                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#viewcompFileModal{{$compFile->id}}">
                                                                                             {{$compFile->screen_name}}
@@ -256,7 +256,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            @forelse($componentfiles as $compFile)
+                                                            @forelse($componentFiles as $compFile)
                                                                 <!-- Modal -->
                                                                 <div class="modal fade" id="viewcompFileModal{{$compFile->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-xl">
@@ -310,7 +310,7 @@
                                                                 <div class="modal-body">
                                                                     <div class="container">
                                                                         <div class="row">
-                                                                            @forelse($subindicatorfiles as $subFile)
+                                                                            @forelse($subindicatorFiles as $subFile)
                                                                             <div class="col">
                                                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#viewsubFileModal{{$subFile->id}}">
                                                                                     {{$subFile->screen_name}}
@@ -328,7 +328,7 @@
                                                         </div>
                                                     </div>
 
-                                                    @forelse($subindicatorfiles as $subFile)
+                                                    @forelse($subindicatorFiles as $subFile)
                                                         <!-- Modal -->
                                                         <div class="modal fade" id="viewsubFileModal{{$subFile->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-xl">
@@ -382,7 +382,7 @@
                                                         <div class="modal-body">
                                                             <div class="container">
                                                                 <div class="row">
-                                                                    @forelse($indicatorfiles as $indFile)
+                                                                    @forelse($indicatorFiles as $indFile)
                                                                     <div class="col">
                                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#viewindicatorFileModal{{$indFile->id}}">
                                                                             {{$indFile->screen_name}}
@@ -400,7 +400,7 @@
                                                 </div>
                                             </div>
 
-                                            @forelse($indicatorfiles as $indFile)
+                                            @forelse($indicatorFiles as $indFile)
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="viewindicatorFileModal{{$indFile->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl">
