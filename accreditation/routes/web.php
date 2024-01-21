@@ -193,7 +193,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('upload_files_indicator', [IndicatorFileController::class, 'store']);
     Route::post('updateindicatorfile/{id}', [IndicatorFileController::class, 'updateFile']);
     Route::get('backupdownload/{id}', [IndicatorFileController::class, 'downLoadBackup']);
+    Route::get('revert/{current_id}/{backup_id}', [IndicatorFileController::class, 'revertfile']);
 
+    
     Route::get('view_indicator_file/{id}', [IndicatorFileController::class, 'show']);
     Route::get('delete_indicator_file/{id}', [IndicatorFileController::class, 'destroy']);
     Route::post('send_message_indicator', [IndicatorMessageController::class, 'store']);
@@ -204,6 +206,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('view_subindicator_file/{id}', [SubIndicatorFileController::class, 'show']);
     Route::post('updatesubindicatorfile/{id}', [SubIndicatorFileController::class, 'updateFile']);
     Route::get('delete_subindicator_file/{id}', [SubIndicatorFileController::class, 'destroy']);
+    Route::get('revertsubindicatorfile/{current_id}/{backup_id}', [SubIndicatorFileController::class, 'revertfile']);
+
     Route::post('send_message_subindicator', [SubIndicatorMessageController::class, 'store']);
     Route::post("move_file_order_subindicator", [SubIndicatorMessageController::class, 'moveOrder']);
 
@@ -211,6 +215,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('upload_files_subcomponent', [SubComponentFileController::class, 'store']);
     Route::get('view_subcomponent_file/{id}', [SubComponentFileController::class, 'show']);
     Route::post('updatesubcomponentfile/{id}', [SubComponentFileController::class, 'updateFile']);
+    Route::get('revertsubcomponentfile/{current_id}/{backup_id}', [SubComponentFileController::class, 'revertfile']);
 
     Route::get('delete_subcomponent_file/{id}', [SubComponentFileController::class, 'destroy']);
     Route::post('send_message_subcomponent', [SubComponentMessageController::class, 'store']);

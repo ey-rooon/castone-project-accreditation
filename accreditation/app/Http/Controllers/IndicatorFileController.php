@@ -38,7 +38,7 @@ class IndicatorFileController extends Controller
             ->where('accreditation_id', $acc_id)
             ->orderBy('indicator_files.updated_at', 'DESC')
             ->get();
-        
+
         $messages = IndicatorMessage::join('users', 'indicator_messages.sender_id', '=', 'users.id')
             ->join('indicator_files', 'indicator_messages.indicator_file_id', '=', 'indicator_files.id')
             ->select()
@@ -90,10 +90,10 @@ class IndicatorFileController extends Controller
     public function updateFile(Request $request, $id)
     {
         $temp = IndicatorFile::findOrFail($id);
-       
+
         if ($request->exists('file')) {
             $file = $request->file('file');
-         
+
             $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension(); // Generate a unique filename
             $fileExtension = $file->getClientOriginalExtension();
             if ($file->storeAs('public/files/', $fileName)) {
@@ -115,15 +115,41 @@ class IndicatorFileController extends Controller
 
         return redirect()->back();;
     }
-    public function downLoadBackup( $id)
+    public function revertfile($current_id, $backup_id)
+    {
+
+        $current_file = IndicatorFile::findOrFail($current_id);
+        $backup = IndicatorBackup::findOrFail($backup_id);
+
+        $temp_screen_name = $current_file->screen_name;
+        $temp_file_name =   $current_file->file_name;
+        $temp_file_type =  $current_file->file_type;
+        $temp_file_location =   $current_file->file_location;
+        $current_file->screen_name = $backup->screen_name;
+        $current_file->file_name = $backup->file_name;
+        $current_file->file_type = $backup->file_type;
+        $current_file->file_location = $backup->file_location;
+
+        $current_file->save();
+
+        $backup->screen_name = $temp_screen_name;
+        $backup->file_name =   $temp_file_name;
+        $backup->file_type =  $temp_file_type;
+        $backup->file_location =   $temp_file_location;
+
+        $backup->save();
+
+        return redirect()->back();;
+    }
+    public function downLoadBackup($id)
     {
         $temp = IndicatorBackup::findOrFail($id);
-       
-       
+
+
 
         return response()->download($temp->file_location);;
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *

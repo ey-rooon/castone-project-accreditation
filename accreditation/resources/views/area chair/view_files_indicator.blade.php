@@ -276,8 +276,11 @@ if ($area) {
                                                                     <h6>Screeename: {{ $log->screen_name }}</h6>
                                                                     <h6>Filename: {{ $log->file_name }}</h6>
                                                                 </div>
-
-                                                                <a href="/backupdownload/{{$log->id}}"><i class="far fa-download"></i></a>
+                                                               
+                                                                <div>
+                                                                    <a href="/revert/{{$file->id}}/{{$log->id}}"><i class="far fa-history"></i></a>
+                                                                    <a href="/backupdownload/{{$log->id}}"><i class="far fa-download"></i></a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     @endforeach
