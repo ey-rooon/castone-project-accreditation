@@ -57,7 +57,7 @@ class InternalRatingController extends Controller
     {
         $parameter_id = $request->input('parameter_id');
         $acc_id = $request->input('acc_id');
-        $user_id = Auth()->user()->id;
+        $user_id = Auth::user()->id;
 
         $accreditation = Accreditation::Select()->where('id', $acc_id)->first();
 
@@ -127,7 +127,11 @@ class InternalRatingController extends Controller
                                     ]);
                                     $comp_ids[] = $subcomponent->id;
                                 }
-                                $sub_avg = InternalSubComponentRating::select()->whereIn('sub_component_id', $comp_ids)->where('accreditation_id', $acc_id)->avg('rating');
+                                $sub_avg = InternalSubComponentRating::select()
+                                ->whereIn('sub_component_id', $comp_ids)
+                                ->where('accreditation_id', $acc_id)
+                                ->where('user_id', $user_id)
+                                ->avg('rating');
                                 $internalSubRating = InternalSubRating::create([
                                     'accreditation_id' => $acc_id,
                                     'user_id' => $user_id,
@@ -138,7 +142,11 @@ class InternalRatingController extends Controller
                             }
                             $sub_ids[] = $subindicator->id;
                         }
-                        $avg = InternalSubRating::select()->whereIn('sub_indicator_id', $sub_ids)->where('accreditation_id', $acc_id)->avg('rating');
+                        $avg = InternalSubRating::select()
+                        ->whereIn('sub_indicator_id', $sub_ids)
+                        ->where('accreditation_id', $acc_id)
+                        ->where('user_id', $user_id)
+                        ->avg('rating');
                         $internalRating = InternalRating::create([
                             'accreditation_id' => $acc_id,
                             'user_id' => $user_id,
@@ -150,7 +158,11 @@ class InternalRatingController extends Controller
                     $ind_ids[] = $indicator->id;
                 }
             }
-            $ind_avg = InternalRating::Select()->whereIn('indicator_id', $ind_ids)->where('accreditation_id', $acc_id)->avg('rating');
+            $ind_avg = InternalRating::Select()
+            ->whereIn('indicator_id', $ind_ids)
+            ->where('accreditation_id', $acc_id)
+            ->where('user_id', $user_id)
+            ->avg('rating');
             $param_avg += $ind_avg;
 
 
@@ -174,9 +186,20 @@ class InternalRatingController extends Controller
         $parameter_rating_id = $request->input('parameter_rating_id');
         $area_id = $request->input('area_id');
 
-        InternalRating::where('parameter_id', $parameter_id)->where('accreditation_id', $acc_id)->delete();
-        InternalSubRating::where('parameter_id', $parameter_id)->where('accreditation_id', $acc_id)->delete();
-        InternalSubComponentRating::where('parameter_id', $parameter_id)->where('accreditation_id', $acc_id)->delete();
+        InternalRating::where('parameter_id', $parameter_id)
+        ->where('user_id', $user_id)
+        ->where('accreditation_id', $acc_id)
+        ->delete();
+
+        InternalSubRating::where('parameter_id', $parameter_id)
+        ->where('user_id', $user_id)
+        ->where('accreditation_id', $acc_id)
+        ->delete();
+        
+        InternalSubComponentRating::where('parameter_id', $parameter_id)
+        ->where('accreditation_id', $acc_id)
+        ->where('user_id', $user_id)
+        ->delete();
 
         $accreditation = Accreditation::Select()->where('id', $acc_id)->first();
 
@@ -245,7 +268,12 @@ class InternalRatingController extends Controller
                                     ]);
                                     $comp_ids[] = $subcomponent->id;
                                 }
-                                $sub_avg = InternalSubComponentRating::select()->whereIn('sub_component_id', $comp_ids)->where('accreditation_id', $acc_id)->avg('rating');
+                                $sub_avg = InternalSubComponentRating::select()
+                                ->whereIn('sub_component_id', $comp_ids)
+                                ->where('accreditation_id', $acc_id)
+                                ->where('user_id', $user_id)
+                                ->avg('rating');
+
                                 $internalSubRating = InternalSubRating::create([
                                     'accreditation_id' => $acc_id,
                                     'user_id' => $user_id,
@@ -256,7 +284,11 @@ class InternalRatingController extends Controller
                             }
                             $sub_ids[] = $subindicator->id;
                         }
-                        $avg = InternalSubRating::select()->whereIn('sub_indicator_id', $sub_ids)->where('accreditation_id', $acc_id)->avg('rating');
+                        $avg = InternalSubRating::select()
+                        ->whereIn('sub_indicator_id', $sub_ids)
+                        ->where('accreditation_id', $acc_id)
+                        ->where('user_id', $user_id)
+                        ->avg('rating');
                         $internalRating = InternalRating::create([
                             'accreditation_id' => $acc_id,
                             'user_id' => $user_id,
@@ -268,7 +300,11 @@ class InternalRatingController extends Controller
                     $ind_ids[] = $indicator->id;
                 }
             }
-            $ind_avg = InternalRating::Select()->whereIn('indicator_id', $ind_ids)->where('accreditation_id', $acc_id)->avg('rating');
+            $ind_avg = InternalRating::Select()
+            ->whereIn('indicator_id', $ind_ids)
+            ->where('accreditation_id', $acc_id)
+            ->where('user_id', $user_id)
+            ->avg('rating');
             $param_avg += $ind_avg;
 
         }
@@ -279,8 +315,14 @@ class InternalRatingController extends Controller
         ]);
 
         $parameter_ids = Parameter::select()->where('area_id', $area_id)->pluck('id');
-        $parameter_avg = ParameterRating::Select()->whereIn('parameter_id', $parameter_ids)->where('accreditation_id', $acc_id)->avg('rating');
-        $areaRating = AreaRating::where('area_id', $area_id)->where('accreditation_id', $acc_id)->update([
+        $parameter_avg = ParameterRating::Select()
+        ->whereIn('parameter_id', $parameter_ids)
+        ->where('accreditation_id', $acc_id)
+        ->where('user_id', $user_id)
+        ->avg('rating');
+        $areaRating = AreaRating::where('area_id', $area_id)
+        ->where('accreditation_id', $acc_id)
+        ->where('user_id', $user_id)->update([
             'rating' => $parameter_avg,
         ]);
 
@@ -301,7 +343,10 @@ class InternalRatingController extends Controller
         $user_id = Auth()->user()->id;
         $role = Auth()->user()->current_role;
         $parameter_ids = Parameter::select()->where('area_id', $area_id)->pluck('id');
-        $parameter_avg = ParameterRating::Select()->whereIn('parameter_id', $parameter_ids)->where('accreditation_id', $acc_id)->avg('rating');
+        $parameter_avg = ParameterRating::Select()
+        ->whereIn('parameter_id', $parameter_ids)
+        ->where('user_id', $user_id)
+        ->where('accreditation_id', $acc_id)->avg('rating');
         $areaRating = AreaRating::create([
             'accreditation_id' => $acc_id,
             'user_id' => $user_id,

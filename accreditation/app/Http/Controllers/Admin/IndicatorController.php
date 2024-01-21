@@ -49,7 +49,9 @@ class IndicatorController extends Controller
             ->where('id', $id)
             ->first();
 
-        $parameter_rating = ParameterRating::where('parameter_id', $id)->where('accreditation_id', $acc_id)->first();
+        $parameter_rating = ParameterRating::where('parameter_id', $id)
+        ->where('accreditation_id', $acc_id)
+        ->first();
 
         $indicators = Indicator::select()
             ->where('parameter_id', $id)
@@ -81,9 +83,18 @@ class IndicatorController extends Controller
             $category = $categories->first();
         }
 
-        $internalRatings = InternalRating::Select()->where('parameter_id', $id)->where('accreditation_id', $acc_id)->get();
-        $internalSubRatings = InternalSubRating::Select()->where('accreditation_id', $acc_id)->get();
-        $internalComponentRatings = InternalSubComponentRating::select()->where('accreditation_id', $acc_id)->get();
+        $internalRatings = InternalRating::Select()
+        ->where('parameter_id', $id)
+        ->where('accreditation_id', $acc_id)
+        ->get();
+
+        $internalSubRatings = InternalSubRating::Select()
+        ->where('accreditation_id', $acc_id)
+        ->get();
+
+        $internalComponentRatings = InternalSubComponentRating::select()
+        ->where('accreditation_id', $acc_id)
+        ->get();
 
         $indicatorfiles = indicatorFile::join('users', 'indicator_files.user_id', '=', 'users.id')
             ->select('users.id as uid', 'indicator_files.*', 'users.firstname', 'users.lastname')
