@@ -10,6 +10,7 @@ use App\Models\Parameter;
 use App\Models\SubIndicatorFile;
 use App\Models\SubIndicatorMessage;
 use App\Models\AreaMember;
+use App\Models\IndicatorBackup;
 use App\Models\SubIndicator;
 use LaravelFileViewer;
 
@@ -29,14 +30,14 @@ class SubIndicatorFileController extends Controller
             ->where('id', $subindicator_id)
             ->first();
 
-        $files = SubIndicatorFile::join('users', 'sub_indicator_files.user_id', '=', 'users.id')
+        $files = SubIndicatorFile::with('backUp')->join('users', 'sub_indicator_files.user_id', '=', 'users.id')
             ->select('users.id as uid', 'sub_indicator_files.*', 'users.firstname', 'users.lastname')
             ->where('parameter_id', $parameter_id)
             ->where('sub_indicator_id', $subindicator_id)
             ->where('accreditation_id', $acc_id)
             ->orderBy('sub_indicator_files.updated_at', 'DESC')
             ->get();
-
+     
         $messages = SubIndicatorMessage::join('users', 'sub_indicator_messages.sender_id', '=', 'users.id')
             ->join('sub_indicator_files', 'sub_indicator_messages.sub_indicator_file_id', '=', 'sub_indicator_files.id')
             ->select()
@@ -67,7 +68,34 @@ class SubIndicatorFileController extends Controller
             ->with('accreditation_id', $acc_id);
         ;
     }
+    public function updateFile(Request $request, $id)
+    {
+        $temp = SubIndicatorFile::findOrFail($id);
+       
+        if ($request->exists('file')) {
+            $file = $request->file('file');
+            $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension(); // Generate a unique filename
+            $fileExtension = strtolower($file->getClientOriginalExtension());
+            if ($file->storeAs('public/files/', $fileName)) {
+                IndicatorBackup::create([
+                    'file_id' => $id,
+                    'user_id' => $temp->user_id,
+                    'file_name' => $temp->file_name,
+                    'screen_name' => $temp->screen_name,
+                    'file_type' => strtolower($temp->file_type),
+                    'file_location' => $temp->file_location,
+                    'type'=>2,
+                ]);
+                $temp->file_name = $fileName;
+                $temp->file_type =  $fileExtension;
+                $temp->file_location = 'storage/files/' . $fileName;
+            }
+        }
+        $temp->screen_name = $request->screen_name;
+        $temp->save();
 
+        return redirect()->back();;
+    }
     public function moveOrder(Request $request)
     {
         $fileId = $request->input('file_id');
@@ -127,7 +155,7 @@ class SubIndicatorFileController extends Controller
 
         $subindicatorFile = new SubIndicatorFile(); // Create a new instance for each file
         $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension(); // Generate a unique filename
-        $fileExtension = $file->getClientOriginalExtension();
+        $fileExtension = strtolower($file->getClientOriginalExtension());
 
         // Store the file and set attributes
         if ($file->storeAs('public/files/', $fileName)) {

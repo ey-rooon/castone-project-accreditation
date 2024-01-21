@@ -99,11 +99,47 @@
                                         <button class="btn btn-outline-primary">View</button>
                                     </a> -->
                                     <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewFileModal{{$file->id}}">View</button>
+                                    <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#update{{ $file->id }}">update</button>
+                                <div class="modal fade" id="update{{ $file->id }}" tabindex="-1"
+                                    aria-labelledby="Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="Label">Update</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form enctype="multipart/form-data"
+                                                    action="/updatesubcomponentfile/{{ $file->id }} "
+                                                    method="post">
+                                                    @csrf
+                                                    <div class="mb-3">
+                                                        <label for="screen_name"
+                                                            class="form-label">Screen_name</label>
+                                                        <input type="text" value="{{ $file->screen_name }}"
+                                                            class="form-control" name="screen_name" id="">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <input type="file" name="file" class="form-control "
+                                                            accept="image/*,video/*,.pdf">
+                                                    </div>
+                                                    <button type="submit"
+                                                        class="btn btn-outline-success">Save</button>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                                     @if(Auth::User()->current_role == 'area member' || Auth::User()->current_role == 'chair')
                                         <button class="btn btn-outline-danger btn-delete" data-file-id="{{$file->id}}" @if(Auth::id() != $file->user_id) disabled @endif @if($file->status == 'checked') disabled @endif >
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     @endif
+                                    
                                 </td>
                                 @if(Auth::User()->current_role == 'area member' || Auth::User()->current_role == 'chair')
                                 <td>
@@ -188,6 +224,24 @@
                                                     </div>
                                                 </div>
                                             @endif
+                                            <div>
+                                                <h6>Logs file:</h6>
+
+                                                <div class="row">
+                                                    @foreach ($file->backUp as $log)
+                                                        <div class="col-12 mt-2">
+                                                            <div class="card p-3 d-flex align-items-center justify-content-between" style="flex-direction: row">
+                                                                <div>
+                                                                    <h6>Screeename: {{ $log->screen_name }}</h6>
+                                                                    <h6>Filename: {{ $log->file_name }}</h6>
+                                                                </div>
+
+                                                                <a href="/backupdownload/{{$log->id}}"><i class="far fa-download"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
