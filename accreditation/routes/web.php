@@ -270,6 +270,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('generate_parameter_report', [GenerateReportController::class, 'store']);
     Route::get('generate_area_summary/{acc_id}', [GenerateReportController::class, 'areaSummary']);
     Route::get('generate_parameter_summary/{area_id}/{acc_id}', [GenerateReportController::class, 'parameterSummary']);
+    Route::get('generate_criteria_summary/{area_id}/{acc_id}', [GenerateReportController::class, 'criteriaSummary']);
 });
 
 require __DIR__ . '/auth.php';

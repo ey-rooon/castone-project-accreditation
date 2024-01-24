@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\AreaRating;
 use App\Models\AccreditationArea;
+use App\Models\CriteriaRating;
+use App\Models\Criteria;
+use App\Models\User;
 use HTML_TO_DOC;
 
 class GenerateReportController extends Controller
@@ -83,6 +86,26 @@ class GenerateReportController extends Controller
             return $pdf->download('SUMMARY OF RATINGS'.$area->area_name.NOW().'.pdf');
             
 	    }
+
+    }
+
+    public function criteriaSummary(Request $request, $area_id, $acc_id)
+    {
+        $accreditation = Accreditation::select()->where('id', $acc_id)->first();
+        $area = Area::select()->where('id', $area_id)->first();
+        $areaRating = AreaRating::select()->where('accreditation_id', $acc_id)->where('area_id', $area_id)->first();
+        $criteria_ids = CriteriaRating::Select()->where('accreditation_id', $acc_id)->where('area_id', $area_id)->pluck('criteria_id');
+        $criterias = Criteria::Select()->whereIn('id', $criteria_ids)->get();
+        $criteriaRatings = CriteriaRating::Select()->where('accreditation_id', $acc_id)->where('area_id', $area_id)->get();
+        $accreditor = CriteriaRating::Select()->where('accreditation_id', $acc_id)->where('area_id', $area_id)->value('user_id');
+        $user = User::select()->where('id', $accreditor)->first();
+        if($request->has('download'))
+	    {
+	        $pdf = Pdf::loadView('pdf-views.criteria_summary', ['accreditation'=>$accreditation, 'area'=>$area, 'criteriaRatings'=> $criteriaRatings, 'areaRating'=> $areaRating, 'criterias'=>$criterias, 'user'=>$user]);
+ 
+            return $pdf->download('SUMMARY OF CRITERIA RATINGS'.$area->area_name.NOW().'.pdf');
+            
+	    } 
 
     }
     public function create()

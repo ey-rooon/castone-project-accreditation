@@ -128,6 +128,7 @@
                                 @endif
                             </td>
                             <td>
+                                @if(Auth::user()->user_type == "admin")
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                       Action
@@ -138,7 +139,7 @@
                                                 <i class="far fa-eye text-info me-2"></i> View Members
                                             </a>
                                         </li>
-                                        @if(Auth::user()->user_type == "admin")
+                                        
                                         <li>
                                             <a class="dropdown-item" href="#"  data-bs-toggle="modal" data-bs-target="#editAccreditationModal{{$accreditation->id}}">
                                                 <i class="far fa-pen-to-square text-success me-2"></i> Edit
@@ -149,9 +150,13 @@
                                                 <i class="far fa-trash text-danger me-2"></i> Delete
                                             </a>
                                         </li>
-                                        @endif
                                     </ul>
                                 </div>
+                                @else
+                                <a class="btn btn-outline-info" href="/manage_member/{{$accreditation->id}}" >
+                                    View Members
+                                </a>
+                                @endif
                             </td>
                         </tr>
 

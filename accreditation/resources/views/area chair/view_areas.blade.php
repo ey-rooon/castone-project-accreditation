@@ -159,9 +159,15 @@
                         @endif
                         @if($area_rating)
                             @if($user->current_role == 'coordinator' || $user->current_role == 'internal')
-                                <a href="/generate_parameter_summary/{{$area->id}}/{{$accreditation_id}}?download=1" class="btn btn-outline-danger">
-                                    Generate Parameter Summary
+                                @if($accreditation->accreditation_type == "New")
+                                <a href="/generate_criteria_summary/{{$area->id}}/{{$accreditation_id}}?download=1" class="btn btn-outline-danger">
+                                    Generate Criteria Summary
                                 </a>
+                                @else
+                                    <a href="/generate_parameter_summary/{{$area->id}}/{{$accreditation_id}}?download=1" class="btn btn-outline-danger">
+                                        Generate Parameter Summary
+                                    </a>
+                                @endif
                             @endif
                         @endif
                     </td>
