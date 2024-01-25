@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Mail\PasswordMail;
+use App\Mail\ResendPasswordMail;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -27,10 +28,33 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
-        return view("admin.resend_password");
+        $user = User::select()->where('id', $id)->first();
+        return view("admin.resend_password")->with('id', $id)->with('user', $user);
+    }
+
+    public function resendPassword(Request $request)
+    {
+        $id = $request->input('id');
+        $temp_pass = Str::random(8);
+        $user = User::where('id', $id)->update([
+            'password' => Hash::make($temp_pass)
+        ]);
+        if($user)
+        {
+            $email = User::where('id', $id)->value('email');
+            Mail::to($email)->send(new ResendPasswordMail([
+                'password'=>$temp_pass,
+            ]) );
+            session()->flash('success', 'User Password resend successfully.');
+        } else {
+            // Add a flash message to indicate that the record was not found
+            session()->flash('error', 'Something went wrong, please try again.');
+        }
+
+        return redirect()->back();
     }
     /**
      * Display the registration view.

@@ -76,7 +76,7 @@
                                     </a>
                                 </div>
                                 <div class="col-md-auto">
-                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Resend Password">
+                                    <a href="/resend_password/{{$user->id}}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Resend Password">
                                         <button class="btn btn-outline-info">
                                             <i class="far fa-sync-alt"></i>
                                         </button>
