@@ -139,6 +139,11 @@
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </a>
+                            <a href="/resend_password/{{$user->user_id}}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Resend Password">
+                                <button class="btn btn-outline-info">
+                                    <i class="far fa-sync-alt"></i>
+                                </button>
+                            </a>
                         </td>
                     </tr>
 
